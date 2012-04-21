@@ -21,6 +21,7 @@
         </html>
     </xsl:template>
     
+    
     <xsl:template match="hodiny">
         <TR>
             <TH WIDTH="8%">&#160;</TH>
