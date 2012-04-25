@@ -1,4 +1,5 @@
 package timetabler3000;
+// poznamka
 
 public class Timetabler3000 {
 
