@@ -12,6 +12,10 @@ class Lecture {
     
     private Term term;
 
+    public Lecture(Term term) {
+        this.term = term;
+    }
+
     public Term getTerm() {
         return term;
     }

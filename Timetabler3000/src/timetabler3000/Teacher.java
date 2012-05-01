@@ -13,6 +13,11 @@ class Teacher {
     private String name;
     private Integer uco;
 
+    public Teacher(String name, Integer uco) {
+        this.name = name;
+        this.uco = uco;
+    }
+
     public String getName() {
         return name;
     }

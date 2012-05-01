@@ -13,6 +13,11 @@ class Room {
     private String name;
     private Integer roomId;
 
+    public Room(String name, Integer roomId) {
+        this.name = name;
+        this.roomId = roomId;
+    }
+
     public String getName() {
         return name;
     }

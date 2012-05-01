@@ -21,6 +21,15 @@ class Term {
     private List<Room> rooms;
     private Integer groupId;
 
+    public Term(Teacher teacher, QDate day, QTime timeFrom, QTime timeTo, List<Room> rooms, Integer groupId) {
+        this.teacher = teacher;
+        this.day = day;
+        this.timeFrom = timeFrom;
+        this.timeTo = timeTo;
+        this.rooms = rooms;
+        this.groupId = groupId;
+    }
+
     public QDate getDay() {
         return day;
     }

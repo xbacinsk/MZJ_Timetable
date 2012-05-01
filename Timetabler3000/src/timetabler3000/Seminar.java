@@ -15,6 +15,11 @@ class Seminar {
     private List<Term> terms;
     private Term chosen;
 
+    public Seminar(List<Term> terms, Term chosen) {
+        this.terms = terms;
+        this.chosen = chosen;
+    }
+
     public Term getChosen() {
         return chosen;
     }

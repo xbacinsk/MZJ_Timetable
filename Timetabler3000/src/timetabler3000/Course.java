@@ -18,6 +18,14 @@ public class Course {
     private Lecture lecture;
     private List<Seminar> seminars;
 
+    public Course(Integer code, String name, Integer courseId, Lecture lecture, List<Seminar> seminars) {
+        this.code = code;
+        this.name = name;
+        this.courseId = courseId;
+        this.lecture = lecture;
+        this.seminars = seminars;
+    }
+
     public Integer getCode() {
         return code;
     }
