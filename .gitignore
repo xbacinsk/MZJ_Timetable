@@ -4,3 +4,4 @@ manifest.mf
 lib/CopyLibs/
 lib/nblibraries.properties
 
+/build/

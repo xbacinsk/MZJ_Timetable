@@ -1,6 +1,6 @@
 package timetabler.entities;
 
-class Room {
+public class Room {
     
     private String name;
     private Integer roomId;

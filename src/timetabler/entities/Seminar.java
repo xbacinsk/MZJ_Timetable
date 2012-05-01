@@ -3,7 +3,7 @@ package timetabler.entities;
 import com.trolltech.qt.gui.QLabel;
 import java.util.List;
 
-class Seminar extends QLabel{
+public class Seminar extends QLabel{
     
     private List<Term> terms;
     private Term chosen;

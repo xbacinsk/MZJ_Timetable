@@ -2,7 +2,7 @@ package timetabler.entities;
 
 import com.trolltech.qt.gui.QLabel;
 
-class Lecture extends QLabel{
+public class Lecture extends QLabel{
     
     private Term term;
 

@@ -3,7 +3,7 @@ package timetabler.entities;
 import com.trolltech.qt.core.QSettings;
 import com.trolltech.qt.gui.QLabel;
 
-class Course extends QLabel{
+public class Course extends QLabel{
     
     private Integer code;
     private String name;
@@ -69,6 +69,6 @@ class Course extends QLabel{
   }
   
   public void setLectureVisibility(boolean isVisible){
-    settings.setValue("lecture/isVisible", isVisible);
+    settings.setValue(code + "/lecture", isVisible);
   }
 }

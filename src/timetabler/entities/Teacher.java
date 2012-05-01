@@ -1,6 +1,6 @@
 package timetabler.entities;
 
-class Teacher {
+public class Teacher {
     
     private String name;
     private Integer teacherId;

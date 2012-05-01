@@ -4,7 +4,7 @@ import com.trolltech.qt.core.QDate;
 import com.trolltech.qt.core.QTime;
 import java.util.List;
 
-class Term {
+public class Term {
     
     private Teacher teacher;
     private QDate day;
