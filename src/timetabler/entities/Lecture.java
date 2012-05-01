@@ -1,14 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package timetabler3000;
+package timetabler.entities;
 
-/**
- *
- * @author Enthas
- */
-class Lecture {
+import com.trolltech.qt.gui.QLabel;
+
+class Lecture extends QLabel{
     
     private Term term;
 

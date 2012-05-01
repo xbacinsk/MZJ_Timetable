@@ -1,29 +1,23 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package timetabler3000;
+package timetabler.entities;
 
-import java.util.List;
+import com.trolltech.qt.core.QSettings;
+import com.trolltech.qt.gui.QLabel;
 
-/**
- *
- * @author Enthas
- */
-public class Course {
+class Course extends QLabel{
     
     private Integer code;
     private String name;
     private Integer courseId;
     private Lecture lecture;
-    private List<Seminar> seminars;
+    private Seminar seminar;
+    private QSettings settings;
 
-    public Course(Integer code, String name, Integer courseId, Lecture lecture, List<Seminar> seminars) {
+    public Course(Integer code, String name, Integer courseId, Lecture lecture, Seminar seminar) {
         this.code = code;
         this.name = name;
         this.courseId = courseId;
         this.lecture = lecture;
-        this.seminars = seminars;
+        this.seminar = seminar;
     }
 
     public Integer getCode() {
@@ -58,12 +52,23 @@ public class Course {
         this.name = name;
     }
 
-    public List<Seminar> getSeminars() {
-        return seminars;
+    public Seminar getSeminars() {
+        return seminar;
     }
 
-    public void setSeminars(List<Seminar> seminars) {
-        this.seminars = seminars;
+    public void setSeminars(Seminar seminar) {
+        this.seminar = seminar;
     }
-    
+
+  public QSettings getSettings() {
+    return settings;
+  }
+
+  public void setSettings(QSettings settings) {
+    this.settings = settings;
+  }
+  
+  public void setLectureVisibility(boolean isVisible){
+    settings.setValue("lecture/isVisible", isVisible);
+  }
 }

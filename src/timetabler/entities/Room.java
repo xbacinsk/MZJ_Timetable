@@ -1,13 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package timetabler3000;
+package timetabler.entities;
 
-/**
- *
- * @author Enthas
- */
 class Room {
     
     private String name;

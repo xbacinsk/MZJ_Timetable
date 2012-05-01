@@ -1,17 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package timetabler3000;
+package timetabler.entities;
 
 import com.trolltech.qt.core.QDate;
 import com.trolltech.qt.core.QTime;
 import java.util.List;
 
-/**
- *
- * @author Enthas
- */
 class Term {
     
     private Teacher teacher;
@@ -19,15 +11,15 @@ class Term {
     private QTime timeFrom;
     private QTime timeTo;
     private List<Room> rooms;
-    private Integer groupId;
+    private Integer groupNum;
 
-    public Term(Teacher teacher, QDate day, QTime timeFrom, QTime timeTo, List<Room> rooms, Integer groupId) {
+    public Term(Teacher teacher, QDate day, QTime timeFrom, QTime timeTo, List<Room> rooms, Integer groupNum) {
         this.teacher = teacher;
         this.day = day;
         this.timeFrom = timeFrom;
         this.timeTo = timeTo;
         this.rooms = rooms;
-        this.groupId = groupId;
+        this.groupNum = groupNum;
     }
 
     public QDate getDay() {
@@ -38,12 +30,12 @@ class Term {
         this.day = day;
     }
 
-    public Integer getGroupId() {
-        return groupId;
+    public Integer getGroupNum() {
+        return groupNum;
     }
 
-    public void setGroupId(Integer groupId) {
-        this.groupId = groupId;
+    public void setGroupNum(Integer groupNum) {
+        this.groupNum = groupNum;
     }
 
     public List<Room> getRooms() {

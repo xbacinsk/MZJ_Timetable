@@ -1,21 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package timetabler3000;
+package timetabler.entities;
 
-/**
- *
- * @author Enthas
- */
 class Teacher {
     
     private String name;
-    private Integer uco;
+    private Integer teacherId;
 
-    public Teacher(String name, Integer uco) {
+    public Teacher(String name, Integer teacherId) {
         this.name = name;
-        this.uco = uco;
+        this.teacherId = teacherId;
     }
 
     public String getName() {
@@ -26,12 +18,12 @@ class Teacher {
         this.name = name;
     }
 
-    public Integer getUco() {
-        return uco;
+    public Integer getTeacherId() {
+        return teacherId;
     }
 
-    public void setUco(Integer uco) {
-        this.uco = uco;
+    public void setTeacherId(Integer teacherId) {
+        this.teacherId = teacherId;
     }
     
 }
