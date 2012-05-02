@@ -1,18 +1,25 @@
 package timetabler.dialogs;
 
+import com.trolltech.qt.core.QObject;
 import com.trolltech.qt.core.QSettings;
 import com.trolltech.qt.core.QTime;
+import com.trolltech.qt.gui.QCheckBox;
 import com.trolltech.qt.gui.QDialog;
+import com.trolltech.qt.gui.QVBoxLayout;
+import java.util.List;
 import timetabler.entities.Course;
+import timetabler.entities.Teacher;
 import timetabler.ui.Ui_CourseDialogUi;
 
 public class CourseDialog extends QDialog{
   
   private Ui_CourseDialogUi ui = new Ui_CourseDialogUi();
+  private Course course;
   
   public CourseDialog(Course course){
+    this.course = course;
     ui.setupUi(this);
-    loadSettings(course);
+    loadSettings();
   }
   
   @Override
@@ -29,11 +36,40 @@ public class CourseDialog extends QDialog{
   }
 
   private void saveSettings() {
-    throw new UnsupportedOperationException("Not yet implemented");
+    QSettings settings = new QSettings();
+    
+    settings.beginGroup(course.getCode() + "/days");
+    settings.setValue("monday", ui.daysMondayCheckBox.isChecked());
+    settings.setValue("tuesday", ui.daysTuesdayCheckBox.isChecked());
+    settings.setValue("wednesday", ui.daysWednesdayCheckBox.isChecked());
+    settings.setValue("thursday", ui.daysThursdayCheckBox.isChecked());
+    settings.setValue("friday", ui.daysFridayCheckBox.isChecked());
+    settings.setValue("saturday", ui.daysSaturdayCheckBox.isChecked());
+    settings.setValue("sunday", ui.daysSundayCheckBox.isChecked());
+    settings.endGroup();
+    
+    settings.beginGroup(course.getCode() + "/week");
+    settings.setValue("even", ui.weekEvenCheckBox.isChecked());
+    settings.setValue("odd", ui.weekOddCheckBox.isChecked());
+    settings.endGroup();
+    
+    settings.beginGroup(course.getCode() + "/time");
+    settings.setValue("from", ui.timeFromEdit.time());
+    settings.setValue("to", ui.timeToEdit.time());
+    settings.endGroup();
+    
+    settings.setValue(course.getCode() + "/lecture", ui.lectureVisibilityCheckBox.isChecked());
+    
+    List<QObject> boxes = ui.teachersBox.children();
+    settings.beginGroup(course.getCode() + "/teachers");
+    for(QObject box : boxes){
+      QCheckBox checkBox = (QCheckBox) box;
+      settings.setValue(checkBox.text(), checkBox.isChecked());
+    }
+    settings.endGroup();
   }
 
-  private void loadSettings(Course course) {
-    
+  private void loadSettings() {
     QSettings settings = new QSettings();
     
     settings.beginGroup(course.getCode() + "/days");
@@ -58,11 +94,16 @@ public class CourseDialog extends QDialog{
     
     ui.lectureVisibilityCheckBox.setChecked((Boolean) settings.value(course.getCode() + "/lecture", true));
     
-    /* TODO:
-     * nacitavanie ucitelov
-     * kazdu tu zmenu nieocoho connectnut na slot ktory bude prepocitavat tie moznosti
-     * saveSettings()
-     */
+    List<Teacher> teachers = course.getTeachers();
+    QVBoxLayout teachersLayout = new QVBoxLayout(ui.teachersBox);
+    
+    settings.beginGroup(course.getCode() + "/teachers");
+    for(Teacher teacher : teachers){
+      QCheckBox box = new QCheckBox(teacher.getName());
+      teachersLayout.addWidget(box);
+      box.setChecked((Boolean) settings.value(teacher.getName(), true));
+    }
+    settings.endGroup();
   }
   
 }
