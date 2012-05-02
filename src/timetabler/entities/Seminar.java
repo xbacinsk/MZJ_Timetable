@@ -8,6 +8,7 @@ public class Seminar extends QLabel {
 
   private List<Term> terms;
   private Term chosen;
+  public final Signal0 requestSettings = new Signal0();
 
   public Seminar(List<Term> terms, Term chosen) {
     this.terms = terms;
@@ -32,6 +33,6 @@ public class Seminar extends QLabel {
 
   @Override
   protected void mouseDoubleClickEvent(QMouseEvent me) {
-    
+    requestSettings.emit();
   }
 }
