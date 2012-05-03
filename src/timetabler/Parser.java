@@ -11,7 +11,7 @@ import timetabler.exceptions.InvalidQueryException;
 
 public class Parser extends QObject{
   private QByteArray xml;
-  private Signal1<List<Course>> dataAvailable = new Signal1<List<Course>>();
+  public final Signal1<List<Course>> dataAvailable = new Signal1<List<Course>>();
   
   public void readXml(QByteArray ba){
     xml = ba;

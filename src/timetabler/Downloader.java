@@ -9,7 +9,7 @@ import timetabler.exceptions.MissingLoginException;
 
 public class Downloader extends QObject{
   private QWebView web = new QWebView();
-  private QSignalEmitter.Signal1<QByteArray> xmlReady = new QSignalEmitter.Signal1<QByteArray>();
+  public final Signal1<QByteArray> xmlReady = new Signal1<QByteArray>();
   
   public Downloader(){
     web.loadFinished.connect(this, "loaded()");
@@ -39,7 +39,7 @@ public class Downloader extends QObject{
     web.load(url);
   }
   
-  public void loaded(){
+  private void loaded(){
     QByteArray ba = new QByteArray();
     ba.append(web.page().mainFrame().toHtml());
     
