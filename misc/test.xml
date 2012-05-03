@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="timetable.xsl"?>
 
 <timetable xsi:noNamespaceSchemaLocation="timetable.xsd" xmlns=""
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <hours bgcolor="blue">
-        <hour pdiff="12" diff="8">08:00</hour>
-        <hour pdiff="12" diff="7">09:00</hour>
-        <hour pdiff="12" diff="7">10:00</hour>
-        <hour pdiff="12" diff="7">11:00</hour>
-        <hour pdiff="12" diff="7">12:00</hour>
-        <hour pdiff="12" diff="7">13:00</hour>
-        <hour pdiff="12" diff="7">14:00</hour>
-        <hour pdiff="12" diff="7">15:00</hour>
-        <hour pdiff="12" diff="7">16:00</hour>
-        <hour pdiff="12" diff="7">17:00</hour>
-        <hour pdiff="12" diff="7">18:00</hour>
-        <hour pdiff="12" diff="6">19:00</hour>
+    <hours bgcolor="d5f9d2">
+        <hour pdiff="8" diff="12">08:00</hour>
+        <hour pdiff="7" diff="12">09:00</hour>
+        <hour pdiff="7" diff="12">10:00</hour>
+        <hour pdiff="7" diff="12">11:00</hour>
+        <hour pdiff="7" diff="12">12:00</hour>
+        <hour pdiff="7" diff="12">13:00</hour>
+        <hour pdiff="7" diff="12">14:00</hour>
+        <hour pdiff="7" diff="12">15:00</hour>
+        <hour pdiff="7" diff="12">16:00</hour>
+        <hour pdiff="7" diff="12">17:00</hour>
+        <hour pdiff="7" diff="12">18:00</hour>
+        <hour pdiff="6" diff="10">19:00</hour>
 
     </hours>
     <days>
@@ -45,6 +46,8 @@
                         <teacher id="7048">Panak</teacher>
                         <rooms>
                             <room id="534">D1</room>
+                            <room id="533">D2</room>
+                            <room id="2362">D3</room>
                         </rooms>
                     </course>
                 </cell>
@@ -53,13 +56,14 @@
         <day id="Út" rows="2">
             <row num="1">
                 <cell pdiff="14" diff="22">
-                    <course>
+                    <course color="ffdddd">
                         <courseid>632862</courseid>
                         <code>MB104</code>
                         <name>Matematika IV</name>
                         <teacher>Panak</teacher>
                         <rooms>
                             <room>D1</room>
+                            <room>D2</room>
                         </rooms>
                     </course>
                 </cell>
