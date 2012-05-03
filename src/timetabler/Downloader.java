@@ -31,7 +31,8 @@ public class Downloader extends QObject{
     String pass = (String) settings.value("login/pass");
     
     QFile file = new QFile("conf/timetableUrl");
-    QUrl url = new QUrl(file.readLine().toString());
+    file.open(QIODevice.OpenModeFlag.ReadOnly);
+    QUrl url = new QUrl(file.readLine().data().stringValue());
     url.setUserName(uco);
     url.setPassword(pass);
     
