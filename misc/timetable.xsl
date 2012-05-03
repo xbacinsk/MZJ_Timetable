@@ -3,7 +3,7 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
     <xsl:output method="html"/>
 
-    <xsl:template match="rozvrh">
+    <xsl:template match="timetable">
         <html>
             <head>
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -11,9 +11,9 @@
             </head>
             <body bgcolor="white">
                 <div>
-                    <TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="2" border="1">
-                        <xsl:apply-templates select="hodiny"/>
-                        <xsl:apply-templates select="tabulka/den"/>
+                    <TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="2" border="1" BGCOLOR="{hours/@bgcolor}">
+                        <xsl:apply-templates select="hours"/>
+                        <xsl:apply-templates select="days/day"/>
                 
                     </TABLE>
                 </div>
@@ -21,66 +21,84 @@
         </html>
     </xsl:template>
     
-    
-    <xsl:template match="hodiny">
+    <xsl:template match="hours">
         <TR>
             <TH WIDTH="8%">&#160;</TH>
-            <xsl:for-each select="hodina">
-                <TD>
-                    <xsl:attribute name="COLSPAN">
-                        <xsl:if test="position()!=last()">12</xsl:if>
-                        <xsl:if test="position()=last()">10</xsl:if>
-                    </xsl:attribute>
+            <xsl:for-each select="hour">
+                <TD COLSPAN="{@diff}">
                     <xsl:attribute name="WIDTH">
-                        <xsl:if test="position()!=last()">7%</xsl:if>
-                        <xsl:if test="position()=last()">6%</xsl:if></xsl:attribute>
-                    <xsl:value-of select="od"/>
+                        <xsl:value-of select="@pdiff"/>%
+                    </xsl:attribute>
+                    <xsl:value-of select="."/>
                 </TD>
             </xsl:for-each>
         </TR>    
     </xsl:template>
     
-    <xsl:template match="tabulka/den">
-        <xsl:for-each select="radek">
+    <xsl:template match="days/day">
+        <xsl:for-each select="row">
             <TR ALIGN="CENTER">
                 <xsl:if test="@num &#60; 2">
                     <TH ROWSPAN="{../@rows}">
                         <xsl:value-of select="../@id"/>
                     </TH>
                 </xsl:if>
-                <xsl:apply-templates select="*"/>
+                <xsl:apply-templates select="cell"/>
             </TR>
         </xsl:for-each>
     </xsl:template>
     
-    <xsl:template match="radek/*">
-                    <xsl:if test="name(.)='break'">
-                        <TD COLSPAN="{@diff}">
-                            <xsl:attribute name="WIDTH"><xsl:value-of select="@pdiff"/>%</xsl:attribute>&#160;
-                        </TD>
-                    </xsl:if>
-                    <xsl:if test="name(.)='slot'">
-                        <TD COLSPAN="{@diff}">
-                            <xsl:attribute name="WIDTH"><xsl:value-of select="@pdiff"/>%</xsl:attribute>
-                            <div>
-                                <FONT SIZE="-2">
-                                    <xsl:value-of select="mistnosti/mistnost/mistnostozn"/>
-                                </FONT>
-                                <BR/>
-                                <b>
-                                    <a>
-                                        <xsl:attribute name="href">https://is.muni.cz/auth/predmety/predmet.pl?id=<xsl:value-of select="akce/predmetid"/>
-                                        </xsl:attribute>
-                                        <xsl:value-of select="akce/kod"/>
-                                    </a>
-                                </b>
-                                <br/>
-                                <xsl:value-of select="akce/nazev"/>
-                                <br/>
-                                <xsl:value-of select="ucitele/ucitel/uciteljmeno"/>
-                            </div>
-                        </TD>
-                    </xsl:if>
-                </xsl:template>
-
+    <xsl:template match="row/cell">
+        <xsl:if test="name(./*)='break'">
+            <TD COLSPAN="{@diff}">
+                <xsl:attribute name="WIDTH">
+                    <xsl:value-of select="@pdiff"/>%
+                </xsl:attribute>&#160;
+            </TD>
+        </xsl:if>
+        <xsl:if test="name(./*)='course'">
+            <TD BGCOLOR="{course/@color}" COLSPAN="{@diff}">
+                <xsl:attribute name="WIDTH">
+                    <xsl:value-of select="@pdiff"/>%
+                </xsl:attribute>
+                <div>
+                    <FONT SIZE="-2">
+                        <xsl:apply-templates select="course/rooms/room"/>
+                    </FONT>
+                    <BR/>
+                    <b>
+                        <a>
+                            <xsl:attribute name="href">https://is.muni.cz/auth/predmety/predmet.pl?id=
+                                <xsl:value-of select="course/courseid"/>
+                            </xsl:attribute>
+                            <xsl:value-of select="course/code"/>
+                        </a>
+                    </b>
+                    <br/>
+                    <xsl:value-of select="course/name"/>
+                    <br/>
+                    <a>
+                        <xsl:if test="course/teacher/@id">
+                            <xsl:attribute name="href">https://is.muni.cz/auth/osoba/
+                                <xsl:value-of select="course/teacher/@id"/>
+                            </xsl:attribute>
+                        </xsl:if>
+                        <xsl:value-of select="course/teacher"/>
+                    </a>
+                </div>
+            </TD>
+        </xsl:if>
+    </xsl:template>
+                
+    <xsl:template match="course/rooms/room">
+        <a>
+            <xsl:if test="@id">
+                <xsl:attribute name="href">https://is.muni.cz/kontakty/mistnost.pl?id=
+                    <xsl:value-of select="@id"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xsl:value-of select="."/>
+        </a>&#160;
+        <xsl:value-of select="course/rooms/room"/>
+    </xsl:template>
 </xsl:stylesheet>
