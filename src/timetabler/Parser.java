@@ -9,10 +9,23 @@ import java.util.List;
 import timetabler.entities.Course;
 import timetabler.exceptions.InvalidQueryException;
 
+/**
+ * Parses xml timetable and creates Course objects
+ * 
+ * @author Michal Kimle
+ * @version 2012-05-04
+ */
 public class Parser extends QObject{
   private QByteArray xml;
   public final Signal1<List<Course>> dataAvailable = new Signal1<List<Course>>();
   
+  /**
+   * SLOT
+   * 
+   * Reads xml from QByteArray
+   * 
+   * @param ba xml in form of QByteArray
+   */
   public void readXml(QByteArray ba){
     xml = ba;
     
@@ -26,6 +39,13 @@ public class Parser extends QObject{
     }
   }
   
+  /**
+   * Parses xml and creates Course objects
+   * 
+   * @throws InvalidQueryException
+   * 
+   * @todo parsing results and creating Course objects from parsed data
+   */
   private void parseXml() throws InvalidQueryException{
     List<Course> courses = new ArrayList<Course>();
     
@@ -45,10 +65,8 @@ public class Parser extends QObject{
     QXmlResultItems results = new QXmlResultItems();
     qry.evaluateTo(results);
     
-    /*TODO
-     * parsing results and creating Course objects from parsed data
-     */
-    
+    buffIn.close();
+    file.close();
     dataAvailable.emit(courses);
   }
 }

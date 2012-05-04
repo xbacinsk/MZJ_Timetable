@@ -4,6 +4,14 @@ import com.trolltech.qt.core.QDate;
 import com.trolltech.qt.core.QTime;
 import java.util.List;
 
+/**
+ * Term
+ * 
+ * Holds information about term
+ * 
+ * @author Michal Kimle
+ * @version 2012-05-04
+ */
 public class Term {
     
     private Teacher teacher;

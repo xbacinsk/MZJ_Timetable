@@ -1,5 +1,13 @@
 package timetabler.entities;
 
+/**
+ * Teacher
+ * 
+ * Holds information about teacher
+ * 
+ * @author Michal Kimle
+ * @version 2012-05-04
+ */
 public class Teacher {
     
     private String name;

@@ -4,9 +4,23 @@ import com.trolltech.qt.gui.QLabel;
 import com.trolltech.qt.gui.QMouseEvent;
 import java.util.List;
 
+/**
+ * Seminar
+ * 
+ * Holds information about seminar
+ * 
+ * @author Michal Kimle
+ * @version 2012-05-04
+ */
 public class Seminar extends QLabel {
 
+  /**
+   * all terms within seminar
+   */
   private List<Term> terms;
+  /**
+   * term which is currently chosen in GUI
+   */
   private Term chosen;
   public final Signal0 requestSettings = new Signal0();
 
@@ -31,6 +45,13 @@ public class Seminar extends QLabel {
     this.terms = terms;
   }
 
+  /**
+   * Executes on mouse double-click
+   * 
+   * emits request for course dialog
+   * 
+   * @param me mouse event generated within double-click
+   */ 
   @Override
   protected void mouseDoubleClickEvent(QMouseEvent me) {
     requestSettings.emit();

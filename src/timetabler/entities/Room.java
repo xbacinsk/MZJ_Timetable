@@ -1,5 +1,13 @@
 package timetabler.entities;
 
+/**
+ * Room
+ * 
+ * Holds information about room
+ * 
+ * @author Michal Kimle
+ * @version 2012-05-04
+ */
 public class Room {
     
     private String name;

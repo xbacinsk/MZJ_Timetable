@@ -3,6 +3,14 @@ package timetabler.entities;
 import com.trolltech.qt.gui.QLabel;
 import com.trolltech.qt.gui.QMouseEvent;
 
+/**
+ * Lecture
+ * 
+ * Holds information about lecture
+ * 
+ * @author Michal Kimle
+ * @version 2012-05-04
+ */
 public class Lecture extends QLabel {
 
   private Term term;
@@ -20,6 +28,13 @@ public class Lecture extends QLabel {
     this.term = term;
   }
 
+  /**
+   * Executes on mouse double-click
+   * 
+   * emits request for course dialog
+   * 
+   * @param me mouse event generated within double-click
+   */  
   @Override
   protected void mouseDoubleClickEvent(QMouseEvent me) {
     requestSettings.emit();
