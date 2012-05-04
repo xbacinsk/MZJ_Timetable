@@ -7,7 +7,11 @@ import timetabler.dialogs.LoginDialog;
 import timetabler.exceptions.MissingLoginException;
 
 /**
- * Downloads timetable in form of xml
+ * Downloads timetable in form of xml.
+ * 
+ * Asks for login with login dialog and download timetable xml from IS. IS 
+ * timetable url is stored in file conf/timetableUrl. When the loading is done
+ * it emits a signal for parser.
  * 
  * @author Michal Kimle
  * @version 2012-05-04
@@ -20,7 +24,7 @@ public class Downloader extends QObject{
   /**
    * Signal emitted when download is complete and xml is ready for parsing
    * 
-   * @param xml in form of QByteArray
+   * @qtspecific-param xml in form of QByteArray
    */
   public final Signal1<QByteArray> xmlReady = new Signal1<QByteArray>();
   

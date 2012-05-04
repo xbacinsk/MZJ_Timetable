@@ -7,10 +7,14 @@ import com.trolltech.qt.gui.QPalette;
 import timetabler.ui.Ui_LoginDialogUi;
 
 /**
- * Represents login dialog for authentication within IS
+ * Login dialog for authentication within IS.
+ * 
+ * Login dialog. Askes for user name and password, checks if they are correct 
+ * and store them in global settings for further usage.
  * 
  * @author Michal Kimle
  * @version 2012-05-04
+ * 
  */
 public class LoginDialog extends QDialog{
 
@@ -24,6 +28,8 @@ public class LoginDialog extends QDialog{
    * SLOT
    * 
    * Called when OK button is pressed
+   * 
+   * @todo checking login before storing in global settings
    */
   @Override
   public void accept() {

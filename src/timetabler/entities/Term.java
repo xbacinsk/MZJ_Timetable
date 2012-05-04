@@ -5,9 +5,9 @@ import com.trolltech.qt.core.QTime;
 import java.util.List;
 
 /**
- * Term
+ * Holds information about term.
  * 
- * Holds information about term
+ * Represents all information about one term.
  * 
  * @author Michal Kimle
  * @version 2012-05-04

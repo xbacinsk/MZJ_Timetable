@@ -8,12 +8,15 @@ import java.util.List;
 import timetabler.dialogs.CourseDialog;
 
 /**
- * Course
+ * Holds all the information about course.
  * 
- * Holds all the information about course
+ * Holds the course code, name, id, lecture and seminar. One object represents 
+ * whole course with all its information which are needed for its rendering.
  * 
  * @author Michal Kimle
  * @version 2012-05-04
+ * 
+ * @todo functions for rendering
  */
 public class Course extends QLabel {
 

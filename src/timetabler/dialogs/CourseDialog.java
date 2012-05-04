@@ -12,7 +12,10 @@ import timetabler.entities.Teacher;
 import timetabler.ui.Ui_CourseDialogUi;
 
 /**
- * Represents settings dialog for course
+ * Settings dialog for course.
+ * 
+ * Represents filter dialog which can reduce the options of placing course on 
+ * timetable.
  * 
  * @author Michal Kimle
  * @version 2012-05-04

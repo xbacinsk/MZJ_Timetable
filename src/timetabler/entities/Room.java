@@ -1,9 +1,9 @@
 package timetabler.entities;
 
 /**
- * Room
+ * Holds information about room.
  * 
- * Holds information about room
+ * Holds room name and id.
  * 
  * @author Michal Kimle
  * @version 2012-05-04

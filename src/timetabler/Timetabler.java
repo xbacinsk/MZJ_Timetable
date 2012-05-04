@@ -23,8 +23,8 @@ public class Timetabler extends QWidget{
          * Course Math.
          */
         Teacher mathTeacher = new Teacher("Panak",1);
-        List<Room> rooms = new ArrayList<>();
-        List<Term> sTerms = new ArrayList<>();
+        List<Room> rooms = new ArrayList<Room>();
+        List<Term> sTerms = new ArrayList<Term>();
         Room mathRoom = new Room("G125",1);
         rooms.add(mathRoom);
         Term mathTerm = new Term(mathTeacher, new QDate(2012,5,5),
@@ -38,7 +38,7 @@ public class Timetabler extends QWidget{
         sTerms.add(mathS3); sTerms.add(mathS2); sTerms.add(mathS1);
         Lecture mathLecture = new Lecture(mathTerm);
         Seminar mathSeminar = new Seminar(sTerms,mathS3);
-        Course mathCourse = new Course(104,"Math104",104,mathLecture,
+        Course mathCourse = new Course("MB104","Math104",104,mathLecture,
                 mathSeminar);
          /**
          * Course .
@@ -57,7 +57,7 @@ public class Timetabler extends QWidget{
         sTerms.add(mzjS3); sTerms.add(mzjS2); sTerms.add(mzjS1);
         Lecture mzjLecture = new Lecture(mzjTerm);
         Seminar mzjSeminar = new Seminar(sTerms,mzjS2);
-        Course mzjCourse = new Course(1,"MZJ",1,mzjLecture,
+        Course mzjCourse = new Course("AB1","MZJ",1,mzjLecture,
                 mzjSeminar);
          /**
          * Course Math.
@@ -76,7 +76,7 @@ public class Timetabler extends QWidget{
         sTerms.add(javaS3); sTerms.add(javaS2); sTerms.add(javaS1);
         Lecture javaLecture = new Lecture(javaTerm);
         Seminar javaSeminar = new Seminar(sTerms,javaS1);
-        Course javaCourse = new Course(999,"Java",999,javaLecture,
+        Course javaCourse = new Course("FX999","Java",999,javaLecture,
                 javaSeminar);
     }
     

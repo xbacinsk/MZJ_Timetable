@@ -1,9 +1,9 @@
 package timetabler.entities;
 
 /**
- * Teacher
+ * Holds information about teacher.
  * 
- * Holds information about teacher
+ * Holds teacher name and id.
  * 
  * @author Michal Kimle
  * @version 2012-05-04

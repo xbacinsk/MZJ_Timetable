@@ -4,9 +4,9 @@ import com.trolltech.qt.gui.QLabel;
 import com.trolltech.qt.gui.QMouseEvent;
 
 /**
- * Lecture
+ * Holds information about lecture.
  * 
- * Holds information about lecture
+ * All information are stored in its Term object.
  * 
  * @author Michal Kimle
  * @version 2012-05-04

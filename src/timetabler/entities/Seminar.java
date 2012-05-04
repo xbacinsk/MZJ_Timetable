@@ -5,9 +5,11 @@ import com.trolltech.qt.gui.QMouseEvent;
 import java.util.List;
 
 /**
- * Seminar
+ * Holds information about seminar.
  * 
- * Holds information about seminar
+ * Holds list of Term objects which represents all the information about seminar 
+ * and one separate Term object which represents currently chosen term in 
+ * timetable.
  * 
  * @author Michal Kimle
  * @version 2012-05-04
