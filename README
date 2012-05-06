@@ -1,0 +1,11 @@
+Úèelom projektu je pomáha študentom Masarykovej univerzity pri vytváraní rozvrhu pred registráciou do seminárnych skupín.
+
+Po autentizácii sa uívate¾ovi naèíta a zobrazí rozvrh, ktorı poskytuje IS, s jeho zapísanımi predmetmi a prednáškami, ktoré sú pevne dané (tie si bude môc pod¾a potreby zobrazova a skrıva). Ïalej sa vytvorí zoznam predmetov, v ktorom si študent bude môc vybra konkrétny predmet, s ktorım chce pracova.
+
+Hlavnou funkcionalitou je presúvanie seminárnych skupín a ich zobrazovanie v grafickej a dynamicky sa zobrazujúcej reprezentácii rozvrhu.
+
+U kadého predmetu si uívate zvolí, èi chce zobrazova prednášku (implicitne zapnuté). Po chytení a presúvaní objektu (predmetu) ponad rozvrh sa ukáu monosti, kde môe seminárnu skupinu umiestni. Po umiestnení sa zmení farba políèka v zozname a nebude moné zobrazi druhú seminárnu skupinu tohto predmetu. Ak si chce uívate¾ vybra inú skupinu, staèí presunú u zobrazenú v rozvrhu.
+
+Študent si takto môe jednoducho a preh¾adne vytvori rozvrh pod¾a svojich predstáv a bude jasne vidie, ktoré seminárne skupiny sa mu budú prekrıva a ktoré nie.
+
+Nakoniec si môe svoj predbenı rozvrh exportova do XML/XHTML, prièom si môe vybra farebné rozlíšenie prednášok a seminárnych skupín.
