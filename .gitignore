@@ -5,3 +5,4 @@ lib/CopyLibs/
 lib/nblibraries.properties
 
 /build/
+/dist/

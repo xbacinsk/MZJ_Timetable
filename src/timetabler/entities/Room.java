@@ -1,11 +1,19 @@
 package timetabler.entities;
 
+/**
+ * Holds information about room.
+ * 
+ * Holds room name and id.
+ * 
+ * @author Michal Kimle
+ * @version 2012-05-04
+ */
 public class Room {
     
     private String name;
-    private Integer roomId;
+    private int roomId;
 
-    public Room(String name, Integer roomId) {
+    public Room(String name, int roomId) {
         this.name = name;
         this.roomId = roomId;
     }
@@ -18,11 +26,11 @@ public class Room {
         this.name = name;
     }
 
-    public Integer getRoomId() {
+    public int getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(Integer roomId) {
+    public void setRoomId(int roomId) {
         this.roomId = roomId;
     }   
     

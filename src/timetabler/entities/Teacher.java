@@ -1,11 +1,19 @@
 package timetabler.entities;
 
+/**
+ * Holds information about teacher.
+ * 
+ * Holds teacher name and id.
+ * 
+ * @author Michal Kimle
+ * @version 2012-05-04
+ */
 public class Teacher {
     
     private String name;
-    private Integer teacherId;
+    private int teacherId;
 
-    public Teacher(String name, Integer teacherId) {
+    public Teacher(String name, int teacherId) {
         this.name = name;
         this.teacherId = teacherId;
     }
@@ -18,11 +26,11 @@ public class Teacher {
         this.name = name;
     }
 
-    public Integer getTeacherId() {
+    public int getTeacherId() {
         return teacherId;
     }
 
-    public void setTeacherId(Integer teacherId) {
+    public void setTeacherId(int teacherId) {
         this.teacherId = teacherId;
     }
     

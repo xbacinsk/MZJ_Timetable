@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+
+    <xs:simpleType name="hourValueType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{2}:[0-9]{2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="hourType">
+        <xs:simpleContent>
+            <xs:extension base="hourValueType">
+                <xs:attribute name="pdiff" type="xs:positiveInteger" use="required"/>
+                <xs:attribute name="diff" type="xs:positiveInteger" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="teacherType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="id" type="xs:positiveInteger"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="roomType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="id" type="xs:positiveInteger"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:element name="timetable">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="hours">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="hour" type="hourType" maxOccurs="21"/>
+                        </xs:sequence>
+                        <xs:attribute name="bgcolor" type="xs:string" default="white"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="days">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="day" maxOccurs="7">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="row" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="cell" maxOccurs="unbounded">
+                                                        <xs:complexType>
+                                                            <xs:choice>
+                                                                <xs:element name="break"/>
+                                                                <xs:element name="course">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element name="courseid" type="xs:positiveInteger"/>
+                                                                            <xs:element name="code">
+                                                                                <xs:simpleType>
+                                                                                    <xs:restriction base="xs:string">
+                                                                                        <xs:pattern value="([a-zA-Z])+[0-9]{3}(/([0-9])+)*"/>
+                                                                                    </xs:restriction>
+                                                                                </xs:simpleType>
+                                                                            </xs:element>
+                                                                            <xs:element name="name" type="xs:string"/>
+                                                                            <xs:element name="teacher" type="teacherType"/>
+                                                                            <xs:element name="rooms">
+                                                                                <xs:complexType>
+                                                                                    <xs:sequence>
+                                                                                        <xs:element name="room" type="roomType" maxOccurs="unbounded"/>
+                                                                                    </xs:sequence>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                        <xs:attribute name="color" type="xs:string" default="white"/>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:choice>
+                                                            <xs:attribute name="pdiff" type="xs:positiveInteger" use="required"/>
+                                                            <xs:attribute name="diff" type="xs:positiveInteger" use="required"/>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                                <xs:attribute name="num" type="xs:positiveInteger" use="required"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                    <xs:attribute name="id">
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:enumeration value="Po"/>
+                                                <xs:enumeration value="Út"/>
+                                                <xs:enumeration value="St"/>
+                                                <xs:enumeration value="Čt"/>
+                                                <xs:enumeration value="Pá"/>
+                                                <xs:enumeration value="So"/>
+                                                <xs:enumeration value="Ne"/>
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:attribute>
+                                    <xs:attribute name="rows" type="xs:positiveInteger"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -11,6 +11,15 @@ import timetabler.entities.Course;
 import timetabler.entities.Teacher;
 import timetabler.ui.Ui_CourseDialogUi;
 
+/**
+ * Settings dialog for course.
+ * 
+ * Represents filter dialog which can reduce the options of placing course on 
+ * timetable.
+ * 
+ * @author Michal Kimle
+ * @version 2012-05-04
+ */
 public class CourseDialog extends QDialog{
   
   private Ui_CourseDialogUi ui = new Ui_CourseDialogUi();
@@ -22,6 +31,11 @@ public class CourseDialog extends QDialog{
     loadSettings();
   }
   
+  /**
+   * SLOT
+   * 
+   * Called when OK button is pressed
+   */
   @Override
   public void accept(){
     saveSettings();
@@ -29,12 +43,20 @@ public class CourseDialog extends QDialog{
     close();
   }
   
+  /**
+   * SLOT
+   * 
+   * Called when Cancel button is pressed
+   */
   @Override
   public void reject(){
     setResult(QDialog.DialogCode.Rejected.value());
     close();
   }
 
+  /**
+   * Save/Create settings from GUI
+   */
   private void saveSettings() {
     QSettings settings = new QSettings();
     
@@ -60,6 +82,7 @@ public class CourseDialog extends QDialog{
     
     settings.setValue(course.getCode() + "/lecture", ui.lectureVisibilityCheckBox.isChecked());
     
+    //getting settings from dynamically generated combo box for teachers
     List<QObject> boxes = ui.teachersBox.children();
     settings.beginGroup(course.getCode() + "/teachers");
     for(QObject box : boxes){
@@ -69,6 +92,9 @@ public class CourseDialog extends QDialog{
     settings.endGroup();
   }
 
+  /**
+   * Load/Create GUI settings from stored settings
+   */
   private void loadSettings() {
     QSettings settings = new QSettings();
     
@@ -97,6 +123,7 @@ public class CourseDialog extends QDialog{
     List<Teacher> teachers = course.getTeachers();
     QVBoxLayout teachersLayout = new QVBoxLayout(ui.teachersBox);
     
+    //dynamically creating combo boxes for teachers and loading their settings
     settings.beginGroup(course.getCode() + "/teachers");
     for(Teacher teacher : teachers){
       QCheckBox box = new QCheckBox(teacher.getName());

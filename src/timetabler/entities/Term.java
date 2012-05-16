@@ -4,6 +4,14 @@ import com.trolltech.qt.core.QDate;
 import com.trolltech.qt.core.QTime;
 import java.util.List;
 
+/**
+ * Holds information about term.
+ * 
+ * Represents all information about one term.
+ * 
+ * @author Michal Kimle
+ * @version 2012-05-04
+ */
 public class Term {
     
     private Teacher teacher;
@@ -11,9 +19,9 @@ public class Term {
     private QTime timeFrom;
     private QTime timeTo;
     private List<Room> rooms;
-    private Integer groupNum;
+    private int groupNum;
 
-    public Term(Teacher teacher, QDate day, QTime timeFrom, QTime timeTo, List<Room> rooms, Integer groupNum) {
+    public Term(Teacher teacher, QDate day, QTime timeFrom, QTime timeTo, List<Room> rooms, int groupNum) {
         this.teacher = teacher;
         this.day = day;
         this.timeFrom = timeFrom;
@@ -30,11 +38,11 @@ public class Term {
         this.day = day;
     }
 
-    public Integer getGroupNum() {
+    public int getGroupNum() {
         return groupNum;
     }
 
-    public void setGroupNum(Integer groupNum) {
+    public void setGroupNum(int groupNum) {
         this.groupNum = groupNum;
     }
 

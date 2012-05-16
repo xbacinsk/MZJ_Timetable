@@ -7,7 +7,8 @@ package timetabler.ui;
  **
  ** WARNING! All changes made in this file will be lost when recompiling ui file!
  ********************************************************************************/
-import com.trolltech.qt.core.*;
+import com.trolltech.qt.core.QSize;
+import com.trolltech.qt.core.QTime;
 import com.trolltech.qt.gui.*;
 
 public class Ui_CourseDialogUi implements com.trolltech.qt.QUiForm<QDialog>
@@ -47,6 +48,7 @@ public class Ui_CourseDialogUi implements com.trolltech.qt.QUiForm<QDialog>
 
     public Ui_CourseDialogUi() { super(); }
 
+  @Override
     public void setupUi(QDialog CourseDialogUi)
     {
         CourseDialogUi.setObjectName("CourseDialogUi");
