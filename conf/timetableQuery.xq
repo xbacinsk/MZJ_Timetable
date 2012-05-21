@@ -13,15 +13,15 @@ for $day in $doc//den
       let $roomName := data($room//mistnostozn)
       let $roomId := data($room//mistnostid)
       
-      return string-join(($roomId,$roomName),"|")),"|")
+      return string-join(($roomId,$roomName),"#")),"#")
   let $courseCode := data($slot//kod)
   let $courseName := data($slot//nazev)
-  let $courseId := data($slot//prdmetid)
+  let $courseId := data($slot//predmetid)
   let $teachers :=
     string-join((for $teacher in $slot//ucitele/ucitel
       let $teacherId := data($teacher/ucitelid)
       let $teacherName := data($teacher/uciteljmeno)
       
-      return string-join(($teacherId,$teacherName),"|")),"|")
+      return string-join(($teacherId,$teacherName),"#")),"#")
   
   return string-join(($dayName,$timeFrom,$timeTo,$rooms,$courseCode,$courseName,$courseId,$teachers),";")
