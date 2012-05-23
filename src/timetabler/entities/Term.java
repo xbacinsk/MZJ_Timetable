@@ -77,5 +77,9 @@ public class Term {
     public void setTimeTo(QTime timeTo) {
         this.timeTo = timeTo;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Term{" + "teacher=" + teacher + ", day=" + day + ", timeFrom=" + timeFrom + ", timeTo=" + timeTo + ", rooms=" + rooms + ", groupNum=" + groupNum + '}';
+    }
 }

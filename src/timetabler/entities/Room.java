@@ -1,5 +1,7 @@
 package timetabler.entities;
 
+import java.math.BigInteger;
+
 /**
  * Holds information about room.
  * 
@@ -11,9 +13,9 @@ package timetabler.entities;
 public class Room {
     
     private String name;
-    private int roomId;
+    private BigInteger roomId;
 
-    public Room(String name, int roomId) {
+    public Room(String name, BigInteger roomId) {
         this.name = name;
         this.roomId = roomId;
     }
@@ -26,12 +28,16 @@ public class Room {
         this.name = name;
     }
 
-    public int getRoomId() {
+    public BigInteger getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(int roomId) {
+    public void setRoomId(BigInteger roomId) {
         this.roomId = roomId;
-    }   
-    
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" + "name=" + name + ", roomId=" + roomId + '}';
+    }
 }

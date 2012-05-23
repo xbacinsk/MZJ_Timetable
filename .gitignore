@@ -3,6 +3,10 @@ build.xml
 manifest.mf
 lib/CopyLibs/
 lib/nblibraries.properties
+lib/qtjambi-win32-msvc2008-4.7.0.jar
 
 /build/
 /dist/
+
+.gitignore~
+.gitignore

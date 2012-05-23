@@ -38,26 +38,26 @@ public class LoginDialog extends QDialog{
     
     //if uco or pass is missing colorize missing element
     if(uco == null || uco.isEmpty() || pass == null || pass.isEmpty()){
-      if(uco == null || uco.isEmpty()){
-        QPalette palette = ui.ucoLabel.palette();
-        palette.setColor(QPalette.ColorRole.Text, QColor.red);
-        ui.ucoLabel.setPalette(palette);
-        
-      }
       if(pass == null || pass.isEmpty()){
         QPalette palette = ui.passLabel.palette();
-        palette.setColor(QPalette.ColorRole.Text, QColor.red);
+        palette.setColor(QPalette.ColorRole.WindowText, QColor.red);
         ui.passLabel.setPalette(palette);
-        
+        ui.passEdit.setFocus();
+      }
+      if(uco == null || uco.isEmpty()){
+        QPalette palette = ui.ucoLabel.palette();
+        palette.setColor(QPalette.ColorRole.WindowText, QColor.red);
+        ui.ucoLabel.setPalette(palette);
+        ui.ucoEdit.setFocus();
       }
       return;
     }
-    
+
     QSettings settings = new QSettings();
     settings.setValue("login/uco", uco);
     settings.setValue("login/pass", pass);
     setResult(QDialog.DialogCode.Accepted.value());
-    close();
+    hide();
   }
 
   /**
@@ -68,7 +68,7 @@ public class LoginDialog extends QDialog{
   @Override
   public void reject() {
     setResult(QDialog.DialogCode.Rejected.value());
-    close();
+    hide();
   }
   
 }

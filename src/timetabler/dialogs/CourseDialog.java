@@ -40,7 +40,7 @@ public class CourseDialog extends QDialog{
   public void accept(){
     saveSettings();
     setResult(QDialog.DialogCode.Accepted.value());
-    close();
+    hide();
   }
   
   /**
@@ -51,7 +51,7 @@ public class CourseDialog extends QDialog{
   @Override
   public void reject(){
     setResult(QDialog.DialogCode.Rejected.value());
-    close();
+    hide();
   }
 
   /**
