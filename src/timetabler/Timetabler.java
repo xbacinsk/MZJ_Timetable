@@ -2,16 +2,20 @@ package timetabler;
 
 import com.trolltech.qt.core.QDate;
 import com.trolltech.qt.core.QTime;
-import com.trolltech.qt.gui.QWidget;
+import com.trolltech.qt.gui.QMainWindow;
 import java.util.ArrayList;
 import java.util.List;
 import timetabler.entities.*;
+import timetabler.ui.Ui_MainWindow;
 
-public class Timetabler extends QWidget{
+public class Timetabler extends QMainWindow{
   
+    private Ui_MainWindow ui = new Ui_MainWindow();
+    private Course course;
+        
     public Timetabler()
     {
-        
+        ui.setupUi(this);
     }
     
     /**
