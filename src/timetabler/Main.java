@@ -43,24 +43,27 @@ public class Main{
             Timetabler timetabler = new Timetabler();
             timetabler.show();             
 
-            loadCourses(timetabler);
-            
-            //initializeGUI(timetabler);
+            filler();
+            loadCourses(timetabler);           
             
             QApplication.exec();
             
     }
     
     public static void filler(){
-        Course course1 = new Course("SOC103", "Obecné sociologické teorie", new BigInteger("123"));
         List<Term> terms1 = new ArrayList<Term>();
         terms1.add(new Term(new Teacher("Csaba Szalo", new BigInteger("12456")), Days.MON, new QTime(14, 0), new QTime(16, 0), new Room("D3", new BigInteger("123")), 1));
         Lecture lecture1 = new Lecture(terms1);
+        Course course1 = new Course("SOC103", "Obecné sociologické teorie", new BigInteger("123"),lecture1,null);
         
-        Course course2 = new Course("SOC106", "Metodologie sociálních věd", new BigInteger("234"));
-        Course course3 = new Course("SOC109", "Demografie", new BigInteger("345"));
-        Course course4 = new Course("PB138   ", "Moderní značkovací jazyky", new BigInteger("456"));
-        Course course5 = new Course("PV174   ", "LEMMA", new BigInteger("567"));
+        List<Term> terms2 = new ArrayList<Term>();
+        terms2.add(new Term(new Teacher("Hejkal Brandorad", new BigInteger("13579")), Days.THU, new QTime(8, 0), new QTime(12, 0), new Room("D1", new BigInteger("3")), 1));
+        Lecture lecture2 = new Lecture(terms2);
+        Course course2 = new Course("SOC106", "Metodologie sociálních věd", new BigInteger("234"),lecture2,null);
+        
+        Course course3 = new Course("SOC109", "Demografie", new BigInteger("345"),null,null);
+        Course course4 = new Course("PB138   ", "Moderní značkovací jazyky", new BigInteger("456"),null,null);
+        Course course5 = new Course("PV174   ", "LEMMA", new BigInteger("567"),null,null);
         
         inputContainer.add(course1);
         inputContainer.add(course2);
