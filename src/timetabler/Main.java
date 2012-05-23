@@ -4,82 +4,62 @@ import com.trolltech.qt.core.QCoreApplication;
 import com.trolltech.qt.core.QDate;
 import com.trolltech.qt.core.QTime;
 import com.trolltech.qt.gui.QApplication;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 import timetabler.entities.*;
+import timetabler.ui.Ui_MainWindow;
 
 public class Main{
+    
+    private static List<Course> inputContainer = new ArrayList<Course>();
+    private static List<Course> outputContainer = new ArrayList<Course>();
   
-  public static void main(String args[]){
-    QApplication.initialize(args);
-    
-    //need to be filled for QSettings usage
-    QCoreApplication.setOrganizationName("MZJ");
-    QCoreApplication.setOrganizationDomain("mzj.net");
-    QCoreApplication.setApplicationName("Timetabler");
-    
-    Timetabler timetabler = new Timetabler();
-    timetabler.show();
-    
-    QApplication.exec();
-  }
-  
-  public void Tester()
-    {
-        /**
-         * Course Math.
-         */
-        Teacher mathTeacher = new Teacher("Panak",1);
-        List<Room> rooms = new ArrayList<Room>();
-        List<Term> sTerms = new ArrayList<Term>();
-        Room mathRoom = new Room("G125",1);
-        rooms.add(mathRoom);
-        Term mathTerm = new Term(mathTeacher, new QDate(2012,5,5),
-                new QTime(10,00), new QTime(12,00),rooms,15);
-        Term mathS1 = new Term(mathTeacher,new QDate(2012,5,6),
-                new QTime(10,00), new QTime(12,00),rooms,16);
-        Term mathS2 = new Term(mathTeacher,new QDate(2012,5,5),
-                new QTime(12,00), new QTime(14,00),rooms,17);
-        Term mathS3 = new Term(mathTeacher, new QDate(2012,5,5),
-                new QTime(8,00),new QTime(10,00),rooms,18);  
-        sTerms.add(mathS3); sTerms.add(mathS2); sTerms.add(mathS1);
-        Lecture mathLecture = new Lecture(mathTerm);
-        Seminar mathSeminar = new Seminar(sTerms,mathS3);
-        Course mathCourse = new Course("MB104","Math104",104,mathLecture,mathSeminar);
-        /**
-         * Course .
-         */
-        Teacher mzjTeacher = new Teacher("Unknown",2);
-        Room mzjRoom = new Room("G124",2);
-        rooms.add(mathRoom);
-        Term mzjTerm = new Term(mzjTeacher, new QDate(2012,5,5),
-                new QTime(16,00), new QTime(18,00),rooms,19);
-        Term mzjS1 = new Term(mzjTeacher, new QDate(2012,5,6),
-                new QTime(12,00), new QTime(14,00),rooms,20);
-        Term mzjS2 = new Term(mzjTeacher, new QDate(2012,5,5),
-                new QTime(12,00), new QTime(14,00),rooms,21);
-        Term mzjS3 = new Term(mzjTeacher,new QDate(2012,5,4),
-                new QTime(8,00), new QTime(10,00),rooms,22);  
-        sTerms.add(mzjS3); sTerms.add(mzjS2); sTerms.add(mzjS1);
-        Lecture mzjLecture = new Lecture(mzjTerm);
-        Seminar mzjSeminar = new Seminar(sTerms,mzjS2);
-        Course mzjCourse = new Course("AB1","MZJ",1,mzjLecture,mzjSeminar);
-         /**
-         * Course Math.
-         */
-        Teacher javaTeacher = new Teacher("Known",3);
-        Room javaRoom = new Room("D1",3);
-        rooms.add(javaRoom);
-        Term javaTerm = new Term(javaTeacher, new QDate(2012,5,4),
-                new QTime(10,00), new QTime(12,00),rooms,23);
-        Term javaS1 = new Term(javaTeacher, new QDate(2012,5,4),
-                new QTime(10,00), new QTime(12,00),rooms,24);
-        Term javaS2 = new Term(javaTeacher, new QDate(2012,5,4),
-                new QTime(12,00), new QTime(14,00),rooms,25);
-        Term javaS3 = new Term(javaTeacher, new QDate(2012,5,3),
-                new QTime(8,00), new QTime(10,00),rooms,26);  
-        sTerms.add(javaS3); sTerms.add(javaS2); sTerms.add(javaS1);
-        Lecture javaLecture = new Lecture(javaTerm);
-        Seminar javaSeminar = new Seminar(sTerms,javaS1);
-        Course javaCourse = new Course("FX999","Java",999,javaLecture,javaSeminar);
+    public static void loadCourses(Timetabler tt){
+            for (Course course : inputContainer){
+                tt.getUi().listWidget.addItem(course.getCode() + "  " + course.getName());
+            }
         }
-  
+    
+    public static void initializeGUI(Timetabler tt){
+        Ui_MainWindow gui = tt.getUi();
+        
+        gui.centralwidget.setBaseSize(845,390);
+        
+        gui.centralwidget.setMinimumWidth(845);
+        gui.centralwidget.setMinimumHeight(390);       
+    }
+    
+    public static void resizeAction(Timetabler tt){
+        Ui_MainWindow gui = tt.getUi();
+        gui.listWidget.setBaseSize((gui.centralwidget.width() / 4), (gui.centralwidget.width() - 100));        
+    }
+    
+    public static void main(String args[]){
+            QApplication.initialize(args);
+
+            //need to be filled for QSettings usage
+            QCoreApplication.setOrganizationName("MZJ");
+            QCoreApplication.setOrganizationDomain("mzj.net");
+            QCoreApplication.setApplicationName("Timetabler");
+            
+            Timetabler timetabler = new Timetabler();
+            timetabler.show();            
+
+            inputContainer.add(new Course("SOC103", "Obecné sociologické teorie", new BigInteger("123")));
+            inputContainer.add(new Course("SOC106", "Metodologie sociálních věd", new BigInteger("234")));
+            inputContainer.add(new Course("SOC109", "Demografie", new BigInteger("345")));
+            inputContainer.add(new Course("PB138   ", "Moderní značkovací jazyky", new BigInteger("456")));
+            inputContainer.add(new Course("PV174   ", "LEMMA", new BigInteger("567")));
+
+            loadCourses(timetabler);
+            
+            initializeGUI(timetabler);
+            
+            QApplication.exec();
+                       
+            //timetabler.getUi().actionResizeWindow.triggered.
+            
+     }  
 }
+ 
