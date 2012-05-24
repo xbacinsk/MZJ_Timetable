@@ -46,27 +46,27 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
     public QLabel label_16;
     public QHBoxLayout horizontalLayout_2;
     public QLabel label_17;
-    public QGroupBox groupBox;
+    public QGroupBox mondayBox;
     public QLabel label_22;
     public QSpacerItem horizontalSpacer_2;
     public QHBoxLayout horizontalLayout_3;
     public QLabel label_18;
-    public QGroupBox groupBox_2;
+    public QGroupBox tuesdayBox;
     public QLabel label_23;
     public QSpacerItem horizontalSpacer_3;
     public QHBoxLayout horizontalLayout_4;
     public QLabel label_19;
-    public QGroupBox groupBox_3;
+    public QGroupBox wednesdayBox;
     public QLabel label_24;
     public QSpacerItem horizontalSpacer_4;
     public QHBoxLayout horizontalLayout_5;
     public QLabel label_20;
-    public QGroupBox groupBox_4;
+    public QGroupBox thursdayBox;
     public QLabel label_25;
     public QSpacerItem horizontalSpacer_5;
     public QHBoxLayout horizontalLayout_6;
     public QLabel label_21;
-    public QGroupBox groupBox_5;
+    public QGroupBox fridayBox;
     public QLabel label_26;
     public QSpacerItem horizontalSpacer_6;
     public QMenuBar menubar;
@@ -354,18 +354,18 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
 
         horizontalLayout_2.addWidget(label_17);
 
-        groupBox = new QGroupBox(centralwidget);
-        groupBox.setObjectName("groupBox");
+        mondayBox = new QGroupBox(centralwidget);
+        mondayBox.setObjectName("groupBox");
         QSizePolicy sizePolicy19 = new QSizePolicy(com.trolltech.qt.gui.QSizePolicy.Policy.Expanding, com.trolltech.qt.gui.QSizePolicy.Policy.Expanding);
         sizePolicy19.setHorizontalStretch((byte)0);
         sizePolicy19.setVerticalStretch((byte)0);
-        sizePolicy19.setHeightForWidth(groupBox.sizePolicy().hasHeightForWidth());
-        groupBox.setSizePolicy(sizePolicy19);
-        label_22 = new QLabel(groupBox);
-        label_22.setObjectName("label_22");
-        label_22.setGeometry(new QRect(5, 5, 78, 55));
+        sizePolicy19.setHeightForWidth(mondayBox.sizePolicy().hasHeightForWidth());
+        mondayBox.setSizePolicy(sizePolicy19);
+        //label_22 = new QLabel(mondayBox);
+        //label_22.setObjectName("label_22");
+        //label_22.setGeometry(new QRect(5, 5, 78, 55));
 
-        horizontalLayout_2.addWidget(groupBox);
+        horizontalLayout_2.addWidget(mondayBox);
 
         horizontalSpacer_2 = new QSpacerItem(34, 20, com.trolltech.qt.gui.QSizePolicy.Policy.Fixed, com.trolltech.qt.gui.QSizePolicy.Policy.Minimum);
 
@@ -392,18 +392,18 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
 
         horizontalLayout_3.addWidget(label_18);
 
-        groupBox_2 = new QGroupBox(centralwidget);
-        groupBox_2.setObjectName("groupBox_2");
+        tuesdayBox = new QGroupBox(centralwidget);
+        tuesdayBox.setObjectName("groupBox_2");
         QSizePolicy sizePolicy21 = new QSizePolicy(com.trolltech.qt.gui.QSizePolicy.Policy.Expanding, com.trolltech.qt.gui.QSizePolicy.Policy.Expanding);
         sizePolicy21.setHorizontalStretch((byte)0);
         sizePolicy21.setVerticalStretch((byte)0);
-        sizePolicy21.setHeightForWidth(groupBox_2.sizePolicy().hasHeightForWidth());
-        groupBox_2.setSizePolicy(sizePolicy21);
-        label_23 = new QLabel(groupBox_2);
-        label_23.setObjectName("label_23");
-        label_23.setGeometry(new QRect(5, 5, 78, 55));
+        sizePolicy21.setHeightForWidth(tuesdayBox.sizePolicy().hasHeightForWidth());
+        tuesdayBox.setSizePolicy(sizePolicy21);
+        //label_23 = new QLabel(tuesdayBox);
+        //label_23.setObjectName("label_23");
+        //label_23.setGeometry(new QRect(5, 5, 78, 55));
 
-        horizontalLayout_3.addWidget(groupBox_2);
+        horizontalLayout_3.addWidget(tuesdayBox);
 
         horizontalSpacer_3 = new QSpacerItem(34, 20, com.trolltech.qt.gui.QSizePolicy.Policy.Fixed, com.trolltech.qt.gui.QSizePolicy.Policy.Minimum);
 
@@ -430,18 +430,18 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
 
         horizontalLayout_4.addWidget(label_19);
 
-        groupBox_3 = new QGroupBox(centralwidget);
-        groupBox_3.setObjectName("groupBox_3");
+        wednesdayBox = new QGroupBox(centralwidget);
+        wednesdayBox.setObjectName("groupBox_3");
         QSizePolicy sizePolicy23 = new QSizePolicy(com.trolltech.qt.gui.QSizePolicy.Policy.Expanding, com.trolltech.qt.gui.QSizePolicy.Policy.Expanding);
         sizePolicy23.setHorizontalStretch((byte)0);
         sizePolicy23.setVerticalStretch((byte)0);
-        sizePolicy23.setHeightForWidth(groupBox_3.sizePolicy().hasHeightForWidth());
-        groupBox_3.setSizePolicy(sizePolicy23);
-        label_24 = new QLabel(groupBox_3);
-        label_24.setObjectName("label_24");
-        label_24.setGeometry(new QRect(10, 5, 78, 55));
+        sizePolicy23.setHeightForWidth(wednesdayBox.sizePolicy().hasHeightForWidth());
+        wednesdayBox.setSizePolicy(sizePolicy23);
+        //label_24 = new QLabel(wednesdayBox);
+        //label_24.setObjectName("label_24");
+        //label_24.setGeometry(new QRect(10, 5, 78, 55));
 
-        horizontalLayout_4.addWidget(groupBox_3);
+        horizontalLayout_4.addWidget(wednesdayBox);
 
         horizontalSpacer_4 = new QSpacerItem(34, 20, com.trolltech.qt.gui.QSizePolicy.Policy.Fixed, com.trolltech.qt.gui.QSizePolicy.Policy.Minimum);
 
@@ -468,18 +468,18 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
 
         horizontalLayout_5.addWidget(label_20);
 
-        groupBox_4 = new QGroupBox(centralwidget);
-        groupBox_4.setObjectName("groupBox_4");
+        thursdayBox = new QGroupBox(centralwidget);
+        thursdayBox.setObjectName("groupBox_4");
         QSizePolicy sizePolicy25 = new QSizePolicy(com.trolltech.qt.gui.QSizePolicy.Policy.Expanding, com.trolltech.qt.gui.QSizePolicy.Policy.Expanding);
         sizePolicy25.setHorizontalStretch((byte)0);
         sizePolicy25.setVerticalStretch((byte)0);
-        sizePolicy25.setHeightForWidth(groupBox_4.sizePolicy().hasHeightForWidth());
-        groupBox_4.setSizePolicy(sizePolicy25);
-        label_25 = new QLabel(groupBox_4);
-        label_25.setObjectName("label_25");
-        label_25.setGeometry(new QRect(10, 5, 78, 55));
+        sizePolicy25.setHeightForWidth(thursdayBox.sizePolicy().hasHeightForWidth());
+        thursdayBox.setSizePolicy(sizePolicy25);
+        //label_25 = new QLabel(thursdayBox);
+        //label_25.setObjectName("label_25");
+        //label_25.setGeometry(new QRect(10, 5, 78, 55));
 
-        horizontalLayout_5.addWidget(groupBox_4);
+        horizontalLayout_5.addWidget(thursdayBox);
 
         horizontalSpacer_5 = new QSpacerItem(34, 20, com.trolltech.qt.gui.QSizePolicy.Policy.Fixed, com.trolltech.qt.gui.QSizePolicy.Policy.Minimum);
 
@@ -506,18 +506,18 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
 
         horizontalLayout_6.addWidget(label_21);
 
-        groupBox_5 = new QGroupBox(centralwidget);
-        groupBox_5.setObjectName("groupBox_5");
+        fridayBox = new QGroupBox(centralwidget);
+        fridayBox.setObjectName("groupBox_5");
         QSizePolicy sizePolicy27 = new QSizePolicy(com.trolltech.qt.gui.QSizePolicy.Policy.Expanding, com.trolltech.qt.gui.QSizePolicy.Policy.Expanding);
         sizePolicy27.setHorizontalStretch((byte)0);
         sizePolicy27.setVerticalStretch((byte)0);
-        sizePolicy27.setHeightForWidth(groupBox_5.sizePolicy().hasHeightForWidth());
-        groupBox_5.setSizePolicy(sizePolicy27);
-        label_26 = new QLabel(groupBox_5);
-        label_26.setObjectName("label_26");
-        label_26.setGeometry(new QRect(5, 5, 78, 55));
+        sizePolicy27.setHeightForWidth(fridayBox.sizePolicy().hasHeightForWidth());
+        fridayBox.setSizePolicy(sizePolicy27);
+        //label_26 = new QLabel(fridayBox);
+        //label_26.setObjectName("label_26");
+        //label_26.setGeometry(new QRect(5, 5, 78, 55));
 
-        horizontalLayout_6.addWidget(groupBox_5);
+        horizontalLayout_6.addWidget(fridayBox);
 
         horizontalSpacer_6 = new QSpacerItem(34, 20, com.trolltech.qt.gui.QSizePolicy.Policy.Fixed, com.trolltech.qt.gui.QSizePolicy.Policy.Minimum);
 
@@ -585,20 +585,20 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         label_15.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "20:00", null));
         label_16.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "21:00", null));
         label_17.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "MON", null));
-        groupBox.setTitle("");
-        label_22.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
+        mondayBox.setTitle("");
+        //label_22.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
         label_18.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TUE", null));
-        groupBox_2.setTitle("");
-        label_23.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
+        tuesdayBox.setTitle("");
+        //label_23.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
         label_19.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "WED", null));
-        groupBox_3.setTitle("");
-        label_24.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
+        wednesdayBox.setTitle("");
+        //label_24.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
         label_20.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "THU", null));
-        groupBox_4.setTitle("");
-        label_25.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
+        thursdayBox.setTitle("");
+        //label_25.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
         label_21.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "FRI", null));
-        groupBox_5.setTitle("");
-        label_26.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
+        fridayBox.setTitle("");
+        //label_26.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
         menuFile.setTitle(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "File", null));
         menuHelp.setTitle(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Help", null));
     } // retranslateUi

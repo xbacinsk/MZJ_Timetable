@@ -1,8 +1,11 @@
 package timetabler;
 
 import com.trolltech.qt.core.QCoreApplication;
+import com.trolltech.qt.core.QRect;
+import com.trolltech.qt.core.QSize;
 import com.trolltech.qt.core.QTime;
 import com.trolltech.qt.gui.QApplication;
+import com.trolltech.qt.gui.QLabel;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +21,33 @@ public class Main{
     private static int labelHeigth;
   
     public static void loadCourses(Timetabler tt){
+            Ui_MainWindow ui = tt.getUi();
+            int labelW = ui.mondayBox.width() / 14;
+            int labelH = ui.mondayBox.height() - 10;
+            
             for (Course course : inputContainer){
-                tt.getUi().listWidget.addItem(course.getCode() + "  " + course.getName());
+                ui.listWidget.addItem(course.getCode() + "  " + course.getName());                               
             }
+            
+//            QLabel label = new QLabel(ui.mondayBox);
+//            label.setGeometry(new QRect(5, 5, 20, 20));
+//            label.setObjectName(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "label", null));
+//            label.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "LABELLABELLABEL", null));
+//            label.setMinimumSize(new QSize(40, 10));
+
+            //label.setObjectName("PB168_label");
+//            ui.horizontalLayout_2.addWidget(
+//            ui.mondayBox.repaint();
+            
+            for (int i = 0; i <= 0; i++){
+            QLabel label = new QLabel(ui.mondayBox);
+            label.setGeometry((i * labelW) + 5, labelH, 80, 80);
+            label.setMinimumSize(new QSize(40, 40));
+            label.setText(String.valueOf(ui.mondayBox.geometry().size()));
+            label.setObjectName(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "lecture"+i, null));
+            label.setStyleSheet("QLabel { background-color : black; color : white; }");
+            }
+            
         }
     
     public static void initializeGUI(Timetabler tt){
@@ -41,24 +68,23 @@ public class Main{
             QCoreApplication.setApplicationName("Timetabler");
             
             Timetabler timetabler = new Timetabler();
-            timetabler.show();             
+                       
 
             filler();
             loadCourses(timetabler);           
+            timetabler.show();  
             
             QApplication.exec();
             
     }
     
     public static void filler(){
-        List<Term> terms1 = new ArrayList<Term>();
-        terms1.add(new Term(new Teacher("Csaba Szalo", new BigInteger("12456")), Days.MON, new QTime(14, 0), new QTime(16, 0), new Room("D3", new BigInteger("123")), 1));
-        Lecture lecture1 = new Lecture(terms1);
+        Term term1 = new Term(new Teacher("Csaba Szalo", new BigInteger("12456")), Days.MON, new QTime(14, 0), new QTime(16, 0), new Room("D3", new BigInteger("123")), 1);
+        Lecture lecture1 = new Lecture(term1);
         Course course1 = new Course("SOC103", "Obecné sociologické teorie", new BigInteger("123"),lecture1,null);
         
-        List<Term> terms2 = new ArrayList<Term>();
-        terms2.add(new Term(new Teacher("Hejkal Brandorad", new BigInteger("13579")), Days.THU, new QTime(8, 0), new QTime(12, 0), new Room("D1", new BigInteger("3")), 1));
-        Lecture lecture2 = new Lecture(terms2);
+        Term term2 = new Term(new Teacher("Hejkal Brandorad", new BigInteger("13579")), Days.THU, new QTime(8, 0), new QTime(12, 0), new Room("D1", new BigInteger("3")), 1);
+        Lecture lecture2 = new Lecture(term2);
         Course course2 = new Course("SOC106", "Metodologie sociálních věd", new BigInteger("234"),lecture2,null);
         
         Course course3 = new Course("SOC109", "Demografie", new BigInteger("345"),null,null);

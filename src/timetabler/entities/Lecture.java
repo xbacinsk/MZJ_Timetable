@@ -14,19 +14,19 @@ import java.util.List;
  */
 public class Lecture extends QLabel {
 
-    private List<Term> terms;
+    private Term term;
     public final Signal0 requestSettings = new Signal0();
 
-    public Lecture(List<Term> terms) {
-        this.terms = terms;
+    public Lecture(Term term) {
+        this.term = term;
     }
 
-    public List<Term> getTerms() {
-        return terms;
+    public Term getTerm() {
+        return term;
     }
 
-    public void setTerms(List<Term> terms) {
-        this.terms = terms;
+    public void setTerm(Term term) {
+        this.term = term;
     }
 
     /**
@@ -43,6 +43,6 @@ public class Lecture extends QLabel {
 
     @Override
     public String toString() {
-        return "Lecture{" + "terms=" + terms + '}';
+        return "Lecture{" + "terms=" + term + '}';
     }
 }

@@ -99,12 +99,8 @@ public class Course extends QLabel {
 
         //getting teacher from lecture
         if (lecture != null) {
-            List<Term> terms = lecture.getTerms();
-            for (Term term : terms) {
-                if (term != null && term.getTeacher() != null) {
-                    teacherSet.add(term.getTeacher());
-                }
-            }
+            Term term = lecture.getTerm();
+            teacherSet.add(term.getTeacher());            
         }
 
         //getting teachers from seminars

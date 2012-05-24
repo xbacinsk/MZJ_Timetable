@@ -105,7 +105,7 @@ public class Parser extends QObject{
                 List<Term> terms = new ArrayList<Term>();
                 terms.add(term);
                 Seminar seminar = new Seminar(terms);
-                course = new Course(courseInfo[0], fields[5], new BigInteger(fields[6]));
+                course = new Course(courseInfo[0], fields[5], new BigInteger(fields[6]), null, seminar);
                 course.setSeminar(seminar);
                 courses.add(course);
             }else{
@@ -127,7 +127,7 @@ public class Parser extends QObject{
             
             course = getCourse(courses, new BigInteger(fields[6]));
             if(course == null){
-                List<Term> terms = new ArrayList<Term>();
+                Term term = new Term(teacher, Days.MON, null, null, null, i);
                 terms.add(term);
                 Lecture lecture = new Lecture(terms);
                 course = new Course(courseInfo[0], fields[5], new BigInteger(fields[6]));
@@ -141,7 +141,7 @@ public class Parser extends QObject{
                     lecture = new Lecture(terms);
                     course.setLecture(lecture);
                 }else{
-                    lecture.getTerms().add(term);
+                    lecture.getTerm().add(term);
                 }
             }
         }
