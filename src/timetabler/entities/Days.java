@@ -9,5 +9,5 @@ package timetabler.entities;
  * @author Enthas
  */
 public enum Days {
-    MON, TUE, WED, THU, FRI
+    MON, TUE, WED, THU, FRI, SAT, SUN
 }
