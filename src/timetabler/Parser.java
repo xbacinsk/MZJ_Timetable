@@ -20,7 +20,7 @@ import timetabler.exceptions.InvalidQueryException;
  * parsed Course objects.
  * 
  * @author Michal Kimle
- * @version 2012-05-04
+ * @version 2012-06-04
  */
 public class Parser extends QObject{
   private QByteArray xml;
@@ -72,9 +72,7 @@ public class Parser extends QObject{
     qry.evaluateTo(results);
     
     QXmlItem item = new QXmlItem(results.next());
-    while(!item.isNull()){
-        System.out.println(item.toAtomicValue().toString());
-        
+    while(!item.isNull()){        
         String[] fields = item.toAtomicValue().toString().split(";");
         
         String[] teacherInfo = fields[7].split("#");
@@ -89,13 +87,17 @@ public class Parser extends QObject{
             i+=2;
         }
         
-        QLocale locale = new QLocale(QLocale.Language.Czech, QLocale.Country.CzechRepublic);
+        QLocale locale;
+        if(fields[0].length()==2)
+            locale = new QLocale(QLocale.Language.Czech, QLocale.Country.CzechRepublic);
+        else
+            locale = new QLocale(QLocale.Language.English, QLocale.Country.UnitedStates);
         
         Course course;
         String[] courseInfo = fields[4].split("/");
         if(courseInfo.length == 2){
             int groupNum = Integer.parseInt(courseInfo[1]);
-            Term term = new Term(teacher, locale.toDate(fields[0], "ddd"), 
+            Term term = new Term(teacher, Days.values()[locale.toDate(fields[0], "ddd").dayOfWeek()-1], 
                                  QTime.fromString(fields[1], "hh:mm"),
                                  QTime.fromString(fields[2], "hh:mm"),
                                  rooms, groupNum);
@@ -105,7 +107,7 @@ public class Parser extends QObject{
                 List<Term> terms = new ArrayList<Term>();
                 terms.add(term);
                 Seminar seminar = new Seminar(terms);
-                course = new Course(courseInfo[0], fields[5], new BigInteger(fields[6]), null, seminar);
+                course = new Course(courseInfo[0], fields[5], new BigInteger(fields[6]));
                 course.setSeminar(seminar);
                 courses.add(course);
             }else{
@@ -120,14 +122,14 @@ public class Parser extends QObject{
                 }
             }
         }else{
-            Term term = new Term(teacher, locale.toDate(fields[0], "ddd"), 
+            Term term = new Term(teacher, Days.values()[locale.toDate(fields[0], "ddd").dayOfWeek()-1], 
                                  QTime.fromString(fields[1], "hh:mm"),
                                  QTime.fromString(fields[2], "hh:mm"),
                                  rooms, 0);
             
             course = getCourse(courses, new BigInteger(fields[6]));
             if(course == null){
-                Term term = new Term(teacher, Days.MON, null, null, null, i);
+                List<Term> terms = new ArrayList<Term>();
                 terms.add(term);
                 Lecture lecture = new Lecture(terms);
                 course = new Course(courseInfo[0], fields[5], new BigInteger(fields[6]));
@@ -141,7 +143,7 @@ public class Parser extends QObject{
                     lecture = new Lecture(terms);
                     course.setLecture(lecture);
                 }else{
-                    lecture.getTerm().add(term);
+                    lecture.getTerms().add(term);
                 }
             }
         }

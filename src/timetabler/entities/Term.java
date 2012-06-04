@@ -1,6 +1,7 @@
 package timetabler.entities;
 
 import com.trolltech.qt.core.QTime;
+import java.util.List;
 
 /**
  * Holds information about term.
@@ -8,7 +9,7 @@ import com.trolltech.qt.core.QTime;
  * Represents all information about one term.
  * 
  * @author Michal Kimle
- * @version 2012-05-04
+ * @version 2012-06-04
  */
 public class Term {
     
@@ -16,15 +17,15 @@ public class Term {
     private Days day;
     private QTime timeFrom;
     private QTime timeTo;
-    private Room room;
+    private List<Room> rooms;
     private int groupNum;
 
-    public Term(Teacher teacher,Days day, QTime timeFrom, QTime timeTo, Room room, int groupNum) {
+    public Term(Teacher teacher,Days day, QTime timeFrom, QTime timeTo, List<Room> rooms, int groupNum) {
         this.teacher = teacher;
         this.day = day;
         this.timeFrom = timeFrom;
         this.timeTo = timeTo;
-        this.room = room;
+        this.rooms = rooms;
         this.groupNum = groupNum;
     }
 
@@ -44,12 +45,12 @@ public class Term {
         this.groupNum = groupNum;
     }
 
-    public Room getRoom() {
-        return room;
+    public List<Room> getRooms() {
+        return rooms;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 
     public Teacher getTeacher() {
@@ -78,6 +79,6 @@ public class Term {
 
     @Override
     public String toString() {
-        return "Term{" + "teacher=" + teacher + ", day=" + day + ", timeFrom=" + timeFrom + ", timeTo=" + timeTo + ", rooms=" + room + ", groupNum=" + groupNum + '}';
+        return "Term{" + "teacher=" + teacher + ", day=" + day + ", timeFrom=" + timeFrom + ", timeTo=" + timeTo + ", rooms=" + rooms + ", groupNum=" + groupNum + '}';
     }
 }

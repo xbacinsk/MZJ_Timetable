@@ -29,12 +29,10 @@ public class Course extends QLabel {
     private Lecture lecture;
     private Seminar seminar;
 
-    public Course(String code, String name, BigInteger id, Lecture lecture, Seminar seminar) {
+    public Course(String code, String name, BigInteger id) {
         this.code = code;
         this.name = name;
         this.id = id;
-        this.lecture = lecture;
-        this.seminar = seminar;
     }
 
     public String getCode() {
@@ -99,8 +97,12 @@ public class Course extends QLabel {
 
         //getting teacher from lecture
         if (lecture != null) {
-            Term term = lecture.getTerm();
-            teacherSet.add(term.getTeacher());            
+            List<Term> terms = lecture.getTerms();
+            for (Term term : terms) {
+                if (term != null && term.getTeacher() != null) {
+                    teacherSet.add(term.getTeacher());
+                }
+            }
         }
 
         //getting teachers from seminars
