@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import timetabler.entities.*;
 import timetabler.exceptions.InvalidQueryException;
+import timetabler.exceptions.InvalidXmlDataException;
 
 /**
  * Parses xml timetable and creates Course objects.
@@ -37,7 +38,7 @@ public class Parser extends QObject{
     xml = ba;
     try{
       parseXml();
-    }catch(InvalidQueryException ex){
+    }catch(Exception ex){
       QMessageBox.StandardButtons buttons = new QMessageBox.StandardButtons();
       buttons.set(QMessageBox.StandardButton.Close);
       QMessageBox box = new QMessageBox(QMessageBox.Icon.Critical, "Error", ex.getMessage(),buttons);
@@ -52,7 +53,7 @@ public class Parser extends QObject{
    * 
    * @todo parsing results and creating Course objects from parsed data
    */
-  private void parseXml() throws InvalidQueryException{
+  private void parseXml() throws InvalidQueryException, InvalidXmlDataException{
     List<Course> courses = new ArrayList<Course>();
     
     QBuffer buffIn = new QBuffer(xml);
@@ -66,12 +67,15 @@ public class Parser extends QObject{
     qry.setQuery(file);
     
     if (!qry.isValid())
-      throw new InvalidQueryException("invalid query");
+      throw new InvalidQueryException("Invalid xquery");
     
     QXmlResultItems results = new QXmlResultItems();
     qry.evaluateTo(results);
     
     QXmlItem item = new QXmlItem(results.next());
+    if(item.isNull()){
+        throw new InvalidXmlDataException("Invalid XML data");
+    }
     while(!item.isNull()){        
         String[] fields = item.toAtomicValue().toString().split(";");
         

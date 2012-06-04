@@ -1,5 +1,8 @@
 package timetabler;
 
+import com.trolltech.qt.core.QByteArray;
+import com.trolltech.qt.core.QFile;
+import com.trolltech.qt.gui.QFileDialog;
 import com.trolltech.qt.gui.QMainWindow;
 import com.trolltech.qt.gui.QResizeEvent;
 import java.util.List;
@@ -16,6 +19,7 @@ public class Timetabler extends QMainWindow{
         ui.setupUi(this);
         
         ui.actionOpen_time_table_from_IS.triggered.connect(this, "loadXmlFromIs()");
+        ui.actionOpen_time_table_from_PC.triggered.connect(this, "loadXmlFromFile()");
     }
 
     public Ui_MainWindow getUi() {
@@ -45,6 +49,20 @@ public class Timetabler extends QMainWindow{
         }catch(MissingLoginException ex){
             System.err.println(ex.toString());
         }
+    }
+    
+    public void loadXmlFromFile(){
+        String fileName = QFileDialog.getOpenFileName(this, tr("Open file"), ".", new QFileDialog.Filter(tr("XML files (*.xml)")));
+        if(fileName == null || fileName.isEmpty())
+            return;
+        
+        QFile file = new QFile(fileName);
+        file.open(QFile.OpenModeFlag.ReadOnly);
+        QByteArray ba = file.readAll();
+        
+        Parser p = new Parser();
+        p.dataAvailable.connect(this, "xmlDataAvailable(List)");
+        p.readXml(ba);        
     }
     
     public void xmlDataAvailable(List<Course> courses){

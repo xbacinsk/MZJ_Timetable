@@ -17,7 +17,7 @@ import timetabler.dialogs.CourseDialog;
  * whole course with all its information which are needed for its rendering.
  *
  * @author Michal Kimle
- * @version 2012-05-04
+ * @version 2012-06-04
  *
  * @todo functions for rendering
  */
@@ -83,6 +83,11 @@ public class Course extends QLabel {
     public void setLectureVisibility(boolean isVisible) {
         QSettings settings = new QSettings();
         settings.setValue(code + "/lecture", isVisible);
+    }
+    
+    public boolean getLectureVisibility(){
+        QSettings settings = new QSettings();
+        return (Boolean) settings.value(code + "/lecture", true);
     }
 
     /**
