@@ -10,23 +10,23 @@ import java.util.List;
  * All information are stored in its Term object.
  *
  * @author Michal Kimle
- * @version 2012-05-04
+ * @version 2012-06-04
  */
 public class Lecture extends QLabel {
 
-    private Term term;
+    private List<Term> terms;
     public final Signal0 requestSettings = new Signal0();
 
-    public Lecture(Term term) {
-        this.term = term;
+    public Lecture(List<Term> terms) {
+        this.terms = terms;
     }
 
-    public Term getTerm() {
-        return term;
+    public List<Term> getTerms() {
+        return terms;
     }
 
-    public void setTerm(Term term) {
-        this.term = term;
+    public void setTerms(List<Term> terms) {
+        this.terms = terms;
     }
 
     /**
@@ -43,6 +43,6 @@ public class Lecture extends QLabel {
 
     @Override
     public String toString() {
-        return "Lecture{" + "terms=" + term + '}';
+        return "Lecture{" + "terms=" + terms + '}';
     }
 }

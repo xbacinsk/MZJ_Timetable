@@ -26,8 +26,11 @@ public class Collisions {
      * @param list
      * @return 
      */
+    
+    /* zakomentovane len aby som to mohol skompilovat
+    /*
     public Collection<Course> detection(Term t, Collection<Course> list){
-        List<Course> output = new ArrayList<>();
+        List<Course> output = new ArrayList<Course>();
         
         for(Course c : list){
             if(comparator(t, c.getLecture().getTerm()) || 
@@ -37,7 +40,7 @@ public class Collisions {
         }
         
         return output;
-    }
+    }*/
     
     private boolean comparator(Term t1, Term t2){
         Term early = earlierTerm(t1,t2);
