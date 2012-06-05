@@ -1,5 +1,6 @@
 package timetabler.entities;
 
+import com.trolltech.qt.QVariant;
 import com.trolltech.qt.core.QSettings;
 import com.trolltech.qt.gui.QLabel;
 import com.trolltech.qt.gui.QMouseEvent;
@@ -87,7 +88,7 @@ public class Course extends QLabel {
     
     public boolean getLectureVisibility(){
         QSettings settings = new QSettings();
-        return (Boolean) settings.value(code + "/lecture", true);
+        return QVariant.toBoolean(settings.value(code + "/lecture", true));
     }
 
     /**

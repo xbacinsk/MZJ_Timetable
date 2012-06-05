@@ -49,7 +49,7 @@ public class Exporter extends QObject {
             dialog.close();
         }
 
-        String name = (String) settings.value("export/name");
+        String name = QVariant.toString(settings.value("export/name"));
 
         QFile file = new QFile("misc/" + name + ".xml");
         if (!file.open(new QIODevice.OpenMode(QIODevice.OpenModeFlag.WriteOnly,

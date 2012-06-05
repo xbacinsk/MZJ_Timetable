@@ -1,5 +1,6 @@
 package timetabler.dialogs;
 
+import com.trolltech.qt.QVariant;
 import com.trolltech.qt.core.QObject;
 import com.trolltech.qt.core.QSettings;
 import com.trolltech.qt.core.QTime;
@@ -99,26 +100,26 @@ public class CourseDialog extends QDialog{
     QSettings settings = new QSettings();
     
     settings.beginGroup(course.getCode() + "/days");
-    ui.daysMondayCheckBox.setChecked((Boolean) settings.value("monday", true));
-    ui.daysTuesdayCheckBox.setChecked((Boolean) settings.value("tuesday", true));
-    ui.daysWednesdayCheckBox.setChecked((Boolean) settings.value("wednesday", true));
-    ui.daysThursdayCheckBox.setChecked((Boolean) settings.value("thursday", true));
-    ui.daysFridayCheckBox.setChecked((Boolean) settings.value("friday", true));
-    ui.daysSaturdayCheckBox.setChecked((Boolean) settings.value("saturday", true));
-    ui.daysSundayCheckBox.setChecked((Boolean) settings.value("sunday", true));
+    ui.daysMondayCheckBox.setChecked(QVariant.toBoolean(settings.value("monday", true)));
+    ui.daysTuesdayCheckBox.setChecked(QVariant.toBoolean(settings.value("tuesday", true)));
+    ui.daysWednesdayCheckBox.setChecked(QVariant.toBoolean(settings.value("wednesday", true)));
+    ui.daysThursdayCheckBox.setChecked(QVariant.toBoolean(settings.value("thursday", true)));
+    ui.daysFridayCheckBox.setChecked(QVariant.toBoolean(settings.value("friday", true)));
+    ui.daysSaturdayCheckBox.setChecked(QVariant.toBoolean(settings.value("saturday", true)));
+    ui.daysSundayCheckBox.setChecked(QVariant.toBoolean(settings.value("sunday", true)));
     settings.endGroup();
     
     settings.beginGroup(course.getCode() + "/week");
-    ui.weekEvenCheckBox.setChecked((Boolean) settings.value("even", true));
-    ui.weekOddCheckBox.setChecked((Boolean) settings.value("odd", true));
+    ui.weekEvenCheckBox.setChecked(QVariant.toBoolean(settings.value("even", true)));
+    ui.weekOddCheckBox.setChecked(QVariant.toBoolean(settings.value("odd", true)));
     settings.endGroup();
     
     settings.beginGroup(course.getCode() + "/time");
-    ui.timeFromEdit.setTime((QTime) settings.value("from", new QTime(8, 0)));
-    ui.timeToEdit.setTime((QTime) settings.value("to", new QTime(20, 0)));
+    ui.timeFromEdit.setTime(QVariant.toTime(settings.value("from", new QTime(8, 0))));
+    ui.timeToEdit.setTime(QVariant.toTime(settings.value("to", new QTime(20, 0))));
     settings.endGroup();
     
-    ui.lectureVisibilityCheckBox.setChecked((Boolean) settings.value(course.getCode() + "/lecture", true));
+    ui.lectureVisibilityCheckBox.setChecked(QVariant.toBoolean(settings.value(course.getCode() + "/lecture", true)));
     
     List<Teacher> teachers = course.getTeachers();
     QVBoxLayout teachersLayout = new QVBoxLayout(ui.teachersBox);
@@ -128,7 +129,7 @@ public class CourseDialog extends QDialog{
     for(Teacher teacher : teachers){
       QCheckBox box = new QCheckBox(teacher.getName());
       teachersLayout.addWidget(box);
-      box.setChecked((Boolean) settings.value(teacher.getName(), true));
+      box.setChecked(QVariant.toBoolean(settings.value(teacher.getName(), true)));
     }
     settings.endGroup();
   }
