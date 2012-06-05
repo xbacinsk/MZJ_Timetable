@@ -27,20 +27,20 @@ public class Collisions {
      * @return 
      */
     
-    /* zakomentovane len aby som to mohol skompilovat
-    /*
-    public Collection<Course> detection(Term t, Collection<Course> list){
-        List<Course> output = new ArrayList<Course>();
-        
-        for(Course c : list){
-            if(comparator(t, c.getLecture().getTerm()) || 
-                    comparator(t, c.getSeminar().getChosen())){
-                output.add(c);
-            }
-        }
-        
-        return output;
-    }*/
+    // zakomentovane len aby som to mohol skompilovat
+    
+//    public Collection<Course> detection(Term t, Collection<Course> list){
+//        List<Course> output = new ArrayList<Course>();
+//        
+//        for(Course c : list){
+//            if(comparator(t, c.getLecture().getTerm()) || 
+//                    comparator(t, c.getSeminar().getChosen())){
+//                output.add(c);
+//            }
+//        }
+//        
+//        return output;
+//    }
     
     private boolean comparator(Term t1, Term t2){
         Term early = earlierTerm(t1,t2);

@@ -4,7 +4,6 @@ import com.trolltech.qt.core.QByteArray;
 import com.trolltech.qt.core.QFile;
 import com.trolltech.qt.gui.QFileDialog;
 import com.trolltech.qt.gui.QMainWindow;
-import com.trolltech.qt.gui.QResizeEvent;
 import java.util.List;
 import timetabler.entities.Course;
 import timetabler.exceptions.MissingLoginException;
@@ -21,6 +20,10 @@ public class Timetabler extends QMainWindow{
         ui.actionOpen_time_table_from_IS.triggered.connect(this, "loadXmlFromIs()");
         ui.actionOpen_time_table_from_PC.triggered.connect(this, "loadXmlFromFile()");
     }
+    
+    public void weekendGUI(boolean b) {
+        ui.weekendGUI(this, b);
+    }
 
     public Ui_MainWindow getUi() {
         return ui;
@@ -28,14 +31,7 @@ public class Timetabler extends QMainWindow{
 
     public void setUi(Ui_MainWindow ui) {
         this.ui = ui;
-    }  
-    
-    @Override
-    protected void resizeEvent(QResizeEvent qre) {
-        qre.size().setHeight(ui.centralwidget.height() - 100);
-        qre.size().setWidth(ui.centralwidget.width() / 4);
-        super.resizeEvent(qre);
-    }
+    } 
     
     public void loadXmlFromIs(){
         Downloader d = new Downloader();

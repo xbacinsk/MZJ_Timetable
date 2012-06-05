@@ -17,13 +17,10 @@ public class Main{
     private static List<Course> inputContainer = new ArrayList<Course>();
     private static List<Course> outputContainer = new ArrayList<Course>();
     
-    private static int labelWidth;
-    private static int labelHeigth;
+//  Okno s vikendem ma width = 571px a bez vikendu width = 431px
   
     public static void loadCourses(Timetabler tt){
             Ui_MainWindow ui = tt.getUi();
-            int labelW = ui.mondayBox.width() / 14;
-            int labelH = ui.mondayBox.height() - 10;
             
             for (Course course : inputContainer){
                 ui.listWidget.addItem(course.getCode() + "  " + course.getName());                               
@@ -39,24 +36,27 @@ public class Main{
 //            ui.horizontalLayout_2.addWidget(
 //            ui.mondayBox.repaint();
             
-            for (int i = 0; i <= 0; i++){
-            QLabel label = new QLabel(ui.mondayBox);
-            label.setGeometry((i * labelW) + 5, labelH, 80, 80);
-            label.setMinimumSize(new QSize(40, 40));
-            label.setText(String.valueOf(ui.mondayBox.geometry().size()));
-            label.setObjectName(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "lecture"+i, null));
-            label.setStyleSheet("QLabel { background-color : black; color : white; }");
-            }
+//            for (int i = 0; i <= 0; i++){
+//            QLabel label = new QLabel(ui.mondayBox);
+//            label.setGeometry((i * labelW) + 5, labelH, 80, 80);
+//            label.setMinimumSize(new QSize(40, 40));
+//            label.setText(String.valueOf(ui.mondayBox.geometry().size()));
+//            label.setObjectName(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "lecture"+i, null));
+//            label.setStyleSheet("QLabel { background-color : black; color : white; }");
+//            }
             
         }
     
     public static void initializeGUI(Timetabler tt){
-        Ui_MainWindow gui = tt.getUi();
+        Ui_MainWindow ui = tt.getUi();
         
-        gui.centralwidget.setBaseSize(845,390);
+        ui.label_46.hide();
+        ui.label_48.hide();
+        ui.saturdayBox.hide();
+        ui.sundayBox.hide();
+            
+        tt.weekendGUI(false);   
         
-        gui.centralwidget.setMinimumWidth(845);
-        gui.centralwidget.setMinimumHeight(390);       
     }   
     
     public static void main(String args[]){
@@ -67,8 +67,7 @@ public class Main{
             QCoreApplication.setOrganizationDomain("mzj.net");
             QCoreApplication.setApplicationName("Timetabler");
             
-            Timetabler timetabler = new Timetabler();
-                       
+            Timetabler timetabler = new Timetabler();                       
 
             //filler();
             loadCourses(timetabler);           
