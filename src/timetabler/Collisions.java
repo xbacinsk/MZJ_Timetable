@@ -27,7 +27,7 @@ public class Collisions {
      * @return 
      */
     public Collection<Course> detection(Term t, Collection<Course> list){
-        List<Course> output = new ArrayList<>();
+        List<Course> output = new ArrayList<Course>();
         
         for(Course c : list){
             if(comparator(t, c.getLecture().getTerm()) || 
