@@ -1,5 +1,6 @@
 package timetabler.entities;
 
+import com.trolltech.qt.QVariant;
 import com.trolltech.qt.core.QSettings;
 import com.trolltech.qt.gui.QLabel;
 import com.trolltech.qt.gui.QMouseEvent;
@@ -17,7 +18,7 @@ import timetabler.dialogs.CourseDialog;
  * whole course with all its information which are needed for its rendering.
  *
  * @author Michal Kimle
- * @version 2012-05-04
+ * @version 2012-06-04
  *
  * @todo functions for rendering
  */
@@ -29,12 +30,10 @@ public class Course extends QLabel {
     private Lecture lecture;
     private Seminar seminar;
 
-    public Course(String code, String name, BigInteger id, Lecture lecture, Seminar seminar) {
+    public Course(String code, String name, BigInteger id) {
         this.code = code;
         this.name = name;
         this.id = id;
-        this.lecture = lecture;
-        this.seminar = seminar;
     }
 
     public String getCode() {
@@ -86,6 +85,11 @@ public class Course extends QLabel {
         QSettings settings = new QSettings();
         settings.setValue(code + "/lecture", isVisible);
     }
+    
+    public boolean getLectureVisibility(){
+        QSettings settings = new QSettings();
+        return QVariant.toBoolean(settings.value(code + "/lecture", true));
+    }
 
     /**
      * Returns list of all teachers within current course
@@ -99,8 +103,12 @@ public class Course extends QLabel {
 
         //getting teacher from lecture
         if (lecture != null) {
-            Term term = lecture.getTerm();
-            teacherSet.add(term.getTeacher());            
+            List<Term> terms = lecture.getTerms();
+            for (Term term : terms) {
+                if (term != null && term.getTeacher() != null) {
+                    teacherSet.add(term.getTeacher());
+                }
+            }
         }
 
         //getting teachers from seminars

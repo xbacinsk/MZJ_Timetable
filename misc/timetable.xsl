@@ -68,8 +68,7 @@
                     <BR/>
                     <b>
                         <a>
-                            <xsl:attribute name="href">https://is.muni.cz/auth/predmety/predmet.pl?id=
-                                <xsl:value-of select="course/courseid"/>
+                            <xsl:attribute name="href">https://is.muni.cz/auth/predmety/predmet.pl?id=<xsl:value-of select="course/courseid"/>
                             </xsl:attribute>
                             <xsl:value-of select="course/code"/>
                         </a>
@@ -79,8 +78,7 @@
                     <br/>
                     <a>
                         <xsl:if test="course/teacher/@id">
-                            <xsl:attribute name="href">https://is.muni.cz/auth/osoba/
-                                <xsl:value-of select="course/teacher/@id"/>
+                            <xsl:attribute name="href">https://is.muni.cz/auth/osoba/<xsl:value-of select="course/teacher/@id"/>
                             </xsl:attribute>
                         </xsl:if>
                         <xsl:value-of select="course/teacher"/>
@@ -93,8 +91,7 @@
     <xsl:template match="course/rooms/room">
         <a>
             <xsl:if test="@id">
-                <xsl:attribute name="href">https://is.muni.cz/kontakty/mistnost.pl?id=
-                    <xsl:value-of select="@id"/>
+                <xsl:attribute name="href">https://is.muni.cz/kontakty/mistnost.pl?id=<xsl:value-of select="@id"/>
                 </xsl:attribute>
             </xsl:if>
             <xsl:value-of select="."/>

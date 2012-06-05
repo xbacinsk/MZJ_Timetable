@@ -96,13 +96,13 @@
                                     <xs:attribute name="id">
                                         <xs:simpleType>
                                             <xs:restriction base="xs:string">
-                                                <xs:enumeration value="Po"/>
-                                                <xs:enumeration value="Út"/>
-                                                <xs:enumeration value="St"/>
-                                                <xs:enumeration value="Čt"/>
-                                                <xs:enumeration value="Pá"/>
-                                                <xs:enumeration value="So"/>
-                                                <xs:enumeration value="Ne"/>
+                                                <xs:enumeration value="MON"/>
+                                                <xs:enumeration value="TUE"/>
+                                                <xs:enumeration value="WED"/>
+                                                <xs:enumeration value="THU"/>
+                                                <xs:enumeration value="FRI"/>
+                                                <xs:enumeration value="SAT"/>
+                                                <xs:enumeration value="SUN"/>
                                             </xs:restriction>
                                         </xs:simpleType>
                                     </xs:attribute>

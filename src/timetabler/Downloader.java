@@ -1,5 +1,6 @@
 package timetabler;
 
+import com.trolltech.qt.QVariant;
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.QDialog;
 import com.trolltech.qt.network.QNetworkAccessManager;
@@ -17,7 +18,7 @@ import timetabler.exceptions.MissingLoginException;
  * it emits a signal for parser.
  *
  * @author Michal Kimle
- * @version 2012-05-04
+ * @version 2012-06-04
  */
 public class Downloader extends QObject {
     private QNetworkAccessManager qnam = new QNetworkAccessManager();
@@ -38,7 +39,7 @@ public class Downloader extends QObject {
     public void downloadTimetable() throws MissingLoginException {
         //login
         QSettings settings = new QSettings();
-        if (!settings.contains("login/uco") || !settings.contains("login/pass") || !fail) {
+        if (!settings.contains("login/uco") || !settings.contains("login/pass") || fail) {
             LoginDialog dialog = new LoginDialog();
             if (dialog.exec() == QDialog.DialogCode.Rejected.value()) {
                 dialog.close();
@@ -52,8 +53,8 @@ public class Downloader extends QObject {
             throw new MissingLoginException("missing uco or password");
         }
 
-        String uco = (String) settings.value("login/uco");
-        String pass = (String) settings.value("login/pass");
+        String uco = QVariant.toString(settings.value("login/uco"));
+        String pass = QVariant.toString(settings.value("login/pass"));
 
         QFile file = new QFile("conf/timetableUrl");
         file.open(QIODevice.OpenModeFlag.ReadOnly);

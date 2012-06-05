@@ -70,7 +70,7 @@ public class Main{
             Timetabler timetabler = new Timetabler();
                        
 
-            filler();
+            //filler();
             loadCourses(timetabler);           
             timetabler.show();  
             
@@ -78,6 +78,8 @@ public class Main{
             
     }
     
+    /* zakomentovane len na testovacie ucely..ale mam pocit ze to aj tka pojde prec, ze
+    /*
     public static void filler(){
         Term term1 = new Term(new Teacher("Csaba Szalo", new BigInteger("12456")), Days.MON, new QTime(14, 0), new QTime(16, 0), new Room("D3", new BigInteger("123")), 1);
         Lecture lecture1 = new Lecture(term1);
@@ -98,7 +100,7 @@ public class Main{
         inputContainer.add(course5);
         
         
-    }
+    }*/
     
 }
  
