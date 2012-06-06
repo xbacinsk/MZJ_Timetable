@@ -21,9 +21,9 @@ public class Timetabler extends QMainWindow{
         ui.actionOpen_time_table_from_PC.triggered.connect(this, "loadXmlFromFile()");
     }
     
-    public void weekendGUI(boolean b) {
-        ui.weekendGUI(this, b);
-    }
+//    public void weekendGUI(boolean b) {
+//        ui.weekendGUI(this, b);
+//    }
 
     public Ui_MainWindow getUi() {
         return ui;

@@ -132,18 +132,6 @@ public class Course extends QListWidgetItem {
         dialog.exec();
     }
 
-    /**
-     * Executes on mouse double-click
-     *
-     * opens course dialog
-     *
-     * @param me mouse event generated within double-click
-     */
-    @Override
-    protected void mouseDoubleClickEvent(QMouseEvent me) {
-        showSettings();
-    }
-
     @Override
     public String toString() {
         return "Course{" + "code=" + code + ", name=" + name + ", id=" + id + ", lecture= [" + lectures + "], seminar= [" + seminars + "] }";

@@ -6,7 +6,7 @@ package timetabler.exceptions;
  * @author Michal Kimle
  * @version 2012-05-04
  */
-public class InvalidQueryException extends Exception{
+public class InvalidQueryException extends ParsingException{
 
   public InvalidQueryException(String message) {
     super(message);

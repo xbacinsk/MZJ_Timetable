@@ -23,5 +23,10 @@ for $day in $doc//den
       let $teacherName := data($teacher/uciteljmeno)
       
       return string-join(($teacherId,$teacherName),"#")),"#")
+  let $comments := 
+    string-join((for $comment in $slot//poznamka
+      let $commentText := data($doc//poznamky/poznamka[@id = $comment/@id])
+      
+      return $commentText), "#")
   
-  return string-join(($dayName,$timeFrom,$timeTo,$rooms,$courseCode,$courseName,$courseId,$teachers),";")
+  return string-join(($dayName,$timeFrom,$timeTo,$rooms,$courseCode,$courseName,$courseId,$teachers,$comments),";")

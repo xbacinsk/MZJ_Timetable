@@ -26,20 +26,18 @@ public class Seminar extends QLabel {
     private QTime timeTo;
     private List<Room> rooms;
     private int groupNum;
-    private boolean oddWeek;
+    private List<String> comments;
     private Course course;
     
     public final Signal0 requestSettings = new Signal0();
 
-    public Seminar(Teacher teacher,Days day, QTime timeFrom, QTime timeTo, List<Room> rooms, int groupNum, boolean oddWeek, Course course) {
+    public Seminar(Teacher teacher,Days day, QTime timeFrom, QTime timeTo, List<Room> rooms, int groupNum) {
         this.teacher = teacher;
         this.day = day;
         this.timeFrom = timeFrom;
         this.timeTo = timeTo;
         this.rooms = rooms;
         this.groupNum = groupNum;
-        this.oddWeek = oddWeek;
-        this.course = course;
     }
 
     public Days getDay() {
@@ -90,6 +88,14 @@ public class Seminar extends QLabel {
         this.timeTo = timeTo;
     }
 
+    public List<String> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<String> comments) {
+        this.comments = comments;
+    }
+
     /**
      * Executes on mouse double-click
      *
@@ -104,6 +110,6 @@ public class Seminar extends QLabel {
 
     @Override
     public String toString() {
-        return "Seminar{" + "teacher=" + teacher + ", day=" + day + ", timeFrom=" + timeFrom + ", timeTo=" + timeTo + ", rooms=" + rooms + ", groupNum=" + groupNum + "}";
+        return "Seminar{" + "teacher=" + teacher + ", day=" + day + ", timeFrom=" + timeFrom + ", timeTo=" + timeTo + ", rooms=" + rooms + ", groupNum=" + groupNum + ", comments=" + comments + '}';
     }
 }

@@ -6,7 +6,7 @@ package timetabler.exceptions;
  * @author Michal Kimle
  * @version 2012-06-04
  */
-public class InvalidXmlDataException extends Exception{
+public class InvalidXmlDataException extends ParsingException{
     
     public InvalidXmlDataException(String message){
         super(message);

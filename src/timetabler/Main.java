@@ -48,12 +48,12 @@ public class Main{
     public static void initializeGUI(Timetabler tt){
         Ui_MainWindow ui = tt.getUi();
         
-        ui.label_46.hide();
-        ui.label_48.hide();
-        ui.saturdayBox.hide();
-        ui.sundayBox.hide();
+//        ui.label_46.hide();
+//        ui.label_48.hide();
+//        ui.saturdayBox.hide();
+//        ui.sundayBox.hide();
             
-        tt.weekendGUI(false);   
+        //tt.weekendGUI(false);   
         
     }   
     

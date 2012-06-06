@@ -111,7 +111,7 @@ public class Exporter extends QObject {
         // creates element "days"
         QDomElement daysE = doc.createElement("days");
         rootElement.appendChild(daysE);
-
+/*
         List<Term> terms = new ArrayList<Term>();
         for (Course course : courses) {
             if(course.getLectureVisibility()) terms.addAll(course.getLecture().getTerms());
@@ -130,7 +130,8 @@ public class Exporter extends QObject {
                     rowE.setAttribute("num", r);
 
                     for (Term term : terms) {
-                        if ((term.getDay() == Days.values()[d])/*&&(cislokolize==r)*/) {
+                        //(cislokolize==r)
+                        if ((term.getDay() == Days.values()[d])) {
                             QDomElement cellE = doc.createElement("cell");
                             Course course = new Course("", "", new BigInteger("0"));
                             for (Course c : courses) {
@@ -201,7 +202,7 @@ public class Exporter extends QObject {
                 daysE.appendChild(dayE);
             }
         }
-
+*/
         return doc;
     }
 
@@ -212,7 +213,7 @@ public class Exporter extends QObject {
      */
     private QTime minTime() {
         QTime min = new QTime(23, 0);
-        for (Course course : courses) {
+        /*for (Course course : courses) {
 
             for (Term term : course.getLecture().getTerms()) {
                 QTime tmp = term.getTimeFrom();
@@ -220,7 +221,7 @@ public class Exporter extends QObject {
                     min = tmp;
                 }
             }
-        }
+        }*/
         return min;
     }
 
@@ -231,12 +232,12 @@ public class Exporter extends QObject {
      */
     private QTime maxTime() {
         QTime max = new QTime(6, 0);
-        for (Course course : courses) {
+        /*for (Course course : courses) {
             QTime tmp = course.getLecture().getTerms().get(0).getTimeFrom();
             if (tmp.hour() > max.hour()) {
                 max = tmp;
             }
-        }
+        }*/
         return max;
     }
 

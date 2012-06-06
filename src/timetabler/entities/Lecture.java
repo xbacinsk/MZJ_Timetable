@@ -20,21 +20,17 @@ public class Lecture extends QLabel {
     private QTime timeFrom;
     private QTime timeTo;
     private List<Room> rooms;
-    private int groupNum;
-    private boolean oddWeek;
+    private List<String> comments;
     private Course course;
     
     public final Signal0 requestSettings = new Signal0();
 
-    public Lecture(Teacher teacher,Days day, QTime timeFrom, QTime timeTo, List<Room> rooms, int groupNum, boolean oddWeek, Course course) {
+    public Lecture(Teacher teacher,Days day, QTime timeFrom, QTime timeTo, List<Room> rooms) {
         this.teacher = teacher;
         this.day = day;
         this.timeFrom = timeFrom;
         this.timeTo = timeTo;
         this.rooms = rooms;
-        this.groupNum = groupNum;
-        this.oddWeek = oddWeek;
-        this.course = course;
     }
 
     public Days getDay() {
@@ -43,14 +39,6 @@ public class Lecture extends QLabel {
 
     public void setDay(Days day) {
         this.day = day;
-    }
-
-    public int getGroupNum() {
-        return groupNum;
-    }
-
-    public void setGroupNum(int groupNum) {
-        this.groupNum = groupNum;
     }
 
     public List<Room> getRooms() {
@@ -85,6 +73,14 @@ public class Lecture extends QLabel {
         this.timeTo = timeTo;
     }
 
+    public List<String> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<String> comments) {
+        this.comments = comments;
+    }
+
     /**
      * Executes on mouse double-click
      *
@@ -99,6 +95,6 @@ public class Lecture extends QLabel {
 
     @Override
     public String toString() {
-        return "Lecture{" + "teacher=" + teacher + ", day=" + day + ", timeFrom=" + timeFrom + ", timeTo=" + timeTo + ", rooms=" + rooms + ", groupNum=" + groupNum + "}";
+        return "Lecture{" + "teacher=" + teacher + ", day=" + day + ", timeFrom=" + timeFrom + ", timeTo=" + timeTo + ", rooms=" + rooms + ", comments=" + comments + '}';
     }
 }
