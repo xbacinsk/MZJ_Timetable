@@ -122,10 +122,14 @@ public class Parser extends QObject {
                 //check for comments
                 if (fields.length == 9 && !fields[8].isEmpty()) {
                     String[] comments = fields[8].split("#");
-                    List<String> lComments = new ArrayList<String>();
-                    lComments.addAll(Arrays.asList(comments));
+                    StringBuilder builder = new StringBuilder();
+                    for(String comment : comments){
+                        builder.append(comment);
+                        builder.append('\n');
+                    }
+                    builder.deleteCharAt(builder.length()-1);
 
-                    seminar.setComments(lComments);
+                    seminar.setToolTip(builder.toString());
                 }
 
                 course = getCourse(courses, new BigInteger(fields[6]));
@@ -152,10 +156,14 @@ public class Parser extends QObject {
                 //check for comments
                 if (fields.length == 9 && !fields[8].isEmpty()) {
                     String[] comments = fields[8].split("#");
-                    List<String> lComments = new ArrayList<String>();
-                    lComments.addAll(Arrays.asList(comments));
+                    StringBuilder builder = new StringBuilder();
+                    for(String comment : comments){
+                        builder.append(comment);
+                        builder.append('\n');
+                    }
+                    builder.deleteCharAt(builder.length()-1);
 
-                    lecture.setComments(lComments);
+                    lecture.setToolTip(builder.toString());
                 }
 
                 course = getCourse(courses, new BigInteger(fields[6]));

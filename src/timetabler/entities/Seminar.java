@@ -26,7 +26,6 @@ public class Seminar extends QLabel {
     private QTime timeTo;
     private List<Room> rooms;
     private int groupNum;
-    private List<String> comments;
     private Course course;
     
     public final Signal0 requestSettings = new Signal0();
@@ -88,14 +87,6 @@ public class Seminar extends QLabel {
         this.timeTo = timeTo;
     }
 
-    public List<String> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<String> comments) {
-        this.comments = comments;
-    }
-
     /**
      * Executes on mouse double-click
      *
@@ -110,6 +101,6 @@ public class Seminar extends QLabel {
 
     @Override
     public String toString() {
-        return "Seminar{" + "teacher=" + teacher + ", day=" + day + ", timeFrom=" + timeFrom + ", timeTo=" + timeTo + ", rooms=" + rooms + ", groupNum=" + groupNum + ", comments=" + comments + '}';
+        return "Seminar{" + "teacher=" + teacher + ", day=" + day + ", timeFrom=" + timeFrom + ", timeTo=" + timeTo + ", rooms=" + rooms + ", groupNum=" + groupNum + ", tooltip=" + toolTip() + '}';
     }
 }
