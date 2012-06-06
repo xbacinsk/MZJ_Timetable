@@ -1,5 +1,6 @@
 package timetabler.entities;
 
+import com.trolltech.qt.core.QTime;
 import com.trolltech.qt.gui.QLabel;
 import com.trolltech.qt.gui.QMouseEvent;
 import java.util.List;
@@ -14,19 +15,74 @@ import java.util.List;
  */
 public class Lecture extends QLabel {
 
-    private List<Term> terms;
+    private Teacher teacher;
+    private Days day;
+    private QTime timeFrom;
+    private QTime timeTo;
+    private List<Room> rooms;
+    private int groupNum;
+    private boolean oddWeek;
+    private Course course;
+    
     public final Signal0 requestSettings = new Signal0();
 
-    public Lecture(List<Term> terms) {
-        this.terms = terms;
+    public Lecture(Teacher teacher,Days day, QTime timeFrom, QTime timeTo, List<Room> rooms, int groupNum, boolean oddWeek, Course course) {
+        this.teacher = teacher;
+        this.day = day;
+        this.timeFrom = timeFrom;
+        this.timeTo = timeTo;
+        this.rooms = rooms;
+        this.groupNum = groupNum;
+        this.oddWeek = oddWeek;
+        this.course = course;
     }
 
-    public List<Term> getTerms() {
-        return terms;
+    public Days getDay() {
+        return day;
     }
 
-    public void setTerms(List<Term> terms) {
-        this.terms = terms;
+    public void setDay(Days day) {
+        this.day = day;
+    }
+
+    public int getGroupNum() {
+        return groupNum;
+    }
+
+    public void setGroupNum(int groupNum) {
+        this.groupNum = groupNum;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public QTime getTimeFrom() {
+        return timeFrom;
+    }
+
+    public void setTimeFrom(QTime timeFrom) {
+        this.timeFrom = timeFrom;
+    }
+
+    public QTime getTimeTo() {
+        return timeTo;
+    }
+
+    public void setTimeTo(QTime timeTo) {
+        this.timeTo = timeTo;
     }
 
     /**
@@ -43,6 +99,6 @@ public class Lecture extends QLabel {
 
     @Override
     public String toString() {
-        return "Lecture{" + "terms=" + terms + '}';
+        return "Lecture{" + "teacher=" + teacher + ", day=" + day + ", timeFrom=" + timeFrom + ", timeTo=" + timeTo + ", rooms=" + rooms + ", groupNum=" + groupNum + "}";
     }
 }

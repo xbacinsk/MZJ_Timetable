@@ -2,7 +2,7 @@ package timetabler.entities;
 
 import com.trolltech.qt.QVariant;
 import com.trolltech.qt.core.QSettings;
-import com.trolltech.qt.gui.QLabel;
+import com.trolltech.qt.gui.QListWidgetItem;
 import com.trolltech.qt.gui.QMouseEvent;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -22,14 +22,14 @@ import timetabler.dialogs.CourseDialog;
  *
  * @todo functions for rendering
  */
-public class Course extends QLabel {
+public class Course extends QListWidgetItem {
 
     private String code;
     private String name;
     private BigInteger id;
-    private Lecture lecture;
-    private Seminar seminar;
-
+    private List<Lecture> lectures;
+    private List<Seminar> seminars;
+    
     public Course(String code, String name, BigInteger id) {
         this.code = code;
         this.name = name;
@@ -52,12 +52,12 @@ public class Course extends QLabel {
         this.id = id;
     }
 
-    public Lecture getLecture() {
-        return lecture;
+    public List<Lecture> getLectures() {
+        return lectures;
     }
 
-    public void setLecture(Lecture lecture) {
-        this.lecture = lecture;
+    public void setLectures(List<Lecture> lectures) {
+        this.lectures = lectures;
     }
 
     public String getName() {
@@ -68,12 +68,12 @@ public class Course extends QLabel {
         this.name = name;
     }
 
-    public Seminar getSeminar() {
-        return seminar;
+    public List<Seminar> getSeminars() {
+        return seminars;
     }
 
-    public void setSeminar(Seminar seminar) {
-        this.seminar = seminar;
+    public void setSeminars(List<Seminar> seminars) {
+        this.seminars = seminars;
     }
 
     /**
@@ -102,21 +102,19 @@ public class Course extends QLabel {
         Set<Teacher> teacherSet = new HashSet<Teacher>();
 
         //getting teacher from lecture
-        if (lecture != null) {
-            List<Term> terms = lecture.getTerms();
-            for (Term term : terms) {
-                if (term != null && term.getTeacher() != null) {
-                    teacherSet.add(term.getTeacher());
+        if (lectures != null) {
+            for (Lecture lecture : lectures) {
+                if (lecture != null && lecture.getTeacher() != null) {
+                    teacherSet.add(lecture.getTeacher());
                 }
             }
         }
 
         //getting teachers from seminars
-        if (seminar != null) {
-            List<Term> terms = seminar.getTerms();
-            for (Term term : terms) {
-                if (term != null && term.getTeacher() != null) {
-                    teacherSet.add(term.getTeacher());
+        if (seminars != null) {
+            for (Seminar seminar : seminars) {
+                if (seminar != null && seminar.getTeacher() != null) {
+                    teacherSet.add(seminar.getTeacher());
                 }
             }
         }
@@ -148,6 +146,6 @@ public class Course extends QLabel {
 
     @Override
     public String toString() {
-        return "Course{" + "code=" + code + ", name=" + name + ", id=" + id + ", lecture=" + lecture + ", seminar=" + seminar + '}';
+        return "Course{" + "code=" + code + ", name=" + name + ", id=" + id + ", lecture= [" + lectures + "], seminar= [" + seminars + "] }";
     }
 }
