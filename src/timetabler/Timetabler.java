@@ -4,6 +4,7 @@ import com.trolltech.qt.core.QByteArray;
 import com.trolltech.qt.core.QFile;
 import com.trolltech.qt.gui.QFileDialog;
 import com.trolltech.qt.gui.QMainWindow;
+import java.util.ArrayList;
 import java.util.List;
 import timetabler.entities.Course;
 import timetabler.exceptions.MissingLoginException;
@@ -11,7 +12,11 @@ import timetabler.ui.Ui_MainWindow;
 
 public class Timetabler extends QMainWindow{
   
-    private Ui_MainWindow ui = new Ui_MainWindow();    
+    private Ui_MainWindow ui = new Ui_MainWindow();
+    private List<Course> inputContainer = new ArrayList<Course>();
+    private List<Course> outputContainer = new ArrayList<Course>();
+      
+    
         
     public Timetabler()
     {
@@ -21,9 +26,48 @@ public class Timetabler extends QMainWindow{
         ui.actionOpen_time_table_from_PC.triggered.connect(this, "loadXmlFromFile()");
     }
     
-//    public void weekendGUI(boolean b) {
-//        ui.weekendGUI(this, b);
-//    }
+    public void weekendGUI(boolean b) {
+        ui.weekendGUI(this, b);
+    }
+    
+    public void initializeGUI(Timetabler tt){
+        
+        ui.label_46.hide();
+        ui.label_48.hide();
+        ui.saturdayBox.hide();
+        ui.sundayBox.hide();
+            
+        weekendGUI(false);   
+        
+    }
+    
+    public void loadCourses(){
+            Ui_MainWindow ui = this.getUi();
+            
+            for (Course course : inputContainer){
+                ui.listWidget.addItem(course.getCode() + "  " + course.getName());                               
+            }
+            
+//            QLabel label = new QLabel(ui.mondayBox);
+//            label.setGeometry(new QRect(5, 5, 20, 20));
+//            label.setObjectName(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "label", null));
+//            label.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "LABELLABELLABEL", null));
+//            label.setMinimumSize(new QSize(40, 10));
+
+            //label.setObjectName("PB168_label");
+//            ui.horizontalLayout_2.addWidget(
+//            ui.mondayBox.repaint();
+            
+//            for (int i = 0; i <= 0; i++){
+//            QLabel label = new QLabel(ui.mondayBox);
+//            label.setGeometry((i * labelW) + 5, labelH, 80, 80);
+//            label.setMinimumSize(new QSize(40, 40));
+//            label.setText(String.valueOf(ui.mondayBox.geometry().size()));
+//            label.setObjectName(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "lecture"+i, null));
+//            label.setStyleSheet("QLabel { background-color : black; color : white; }");
+//            }
+            
+        }
 
     public Ui_MainWindow getUi() {
         return ui;
