@@ -620,7 +620,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
 //
 //        QListWidgetItem __item4 = new QListWidgetItem(listWidget);
 //        __item4.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "IB001 Tamto a tohle", null));
-//        checkBox.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Show seminars only", null));
+        checkBox.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Show seminars only", null));
         label_21.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "FRI", null));
         fridayBox.setTitle("");
 //        label_26.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));

@@ -3,6 +3,7 @@ package timetabler;
 import com.trolltech.qt.core.QByteArray;
 import com.trolltech.qt.core.QFile;
 import com.trolltech.qt.core.QTime;
+import com.trolltech.qt.core.Qt;
 import com.trolltech.qt.gui.QFileDialog;
 import com.trolltech.qt.gui.QMainWindow;
 import java.util.ArrayList;
@@ -53,11 +54,18 @@ public class Timetabler extends QMainWindow{
                         Days day = lecture.getDay();
                         int lectureLength = lecture.getLength();
                         /*
-                        * Tady by měla být funkce, která určí výšku podle toho,
+                        * Tady by měla být funkce, která určí výšku lectureHeight podle toho,
                         * jeslti se náhodou nepřekrývá s jiným předmětem.
+                        *  0 /  1 /  2 překryté
+                        * 60 / 30 / 20 px
+                        * 
+                        * Podle toho by mělo být i nastavené lectureY.
+                        *  5 / 35 / 45 px
+                        * 
                         */
-                        int lectureHeight = 30;
-                        int lectureX = lecture.getTimeFrom().secsTo(new QTime(7, 0)) / 60;
+                        int lectureHeight = 60;
+                        int lectureY = 5;
+                        int lectureX = lecture.getTimeFrom().secsTo(new QTime(7, 0)) / -60;
 
                         switch (day) {
                             case MON:   lecture.setParent(ui.mondayBox);
@@ -75,10 +83,14 @@ public class Timetabler extends QMainWindow{
                             case SUN:   lecture.setParent(ui.sundayBox);
                                         break;
                         }
-                        lecture.setGeometry(lectureX, 5, lectureLength, lectureHeight);
-                        lecture.setText("bla");//lecture.getCourse().getCode());
+                        lecture.setGeometry(lectureX, lectureY, lectureLength, lectureHeight);
+                        lecture.setText(lecture.getCourse().getCode());
                         lecture.setStyleSheet("background-color: rgb(108, 220, 100);\n"+"border-color: rgb(0, 0, 0);");
+                        lecture.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
+                        lecture.setAlignment(Qt.AlignmentFlag.AlignCenter);
                         lecture.show();
+                        
+                        System.out.println(lecture.getCourse().getCode() + " " + lectureX + " " + lectureLength);
 
                     }
                 }
