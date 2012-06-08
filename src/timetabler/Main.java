@@ -1,11 +1,11 @@
 package timetabler;
 
 import com.trolltech.qt.core.QCoreApplication;
+import com.trolltech.qt.core.QTime;
 import com.trolltech.qt.gui.QApplication;
-import timetabler.ui.Ui_MainWindow;
 
 public class Main{
-       
+    
     public static void main(String args[]){
             QApplication.initialize(args);
 
@@ -14,9 +14,10 @@ public class Main{
             QCoreApplication.setOrganizationDomain("mzj.net");
             QCoreApplication.setApplicationName("Timetabler");
             
-            Timetabler timetabler = new Timetabler();                       
-
-            timetabler.show();  
+            Timetabler timetabler = new Timetabler(); 
+            
+            timetabler.weekendGUI(false);            
+            timetabler.show();
             
             QApplication.exec();
             

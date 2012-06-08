@@ -39,6 +39,10 @@ public class Seminar extends QLabel {
         this.groupNum = groupNum;
     }
 
+    public Course getCourse() {
+        return course;
+    }
+
     public Days getDay() {
         return day;
     }

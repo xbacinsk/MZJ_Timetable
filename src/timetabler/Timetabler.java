@@ -2,11 +2,14 @@ package timetabler;
 
 import com.trolltech.qt.core.QByteArray;
 import com.trolltech.qt.core.QFile;
+import com.trolltech.qt.core.QTime;
 import com.trolltech.qt.gui.QFileDialog;
 import com.trolltech.qt.gui.QMainWindow;
 import java.util.ArrayList;
 import java.util.List;
 import timetabler.entities.Course;
+import timetabler.entities.Days;
+import timetabler.entities.Lecture;
 import timetabler.exceptions.MissingLoginException;
 import timetabler.ui.Ui_MainWindow;
 
@@ -42,31 +45,44 @@ public class Timetabler extends QMainWindow{
     }
     
     public void loadCourses(){
-            Ui_MainWindow ui = this.getUi();
-            
             for (Course course : inputContainer){
-                ui.listWidget.addItem(course.getCode() + "  " + course.getName());                               
-            }
-            
-//            QLabel label = new QLabel(ui.mondayBox);
-//            label.setGeometry(new QRect(5, 5, 20, 20));
-//            label.setObjectName(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "label", null));
-//            label.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "LABELLABELLABEL", null));
-//            label.setMinimumSize(new QSize(40, 10));
+                ui.listWidget.addItem(course);
+                
+                if (course.getLectures() != null){
+                    for (Lecture lecture : course.getLectures()){
+                        Days day = lecture.getDay();
+                        int lectureLength = lecture.getLength();
+                        /*
+                        * Tady by měla být funkce, která určí výšku podle toho,
+                        * jeslti se náhodou nepřekrývá s jiným předmětem.
+                        */
+                        int lectureHeight = 30;
+                        int lectureY = lecture.getTimeFrom().secsTo(new QTime(7, 0)) / 60;
 
-            //label.setObjectName("PB168_label");
-//            ui.horizontalLayout_2.addWidget(
-//            ui.mondayBox.repaint();
-            
-//            for (int i = 0; i <= 0; i++){
-//            QLabel label = new QLabel(ui.mondayBox);
-//            label.setGeometry((i * labelW) + 5, labelH, 80, 80);
-//            label.setMinimumSize(new QSize(40, 40));
-//            label.setText(String.valueOf(ui.mondayBox.geometry().size()));
-//            label.setObjectName(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "lecture"+i, null));
-//            label.setStyleSheet("QLabel { background-color : black; color : white; }");
-//            }
-            
+                        switch (day) {
+                            case MON:   lecture.setParent(ui.mondayBox);
+                                        break;
+                            case TUE:   lecture.setParent(ui.tuesdayBox);
+                                        break;
+                            case WED:   lecture.setParent(ui.wednesdayBox);
+                                        break;
+                            case THU:   lecture.setParent(ui.thursdayBox);
+                                        break;
+                            case FRI:   lecture.setParent(ui.fridayBox);
+                                        break;
+                            case SAT:   lecture.setParent(ui.saturdayBox);
+                                        break;
+                            case SUN:   lecture.setParent(ui.sundayBox);
+                                        break;
+                        }
+                        lecture.setGeometry(lectureY, 5, lectureLength, lectureHeight);
+                        lecture.setText(lecture.getCourse().getCode());
+                        lecture.setStyleSheet("background-color: rgb(108, 220, 100);\n"+"border-color: rgb(0, 0, 0);");
+                        lecture.show();
+
+                    }
+                }
+            }            
         }
 
     public Ui_MainWindow getUi() {
@@ -109,8 +125,13 @@ public class Timetabler extends QMainWindow{
         /**
          * sem prichadzaju data z parsera...kod je len na otestovanie treba ho zmenit!!..ale to asi vidit :D
          */
-        for(Course course : courses){
-            System.out.println(course.toString());
-        }
+//        for(Course course : courses){
+//            System.out.println(course.toString());
+//        }
+        
+        inputContainer.addAll(courses);
+        loadCourses();
+        initializeGUI(this);
     }
+   
 }    
