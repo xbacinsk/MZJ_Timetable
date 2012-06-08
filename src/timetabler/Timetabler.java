@@ -57,7 +57,7 @@ public class Timetabler extends QMainWindow{
                         * jeslti se náhodou nepřekrývá s jiným předmětem.
                         */
                         int lectureHeight = 30;
-                        int lectureY = lecture.getTimeFrom().secsTo(new QTime(7, 0)) / 60;
+                        int lectureX = lecture.getTimeFrom().secsTo(new QTime(7, 0)) / 60;
 
                         switch (day) {
                             case MON:   lecture.setParent(ui.mondayBox);
@@ -75,8 +75,8 @@ public class Timetabler extends QMainWindow{
                             case SUN:   lecture.setParent(ui.sundayBox);
                                         break;
                         }
-                        lecture.setGeometry(lectureY, 5, lectureLength, lectureHeight);
-                        lecture.setText(lecture.getCourse().getCode());
+                        lecture.setGeometry(lectureX, 5, lectureLength, lectureHeight);
+                        lecture.setText("bla");//lecture.getCourse().getCode());
                         lecture.setStyleSheet("background-color: rgb(108, 220, 100);\n"+"border-color: rgb(0, 0, 0);");
                         lecture.show();
 

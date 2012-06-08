@@ -1,7 +1,6 @@
 package timetabler;
 
 import com.trolltech.qt.core.QCoreApplication;
-import com.trolltech.qt.core.QTime;
 import com.trolltech.qt.gui.QApplication;
 
 public class Main{

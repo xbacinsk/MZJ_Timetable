@@ -24,13 +24,13 @@ public class Lecture extends QLabel {
     
     public final Signal0 requestSettings = new Signal0();
     
-    public Lecture(Teacher teacher,Days day, QTime timeFrom, QTime timeTo, List<Room> rooms, Course course) {
+    public Lecture(Teacher teacher,Days day, QTime timeFrom, QTime timeTo, List<Room> rooms) {
         this.teacher = teacher;
         this.day = day;
         this.timeFrom = timeFrom;
         this.timeTo = timeTo;
         this.rooms = rooms;
-        this.course = course;
+        //this.course = course;
     }
     
     public Course getCourse() {

@@ -30,14 +30,14 @@ public class Seminar extends QLabel {
     
     public final Signal0 requestSettings = new Signal0();
 
-    public Seminar(Teacher teacher,Days day, QTime timeFrom, QTime timeTo, List<Room> rooms, int groupNum, Course course) {
+    public Seminar(Teacher teacher,Days day, QTime timeFrom, QTime timeTo, List<Room> rooms, int groupNum) {
         this.teacher = teacher;
         this.day = day;
         this.timeFrom = timeFrom;
         this.timeTo = timeTo;
         this.rooms = rooms;
         this.groupNum = groupNum;
-        this.course = course;
+//        this.course = course;
     }
 
     public Course getCourse() {
