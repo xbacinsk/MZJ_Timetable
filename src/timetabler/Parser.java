@@ -117,7 +117,7 @@ public class Parser extends QObject {
                 Seminar seminar = new Seminar(teacher, Days.values()[locale.toDate(fields[0], "ddd").dayOfWeek() - 1],
                         QTime.fromString(fields[1], "hh:mm"),
                         QTime.fromString(fields[2], "hh:mm"),
-                        rooms, groupNum);
+                        rooms, groupNum, null);
 
                 //check for comments
                 if (fields.length == 9 && !fields[8].isEmpty()) {
@@ -144,6 +144,7 @@ public class Parser extends QObject {
                     course.setSeminars(seminars);
                 }
 
+                seminar.setCourse(course);
                 course.getSeminars().add(seminar);
 
                 //its a lecture
@@ -151,7 +152,7 @@ public class Parser extends QObject {
                 Lecture lecture = new Lecture(teacher, Days.values()[locale.toDate(fields[0], "ddd").dayOfWeek() - 1],
                         QTime.fromString(fields[1], "hh:mm"),
                         QTime.fromString(fields[2], "hh:mm"),
-                        rooms);
+                        rooms, null);
                 
                 //check for comments
                 if (fields.length == 9 && !fields[8].isEmpty()) {
@@ -177,6 +178,7 @@ public class Parser extends QObject {
                     course.setLectures(lectures);
                 }
                 
+                lecture.setCourse(course);
                 course.getLectures().add(lecture);
             }
 

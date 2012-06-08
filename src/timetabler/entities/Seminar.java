@@ -43,6 +43,10 @@ public class Seminar extends QLabel {
     public Course getCourse() {
         return course;
     }
+    
+    public void setCourse(Course course){
+        this.course = course;
+    }
 
     public Days getDay() {
         return day;

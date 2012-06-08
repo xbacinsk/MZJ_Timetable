@@ -37,6 +37,10 @@ public class Lecture extends QLabel {
         return course;
     }
     
+    public void setCourse(Course course){
+        this.course = course;
+    }
+    
     public int getLength(){
         return timeFrom.secsTo(timeTo) / 60;
     }
