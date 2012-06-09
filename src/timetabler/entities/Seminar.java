@@ -30,7 +30,7 @@ public class Seminar extends QLabel {
     private Course course;
     
     public final Signal0 requestSettings = new Signal0();
-    public final Signal0 requestRemoval = new Signal0();
+    public final Signal1<Seminar> requestRemoval = new Signal1<Seminar>();
 
     public Seminar(Teacher teacher,Days day, QTime timeFrom, QTime timeTo, List<Room> rooms, int groupNum, Course course) {
         this.teacher = teacher;
@@ -112,8 +112,8 @@ public class Seminar extends QLabel {
     
     @Override
     protected void mousePressEvent(QMouseEvent me) {
-        if(me.button() == Qt.MouseButton.MidButton){
-            requestRemoval.emit();
+        if(me.button() == Qt.MouseButton.RightButton){
+            requestRemoval.emit(this);
         }
     }
 

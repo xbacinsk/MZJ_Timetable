@@ -31,7 +31,7 @@ public class Course extends QListWidgetItem {
     private List<Seminar> seminars;
     public final Signal1<Course> optionsChanged = new Signal1<Course>();
     public final Signal1<Course> removeLectureRequest = new Signal1<Course>();
-    public final Signal1<Course> removeSeminarRequest = new Signal1<Course>();
+    public final Signal1<Seminar> removeSeminarRequest = new Signal1<Seminar>();
     
     public Course(String code, String name, BigInteger id) {
         this.code = code;
@@ -141,8 +141,8 @@ public class Course extends QListWidgetItem {
         removeLectureRequest.emit(this);
     }
     
-    public void removeSeminar(){
-        removeSeminarRequest.emit(this);
+    public void removeSeminar(Seminar seminar){
+        removeSeminarRequest.emit(seminar);
     }
 
     @Override
