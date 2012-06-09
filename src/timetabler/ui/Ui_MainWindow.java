@@ -727,6 +727,10 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
             tt.setMinimumHeight(571);
             tt.setMaximumHeight(571);
             tt.setFixedHeight(571);
+            tt.getUi().label_46.hide();
+            tt.getUi().label_48.hide();
+            tt.getUi().saturdayBox.hide();
+            tt.getUi().sundayBox.hide();
             tt.repaint();
         } else {
             tt.setMinimumHeight(431);
