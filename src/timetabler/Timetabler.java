@@ -84,8 +84,8 @@ public class Timetabler extends QMainWindow {
             
             updateCourseOptions(course);
         }
-    }
-
+    }    
+   
     public void loadCourses() {
         for (Course course : inputContainer) {
             ui.listWidget.addItem(course);
@@ -132,6 +132,7 @@ public class Timetabler extends QMainWindow {
                         case SUN:
                             lecture.setParent(ui.sundayBox);
                             break;
+
                     }
                     lecture.setGeometry(lectureX, lectureY, lectureLength, lectureHeight);
                     lecture.setText(lecture.getCourse().getCode());
