@@ -80,9 +80,11 @@ public class CourseDialog extends QDialog{
     settings.setValue(course.getCode() + "/lecture", ui.lectureVisibilityCheckBox.isChecked());
     
     //getting settings from dynamically generated combo box for teachers
-    List<QObject> boxes = ui.teachersBox.layout().children();
+    List<QObject> boxes = ui.teachersBox.children();
     settings.beginGroup(course.getCode() + "/teachers");
     for(QObject box : boxes){
+      if(!(box instanceof QCheckBox))
+          continue;
       QCheckBox checkBox = (QCheckBox) box;
       settings.setValue(checkBox.text(), checkBox.isChecked());
     }

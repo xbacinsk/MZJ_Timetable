@@ -43,7 +43,7 @@ public class Parser extends QObject {
         } catch (ParsingException ex) {
             QMessageBox.StandardButtons buttons = new QMessageBox.StandardButtons();
             buttons.set(QMessageBox.StandardButton.Close);
-            QMessageBox box = new QMessageBox(QMessageBox.Icon.Critical, "Error", ex.getClass() + ex.getMessage(), buttons);
+            QMessageBox box = new QMessageBox(QMessageBox.Icon.Critical, "Parsing error",ex.getMessage(), buttons);
             box.exec();
         }
     }
@@ -77,12 +77,15 @@ public class Parser extends QObject {
 
         QXmlItem item = new QXmlItem(results.next());
         if (item.isNull()) {
-            throw new InvalidXmlDataException("Invalid XML data");
+            throw new InvalidXmlDataException("Invalid XML data\n" + "Make sure you are using XML file created by IS with options \"včetně všech seminářů zobrazovaných předmětů\" and \"vypisovat i učitele\"");
         }
         while (!item.isNull()) {
             //for each item
 
             String[] fields = item.toAtomicValue().toString().split(";");
+            if(fields.length != 9 && fields.length != 8){
+                throw new InvalidXmlDataException("Invalid XML data\n" + "Make sure you are using XML file created by IS with options \"včetně všech seminářů zobrazovaných předmětů\" and \"vypisovat i učitele\"");
+            }
 
             //parsing teacher
             String[] teacherInfo = fields[7].split("#");

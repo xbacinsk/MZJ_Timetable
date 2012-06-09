@@ -187,7 +187,7 @@ public class Ui_CourseDialogUi implements com.trolltech.qt.QUiForm<QDialog>
 
     void retranslateUi(QDialog CourseDialogUi)
     {
-        CourseDialogUi.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "Dialog", null));
+        CourseDialogUi.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "Course options", null));
         daysBox.setTitle(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "Days", null));
         daysMondayCheckBox.setText(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "Monday", null));
         daysTuesdayCheckBox.setText(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "Tuesday", null));
@@ -199,7 +199,9 @@ public class Ui_CourseDialogUi implements com.trolltech.qt.QUiForm<QDialog>
         teachersBox.setTitle(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "Teachers", null));
         timeBox.setTitle(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "Time", null));
         timeFromLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "From:", null));
+        timeFromEdit.setDisplayFormat(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "hh:mm", null));
         timeToLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "To:", null));
+        timeToEdit.setDisplayFormat(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "hh:mm", null));
         lectureVisibilityCheckBox.setText(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "Show lecture", null));
     } // retranslateUi
 
