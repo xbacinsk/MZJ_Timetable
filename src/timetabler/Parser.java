@@ -146,7 +146,7 @@ public class Parser extends QObject {
                 seminar.setCourse(course);
                 course.getSeminars().add(seminar);
                 seminar.requestSettings.connect(course, "showSettings()");
-                seminar.requestRemoval.connect(course, "removeSeminar()");
+                seminar.requestRemoval.connect(course, "removeSeminar(Seminar)");
 
                 //its a lecture
             } else {

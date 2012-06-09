@@ -101,7 +101,7 @@ public class Lecture extends QLabel {
     
     @Override
     protected void mousePressEvent(QMouseEvent me) {
-        if(me.button() == Qt.MouseButton.MidButton){
+        if(me.button() == Qt.MouseButton.RightButton){
             requestRemoval.emit();
         }
     }
