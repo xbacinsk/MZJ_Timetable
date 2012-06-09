@@ -37,10 +37,10 @@ public class Timetabler extends QMainWindow{
     
     public void initializeGUI(Timetabler tt){
         
-        ui.label_46.hide();
-        ui.label_48.hide();
-        ui.saturdayBox.hide();
-        ui.sundayBox.hide();
+//        ui.label_46.hide();
+//        ui.label_48.hide();
+//        ui.saturdayBox.hide();
+//        ui.sundayBox.hide();
             
         weekendGUI(false);   
         
