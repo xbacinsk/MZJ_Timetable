@@ -130,10 +130,8 @@ public class Timetabler extends QMainWindow{
                         lecture.setStyleSheet("background-color: rgb(108, 220, 100);\n"+"border-color: rgb(0, 0, 0);");
                         lecture.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
                         lecture.setAlignment(Qt.AlignmentFlag.AlignCenter);
-                        lecture.show();
-                        
-                        System.out.println(lecture.getCourse().getCode() + " " + lectureX + " " + lectureLength);
-
+                        lecture.show();                        
+//                        System.out.println(lecture.getCourse().getCode() + " " + lectureX + " " + lectureLength);
                     }
                 }
             }            
