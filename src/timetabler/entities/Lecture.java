@@ -1,6 +1,7 @@
 package timetabler.entities;
 
 import com.trolltech.qt.core.QTime;
+import com.trolltech.qt.core.Qt;
 import com.trolltech.qt.gui.QLabel;
 import com.trolltech.qt.gui.QMouseEvent;
 import java.util.List;
@@ -23,6 +24,7 @@ public class Lecture extends QLabel {
     private Course course;
     
     public final Signal0 requestSettings = new Signal0();
+    public final Signal0 requestRemoval = new Signal0();
     
     public Lecture(Teacher teacher,Days day, QTime timeFrom, QTime timeTo, List<Room> rooms, Course course) {
         this.teacher = teacher;
@@ -95,6 +97,13 @@ public class Lecture extends QLabel {
     @Override
     protected void mouseDoubleClickEvent(QMouseEvent me) {
         requestSettings.emit();
+    }
+    
+    @Override
+    protected void mousePressEvent(QMouseEvent me) {
+        if(me.button() == Qt.MouseButton.MidButton){
+            requestRemoval.emit();
+        }
     }
 
     @Override

@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>574</width>
-    <height>370</height>
+    <width>442</width>
+    <height>257</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_5">
+  <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
@@ -92,6 +92,19 @@
           </property>
          </widget>
         </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>com.trolltech.qt.core.Qt.Orientation.Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
        </layout>
       </widget>
      </item>
@@ -103,39 +116,7 @@
       </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <item>
-        <widget class="QGroupBox" name="weekBox">
-         <property name="title">
-          <string>Week</string>
-         </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
-           <widget class="QCheckBox" name="weekEvenCheckBox">
-            <property name="text">
-             <string>Even</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-            <property name="tristate">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QCheckBox" name="weekOddCheckBox">
-            <property name="text">
-             <string>Odd</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QGroupBox" name="timeBox">
          <property name="title">
@@ -198,62 +179,35 @@
          </layout>
         </widget>
        </item>
+       <item>
+        <widget class="QCheckBox" name="lectureVisibilityCheckBox">
+         <property name="text">
+          <string>Show lecture</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>com.trolltech.qt.core.Qt.Orientation.Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
      </item>
     </layout>
    </item>
    <item>
-    <widget class="QCheckBox" name="lectureVisibilityCheckBox">
-     <property name="text">
-      <string>Show lecture</string>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>com.trolltech.qt.core.Qt.Orientation.Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>83</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
-      <widget class="QLabel" name="choicesTextLabel">
-       <property name="text">
-        <string>Number of choices:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="choicesNumLabel">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>com.trolltech.qt.core.Qt.Orientation.Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>298</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
      <item>
       <widget class="QDialogButtonBox" name="buttonBox">
        <property name="orientation">

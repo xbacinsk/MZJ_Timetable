@@ -2,6 +2,7 @@ package timetabler.entities;
 
 import com.trolltech.qt.QVariant;
 import com.trolltech.qt.core.QSettings;
+import com.trolltech.qt.gui.QDialog;
 import com.trolltech.qt.gui.QListWidgetItem;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -28,6 +29,9 @@ public class Course extends QListWidgetItem {
     private BigInteger id;
     private List<Lecture> lectures;
     private List<Seminar> seminars;
+    public final Signal1<Course> optionsChanged = new Signal1<Course>();
+    public final Signal1<Course> removeLectureRequest = new Signal1<Course>();
+    public final Signal1<Course> removeSeminarRequest = new Signal1<Course>();
     
     public Course(String code, String name, BigInteger id) {
         this.code = code;
@@ -129,7 +133,16 @@ public class Course extends QListWidgetItem {
      */
     public void showSettings() {
         CourseDialog dialog = new CourseDialog(this);
-        dialog.exec();
+        if(dialog.exec() == QDialog.DialogCode.Accepted.value())
+            optionsChanged.emit(this);
+    }
+    
+    public void removeLecture(){
+        removeLectureRequest.emit(this);
+    }
+    
+    public void removeSeminar(){
+        removeSeminarRequest.emit(this);
     }
 
     @Override

@@ -1,5 +1,4 @@
 package timetabler.ui;
-
 /********************************************************************************
  ** Form generated from reading ui file 'courseDialog.jui'
  **
@@ -7,13 +6,12 @@ package timetabler.ui;
  **
  ** WARNING! All changes made in this file will be lost when recompiling ui file!
  ********************************************************************************/
-import com.trolltech.qt.core.QSize;
-import com.trolltech.qt.core.QTime;
+import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.*;
 
 public class Ui_CourseDialogUi implements com.trolltech.qt.QUiForm<QDialog>
 {
-    public QVBoxLayout verticalLayout_5;
+    public QVBoxLayout verticalLayout_4;
     public QHBoxLayout horizontalLayout_3;
     public QGroupBox daysBox;
     public QVBoxLayout verticalLayout;
@@ -24,12 +22,9 @@ public class Ui_CourseDialogUi implements com.trolltech.qt.QUiForm<QDialog>
     public QCheckBox daysFridayCheckBox;
     public QCheckBox daysSaturdayCheckBox;
     public QCheckBox daysSundayCheckBox;
+    public QSpacerItem verticalSpacer;
     public QGroupBox teachersBox;
-    public QVBoxLayout verticalLayout_4;
-    public QGroupBox weekBox;
     public QVBoxLayout verticalLayout_2;
-    public QCheckBox weekEvenCheckBox;
-    public QCheckBox weekOddCheckBox;
     public QGroupBox timeBox;
     public QVBoxLayout verticalLayout_3;
     public QHBoxLayout horizontalLayout;
@@ -39,22 +34,18 @@ public class Ui_CourseDialogUi implements com.trolltech.qt.QUiForm<QDialog>
     public QLabel timeToLabel;
     public QTimeEdit timeToEdit;
     public QCheckBox lectureVisibilityCheckBox;
-    public QSpacerItem verticalSpacer;
+    public QSpacerItem verticalSpacer_2;
     public QHBoxLayout horizontalLayout_4;
-    public QLabel choicesTextLabel;
-    public QLabel choicesNumLabel;
-    public QSpacerItem horizontalSpacer;
     public QDialogButtonBox buttonBox;
 
     public Ui_CourseDialogUi() { super(); }
 
-  @Override
     public void setupUi(QDialog CourseDialogUi)
     {
         CourseDialogUi.setObjectName("CourseDialogUi");
-        CourseDialogUi.resize(new QSize(574, 370).expandedTo(CourseDialogUi.minimumSizeHint()));
-        verticalLayout_5 = new QVBoxLayout(CourseDialogUi);
-        verticalLayout_5.setObjectName("verticalLayout_5");
+        CourseDialogUi.resize(new QSize(442, 257).expandedTo(CourseDialogUi.minimumSizeHint()));
+        verticalLayout_4 = new QVBoxLayout(CourseDialogUi);
+        verticalLayout_4.setObjectName("verticalLayout_4");
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3.setObjectName("horizontalLayout_3");
         daysBox = new QGroupBox(CourseDialogUi);
@@ -103,6 +94,10 @@ public class Ui_CourseDialogUi implements com.trolltech.qt.QUiForm<QDialog>
 
         verticalLayout.addWidget(daysSundayCheckBox);
 
+        verticalSpacer = new QSpacerItem(20, 40, com.trolltech.qt.gui.QSizePolicy.Policy.Minimum, com.trolltech.qt.gui.QSizePolicy.Policy.Expanding);
+
+        verticalLayout.addItem(verticalSpacer);
+
 
         horizontalLayout_3.addWidget(daysBox);
 
@@ -111,28 +106,8 @@ public class Ui_CourseDialogUi implements com.trolltech.qt.QUiForm<QDialog>
 
         horizontalLayout_3.addWidget(teachersBox);
 
-        verticalLayout_4 = new QVBoxLayout();
-        verticalLayout_4.setObjectName("verticalLayout_4");
-        weekBox = new QGroupBox(CourseDialogUi);
-        weekBox.setObjectName("weekBox");
-        verticalLayout_2 = new QVBoxLayout(weekBox);
+        verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2.setObjectName("verticalLayout_2");
-        weekEvenCheckBox = new QCheckBox(weekBox);
-        weekEvenCheckBox.setObjectName("weekEvenCheckBox");
-        weekEvenCheckBox.setChecked(true);
-        weekEvenCheckBox.setTristate(false);
-
-        verticalLayout_2.addWidget(weekEvenCheckBox);
-
-        weekOddCheckBox = new QCheckBox(weekBox);
-        weekOddCheckBox.setObjectName("weekOddCheckBox");
-        weekOddCheckBox.setChecked(true);
-
-        verticalLayout_2.addWidget(weekOddCheckBox);
-
-
-        verticalLayout_4.addWidget(weekBox);
-
         timeBox = new QGroupBox(CourseDialogUi);
         timeBox.setObjectName("timeBox");
         verticalLayout_3 = new QVBoxLayout(timeBox);
@@ -171,40 +146,26 @@ public class Ui_CourseDialogUi implements com.trolltech.qt.QUiForm<QDialog>
         verticalLayout_3.addLayout(horizontalLayout_2);
 
 
-        verticalLayout_4.addWidget(timeBox);
-
-
-        horizontalLayout_3.addLayout(verticalLayout_4);
-
-
-        verticalLayout_5.addLayout(horizontalLayout_3);
+        verticalLayout_2.addWidget(timeBox);
 
         lectureVisibilityCheckBox = new QCheckBox(CourseDialogUi);
         lectureVisibilityCheckBox.setObjectName("lectureVisibilityCheckBox");
         lectureVisibilityCheckBox.setChecked(true);
 
-        verticalLayout_5.addWidget(lectureVisibilityCheckBox);
+        verticalLayout_2.addWidget(lectureVisibilityCheckBox);
 
-        verticalSpacer = new QSpacerItem(20, 83, com.trolltech.qt.gui.QSizePolicy.Policy.Minimum, com.trolltech.qt.gui.QSizePolicy.Policy.Expanding);
+        verticalSpacer_2 = new QSpacerItem(20, 40, com.trolltech.qt.gui.QSizePolicy.Policy.Minimum, com.trolltech.qt.gui.QSizePolicy.Policy.Expanding);
 
-        verticalLayout_5.addItem(verticalSpacer);
+        verticalLayout_2.addItem(verticalSpacer_2);
+
+
+        horizontalLayout_3.addLayout(verticalLayout_2);
+
+
+        verticalLayout_4.addLayout(horizontalLayout_3);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4.setObjectName("horizontalLayout_4");
-        choicesTextLabel = new QLabel(CourseDialogUi);
-        choicesTextLabel.setObjectName("choicesTextLabel");
-
-        horizontalLayout_4.addWidget(choicesTextLabel);
-
-        choicesNumLabel = new QLabel(CourseDialogUi);
-        choicesNumLabel.setObjectName("choicesNumLabel");
-
-        horizontalLayout_4.addWidget(choicesNumLabel);
-
-        horizontalSpacer = new QSpacerItem(298, 20, com.trolltech.qt.gui.QSizePolicy.Policy.Expanding, com.trolltech.qt.gui.QSizePolicy.Policy.Minimum);
-
-        horizontalLayout_4.addItem(horizontalSpacer);
-
         buttonBox = new QDialogButtonBox(CourseDialogUi);
         buttonBox.setObjectName("buttonBox");
         buttonBox.setOrientation(com.trolltech.qt.core.Qt.Orientation.Horizontal);
@@ -213,7 +174,7 @@ public class Ui_CourseDialogUi implements com.trolltech.qt.QUiForm<QDialog>
         horizontalLayout_4.addWidget(buttonBox);
 
 
-        verticalLayout_5.addLayout(horizontalLayout_4);
+        verticalLayout_4.addLayout(horizontalLayout_4);
 
         timeFromLabel.setBuddy(timeFromEdit);
         timeToLabel.setBuddy(timeToEdit);
@@ -236,15 +197,10 @@ public class Ui_CourseDialogUi implements com.trolltech.qt.QUiForm<QDialog>
         daysSaturdayCheckBox.setText(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "Saturday", null));
         daysSundayCheckBox.setText(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "Sunday", null));
         teachersBox.setTitle(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "Teachers", null));
-        weekBox.setTitle(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "Week", null));
-        weekEvenCheckBox.setText(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "Even", null));
-        weekOddCheckBox.setText(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "Odd", null));
         timeBox.setTitle(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "Time", null));
         timeFromLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "From:", null));
         timeToLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "To:", null));
         lectureVisibilityCheckBox.setText(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "Show lecture", null));
-        choicesTextLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("CourseDialogUi", "Number of choices:", null));
-        choicesNumLabel.setText("");
     } // retranslateUi
 
 }

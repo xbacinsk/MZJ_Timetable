@@ -1,10 +1,8 @@
 package timetabler;
 
-import com.trolltech.qt.core.QByteArray;
-import com.trolltech.qt.core.QFile;
-import com.trolltech.qt.core.QTime;
-import com.trolltech.qt.core.Qt;
+import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.QFileDialog;
+import com.trolltech.qt.gui.QListWidgetItem;
 import com.trolltech.qt.gui.QMainWindow;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,8 +17,6 @@ public class Timetabler extends QMainWindow{
     private Ui_MainWindow ui = new Ui_MainWindow();
     private List<Course> inputContainer = new ArrayList<Course>();
     private List<Course> outputContainer = new ArrayList<Course>();
-      
-    
         
     public Timetabler()
     {
@@ -28,6 +24,11 @@ public class Timetabler extends QMainWindow{
         
         ui.actionOpen_time_table_from_IS.triggered.connect(this, "loadXmlFromIs()");
         ui.actionOpen_time_table_from_PC.triggered.connect(this, "loadXmlFromFile()");
+        
+        ui.listWidget.itemClicked.connect(this, "courseClicked(QListWidgetItem)");
+        ui.listWidget.itemDoubleClicked.connect(this, "courseDoubleClicked(QListWidgetItem)");
+        
+        ui.checkBox.stateChanged.connect(this, "hideLectureCheckBoxClicked(Integer)");
     }
     
     public void weekendGUI(boolean b) {
@@ -45,9 +46,50 @@ public class Timetabler extends QMainWindow{
         
     }
     
+    public void courseClicked(QListWidgetItem item){
+        Course course = (Course) item;
+        System.out.println("courseClicked: " + course);
+    }
+    
+    public void courseDoubleClicked(QListWidgetItem item){
+        Course course = (Course) item;
+        course.showSettings();
+    }
+    
+    public void updateCourseOptions(Course course){
+        System.out.println("updateCourseOptions: " + course);
+    }
+    
+    public void removeLecture(Course course){
+        QSettings settings = new QSettings();
+        settings.setValue(course.getCode() + "/lecture", false);
+        
+        updateCourseOptions(course);
+    }
+    
+    public void removeSeminar(Course course){
+        
+    }
+    
+    public void hideLectureCheckBoxClicked(Integer n){
+        Course course = (Course) ui.listWidget.currentItem();
+        QSettings settings = new QSettings();
+        
+        if(n == Qt.CheckState.Checked.value()){
+            settings.setValue(course.getCode() + "/lecture", false);
+        }else{
+            settings.setValue(course.getCode() + "/lecture", true);
+        }
+        
+        updateCourseOptions(course);
+    }
+    
     public void loadCourses(){
             for (Course course : inputContainer){
                 ui.listWidget.addItem(course);
+                course.optionsChanged.connect(this, "updateCourseOptions(Course)");
+                course.removeLectureRequest.connect(this, "removeLecture(Course)");
+                course.removeSeminarRequest.connect(this, "removeSeminar(Course)");
                 
                 if (course.getLectures() != null){
                     for (Lecture lecture : course.getLectures()){

@@ -6,6 +6,7 @@ import com.trolltech.qt.core.QSettings;
 import com.trolltech.qt.core.QTime;
 import com.trolltech.qt.gui.QCheckBox;
 import com.trolltech.qt.gui.QDialog;
+import com.trolltech.qt.gui.QSpacerItem;
 import com.trolltech.qt.gui.QVBoxLayout;
 import java.util.List;
 import timetabler.entities.Course;
@@ -71,11 +72,6 @@ public class CourseDialog extends QDialog{
     settings.setValue("sunday", ui.daysSundayCheckBox.isChecked());
     settings.endGroup();
     
-    settings.beginGroup(course.getCode() + "/week");
-    settings.setValue("even", ui.weekEvenCheckBox.isChecked());
-    settings.setValue("odd", ui.weekOddCheckBox.isChecked());
-    settings.endGroup();
-    
     settings.beginGroup(course.getCode() + "/time");
     settings.setValue("from", ui.timeFromEdit.time());
     settings.setValue("to", ui.timeToEdit.time());
@@ -84,7 +80,7 @@ public class CourseDialog extends QDialog{
     settings.setValue(course.getCode() + "/lecture", ui.lectureVisibilityCheckBox.isChecked());
     
     //getting settings from dynamically generated combo box for teachers
-    List<QObject> boxes = ui.teachersBox.children();
+    List<QObject> boxes = ui.teachersBox.layout().children();
     settings.beginGroup(course.getCode() + "/teachers");
     for(QObject box : boxes){
       QCheckBox checkBox = (QCheckBox) box;
@@ -109,11 +105,6 @@ public class CourseDialog extends QDialog{
     ui.daysSundayCheckBox.setChecked(QVariant.toBoolean(settings.value("sunday", true)));
     settings.endGroup();
     
-    settings.beginGroup(course.getCode() + "/week");
-    ui.weekEvenCheckBox.setChecked(QVariant.toBoolean(settings.value("even", true)));
-    ui.weekOddCheckBox.setChecked(QVariant.toBoolean(settings.value("odd", true)));
-    settings.endGroup();
-    
     settings.beginGroup(course.getCode() + "/time");
     ui.timeFromEdit.setTime(QVariant.toTime(settings.value("from", new QTime(8, 0))));
     ui.timeToEdit.setTime(QVariant.toTime(settings.value("to", new QTime(20, 0))));
@@ -131,6 +122,8 @@ public class CourseDialog extends QDialog{
       teachersLayout.addWidget(box);
       box.setChecked(QVariant.toBoolean(settings.value(teacher.getName(), true)));
     }
+    QSpacerItem spacer = new QSpacerItem(1,1,com.trolltech.qt.gui.QSizePolicy.Policy.Minimum, com.trolltech.qt.gui.QSizePolicy.Policy.Expanding);
+    teachersLayout.addSpacerItem(spacer);
     settings.endGroup();
   }
   

@@ -145,6 +145,8 @@ public class Parser extends QObject {
 
                 seminar.setCourse(course);
                 course.getSeminars().add(seminar);
+                seminar.requestSettings.connect(course, "showSettings()");
+                seminar.requestRemoval.connect(course, "removeSeminar()");
 
                 //its a lecture
             } else {
@@ -179,6 +181,8 @@ public class Parser extends QObject {
                 
                 lecture.setCourse(course);
                 course.getLectures().add(lecture);
+                lecture.requestSettings.connect(course, "showSettings()");
+                lecture.requestRemoval.connect(course, "removeLecture()");
             }
 
             item = results.next();
