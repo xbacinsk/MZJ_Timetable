@@ -7,7 +7,6 @@ import com.trolltech.qt.xmlpatterns.QXmlQuery;
 import com.trolltech.qt.xmlpatterns.QXmlResultItems;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import timetabler.entities.*;
 import timetabler.exceptions.InvalidQueryException;

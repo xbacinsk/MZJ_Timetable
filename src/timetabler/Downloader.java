@@ -3,10 +3,8 @@ package timetabler;
 import com.trolltech.qt.QVariant;
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.QDialog;
-import com.trolltech.qt.network.QNetworkAccessManager;
-import com.trolltech.qt.network.QNetworkReply;
+import com.trolltech.qt.network.*;
 import com.trolltech.qt.network.QNetworkReply.NetworkError;
-import com.trolltech.qt.network.QNetworkRequest;
 import timetabler.dialogs.LoginDialog;
 import timetabler.exceptions.MissingLoginException;
 
@@ -63,7 +61,12 @@ public class Downloader extends QObject {
         url.setPassword(pass);
         file.close();
 
-        reply = qnam.get(new QNetworkRequest(url));
+        QNetworkRequest nr = new QNetworkRequest(url);
+        QSslConfiguration sslConf = nr.sslConfiguration();
+        sslConf.setPeerVerifyMode(QSslSocket.PeerVerifyMode.VerifyNone);
+        nr.setSslConfiguration(sslConf);
+        
+        reply = qnam.get(nr);
         reply.finished.connect(this, "loaded()");
     }
 
