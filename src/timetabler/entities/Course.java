@@ -29,12 +29,12 @@ public class Course extends QListWidgetItem {
     private String code;
     private String name;
     private BigInteger id;
-    private List<Lecture> lectures;
-    private List<Seminar> seminars;
+    private List<Lecture> lectures = new ArrayList<Lecture>();
+    private List<Seminar> seminars = new ArrayList<Seminar>();
     public final Signal1<Course> optionsChanged = new Signal1<Course>();
     public final Signal1<Course> removeLectureRequest = new Signal1<Course>();
     public final Signal1<Seminar> removeSeminarRequest = new Signal1<Seminar>();
-    public final Signal1<Seminar> chooseSeminar = new Signal1<Seminar>();
+    public final Signal1<Seminar> chooseSeminarRequest = new Signal1<Seminar>();
     
     public Course(String code, String name, BigInteger id) {
         this.code = code;
@@ -149,7 +149,7 @@ public class Course extends QListWidgetItem {
     }
     
     public void chooseSeminar(Seminar seminar){
-        chooseSeminar.emit(seminar);
+        chooseSeminarRequest.emit(seminar);
     }
     
     @Override

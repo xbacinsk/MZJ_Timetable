@@ -29,10 +29,10 @@ public class Timetabler extends QMainWindow {
         ui.actionExport_to_HTML_XML.triggered.connect(this, "exportToXml()");
         ui.actionExit.triggered.connect(QApplication.instance(), "quit()");
 
-        ui.listWidget.itemClicked.connect(this, "courseClicked(QListWidgetItem)");
+        ui.listWidget.currentItemChanged.connect(this, "courseClicked(QListWidgetItem, QListWidgetItem)");
         ui.listWidget.itemDoubleClicked.connect(this, "courseDoubleClicked(QListWidgetItem)");
 
-        ui.checkBox.stateChanged.connect(this, "hideLecturesCheckBoxClicked(Integer)");        
+        ui.checkBox.stateChanged.connect(this, "hideLecturesCheckBoxClicked(Integer)");
     }
 
     public void weekendGUI(boolean b) {
@@ -44,16 +44,22 @@ public class Timetabler extends QMainWindow {
 
     }
 
-    public void courseClicked(QListWidgetItem item) {
-        Course course = (Course) item;        
-        if (course.getSeminars() != null){
-            for (Seminar seminar : course.getSeminars()){            
+    public void courseClicked(QListWidgetItem item1, QListWidgetItem item2) {
+        Course current = (Course) item1;
+        Course previous = (Course) item2;
+        
+        if(choosingMode)
+            hideSeminars(previous);            
+        
+        if (current.getSeminars() != null) {
+            for (Seminar seminar : current.getSeminars()) {
                 seminar.setStyleSheet("background-color: rgba(255, 31, 2, 128);\n" + "border-color: rgb(0, 0, 0);");
-                seminar.setVisible(true);                
+                seminar.setVisible(true);
             }
-            System.out.println("courseClicked: " + course);
-            choosingMode = true;
         }
+        
+        System.out.println("courseClicked: " + current);
+        choosingMode = true;
     }
 
     public void courseDoubleClicked(QListWidgetItem item) {
@@ -73,22 +79,27 @@ public class Timetabler extends QMainWindow {
     }
 
     public void removeSeminar(Seminar seminar) {
-        if (!choosingMode)
-        seminar.setVisible(false);
+        if (!choosingMode) {
+            seminar.setVisible(false);
+        }
     }
-    
-    public void chooseSeminar(Seminar seminar){
+
+    private void hideSeminars(Course course) {
+        for (Seminar sem : course.getSeminars()) {
+            sem.setStyleSheet("background-color: rgb(149, 236, 174);\n");
+            sem.setVisible(false);
+        }
+    }
+
+    public void chooseSeminar(Seminar seminar) {
         System.out.println("Vybran seminar: " + seminar.toString());
-        if (choosingMode){
-            for (Seminar sem : seminar.getCourse().getSeminars()){
-                sem.setStyleSheet("background-color: rgb(149, 236, 174);\n");
-                sem.setVisible(false);
-            }
+        if (choosingMode) {
+            hideSeminars(seminar.getCourse());
             seminar.setVisible(true);
         }
-        
+
         System.out.println("Vybran seminar: " + seminar.toString());
-        choosingMode = false;        
+        choosingMode = false;
     }
 
     public void hideLecturesCheckBoxClicked(Integer n) {
@@ -100,21 +111,22 @@ public class Timetabler extends QMainWindow {
             } else {
                 settings.setValue(course.getCode() + "/lecture", true);
             }
-            
+
             updateCourseOptions(course);
         }
-    }    
-   
+    }
+
     public void loadCourses() {
-        for (Course course : inputContainer) { 
+        for (Course course : inputContainer) {
             ui.listWidget.addItem(course);
             course.optionsChanged.connect(this, "updateCourseOptions(Course)");
             course.removeLectureRequest.connect(this, "removeLecture(Course)");
             course.removeSeminarRequest.connect(this, "removeSeminar(Seminar)");
-            
+            course.chooseSeminarRequest.connect(this, "chooseSeminar(Seminar)");
+
             System.out.println(course.getName());
-            
-            if (course.getLectures() != null) { 
+
+            if (course.getLectures() != null) {
                 for (Lecture lecture : course.getLectures()) {
                     Days day = lecture.getDay();
                     int lectureLength = lecture.getLength();
@@ -163,56 +175,56 @@ public class Timetabler extends QMainWindow {
                     lecture.setVisible(true);
                 }
             }
-            if (course.getSeminars() != null){
-                for (Seminar seminar : course.getSeminars()){
+            if (course.getSeminars() != null) {
+                for (Seminar seminar : course.getSeminars()) {
                     Days day = seminar.getDay();
-                        int seminarLength = seminar.getLength();
-                        /*
-                            * Tady by měla být funkce, která určí výšku lectureHeight
-                            * podle toho, jeslti se náhodou nepřekrývá s jiným
-                            * předmětem. 0 / 1 / 2 překryté 60 / 30 / 20 px
-                            *
-                            * Podle toho by mělo být i nastavené lectureY. 5 / 35 / 45
-                            * px
-                            *
-                            */
-                        int seminarHeight = 60;
-                        int seminarY = 5;
-                        int seminarX = seminar.getTimeFrom().secsTo(new QTime(7, 0)) / -60;
+                    int seminarLength = seminar.getLength();
+                    /*
+                     * Tady by měla být funkce, která určí výšku lectureHeight
+                     * podle toho, jeslti se náhodou nepřekrývá s jiným
+                     * předmětem. 0 / 1 / 2 překryté 60 / 30 / 20 px
+                     *
+                     * Podle toho by mělo být i nastavené lectureY. 5 / 35 / 45
+                     * px
+                     *
+                     */
+                    int seminarHeight = 60;
+                    int seminarY = 5;
+                    int seminarX = seminar.getTimeFrom().secsTo(new QTime(7, 0)) / -60;
 
-                        switch (day) {
-                            case MON:
-                                seminar.setParent(ui.mondayBox);
-                                break;
-                            case TUE:
-                                seminar.setParent(ui.tuesdayBox);
-                                break;
-                            case WED:
-                                seminar.setParent(ui.wednesdayBox);
-                                break;
-                            case THU:
-                                seminar.setParent(ui.thursdayBox);
-                                break;
-                            case FRI:
-                                seminar.setParent(ui.fridayBox);
-                                break;
-                            case SAT:
-                                seminar.setParent(ui.saturdayBox);
-                                break;
-                            case SUN:
-                                seminar.setParent(ui.sundayBox);
-                                break;
+                    switch (day) {
+                        case MON:
+                            seminar.setParent(ui.mondayBox);
+                            break;
+                        case TUE:
+                            seminar.setParent(ui.tuesdayBox);
+                            break;
+                        case WED:
+                            seminar.setParent(ui.wednesdayBox);
+                            break;
+                        case THU:
+                            seminar.setParent(ui.thursdayBox);
+                            break;
+                        case FRI:
+                            seminar.setParent(ui.fridayBox);
+                            break;
+                        case SAT:
+                            seminar.setParent(ui.saturdayBox);
+                            break;
+                        case SUN:
+                            seminar.setParent(ui.sundayBox);
+                            break;
 
-                        }
-                        seminar.setGeometry(seminarX, seminarY, seminarLength, seminarHeight);
-                        seminar.setText(seminar.getCourse().getCode());
-                        seminar.setStyleSheet("background-color: rgb(149, 236, 174);\n" + "border-color: rgb(0, 0, 0);");
-                        seminar.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
-                        seminar.setAlignment(Qt.AlignmentFlag.AlignCenter);
-                        seminar.setVisible(false);
+                    }
+                    seminar.setGeometry(seminarX, seminarY, seminarLength, seminarHeight);
+                    seminar.setText(seminar.getCourse().getCode());
+                    seminar.setStyleSheet("background-color: rgb(149, 236, 174);\n" + "border-color: rgb(0, 0, 0);");
+                    seminar.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
+                    seminar.setAlignment(Qt.AlignmentFlag.AlignCenter);
+                    seminar.setVisible(false);
                 }
             }
-        }  
+        }
     }
 
     public Ui_MainWindow getUi() {
@@ -261,7 +273,7 @@ public class Timetabler extends QMainWindow {
         loadCourses();
         initializeGUI(this);
     }
-    
+
     public void exportToXml() {
         Exporter exp = new Exporter(inputContainer);
         exp.writeXML();
