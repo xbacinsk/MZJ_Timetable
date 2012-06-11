@@ -149,5 +149,27 @@ public class Course extends QListWidgetItem {
     public String toString() {
         return "Course{" + "code=" + code + ", name=" + name + ", id=" + id + ", lecture= [" + lectures + "], seminar= [" + seminars + "] }";
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Course other = (Course) obj;
+        if ((this.code == null) ? (other.code != null) : !this.code.equals(other.code)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + (this.code != null ? this.code.hashCode() : 0);
+        return hash;
+    }
     
 }

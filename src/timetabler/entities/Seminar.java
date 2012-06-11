@@ -121,4 +121,43 @@ public class Seminar extends QLabel {
     public String toString() {
         return "Seminar{" + "teacher=" + teacher + ", day=" + day + ", timeFrom=" + timeFrom + ", timeTo=" + timeTo + ", rooms=" + rooms + ", groupNum=" + groupNum + ", tooltip=" + toolTip() + '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Seminar other = (Seminar) obj;
+        if (this.teacher != other.teacher && (this.teacher == null || !this.teacher.equals(other.teacher))) {
+            return false;
+        }
+        if (this.day != other.day) {
+            return false;
+        }
+        if (this.timeFrom != other.timeFrom && (this.timeFrom == null || !this.timeFrom.equals(other.timeFrom))) {
+            return false;
+        }
+        if (this.timeTo != other.timeTo && (this.timeTo == null || !this.timeTo.equals(other.timeTo))) {
+            return false;
+        }
+        if (this.groupNum != other.groupNum) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + (this.teacher != null ? this.teacher.hashCode() : 0);
+        hash = 97 * hash + (this.day != null ? this.day.hashCode() : 0);
+        hash = 97 * hash + (this.timeFrom != null ? this.timeFrom.hashCode() : 0);
+        hash = 97 * hash + (this.timeTo != null ? this.timeTo.hashCode() : 0);
+        hash = 97 * hash + this.groupNum;
+        return hash;
+    }
+    
 }

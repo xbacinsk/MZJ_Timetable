@@ -65,6 +65,11 @@ public class Timetabler extends QMainWindow {
     }
 
     public void removeSeminar(Seminar seminar) {
+        for (Course course : outputContainer) {
+            if (course.getId() == seminar.getCourse().getId()){
+                course.getSeminars().remove(seminar);
+            }
+        }
     }
 
     public void hideLecturesCheckBoxClicked(Integer n) {

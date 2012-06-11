@@ -111,4 +111,38 @@ public class Lecture extends QLabel {
         return "Lecture{" + "teacher=" + teacher + ", day=" + day + ", timeFrom=" + timeFrom + ", timeTo=" + timeTo + ", rooms=" + rooms + ", tooltip=" + toolTip() + '}';
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Lecture other = (Lecture) obj;
+        if (this.teacher != other.teacher && (this.teacher == null || !this.teacher.equals(other.teacher))) {
+            return false;
+        }
+        if (this.day != other.day) {
+            return false;
+        }
+        if (this.timeFrom != other.timeFrom && (this.timeFrom == null || !this.timeFrom.equals(other.timeFrom))) {
+            return false;
+        }
+        if (this.timeTo != other.timeTo && (this.timeTo == null || !this.timeTo.equals(other.timeTo))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + (this.teacher != null ? this.teacher.hashCode() : 0);
+        hash = 97 * hash + (this.day != null ? this.day.hashCode() : 0);
+        hash = 97 * hash + (this.timeFrom != null ? this.timeFrom.hashCode() : 0);
+        hash = 97 * hash + (this.timeTo != null ? this.timeTo.hashCode() : 0);
+        return hash;
+    }
+
 }
