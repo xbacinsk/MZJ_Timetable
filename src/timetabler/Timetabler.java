@@ -55,6 +55,8 @@ public class Timetabler extends QMainWindow {
             for (Seminar seminar : current.getSeminars()) {
                 seminar.setStyleSheet("background-color: rgba(255, 31, 2, 128);\n" + "border-color: rgb(0, 0, 0);");
                 seminar.setVisible(true);
+                //tu sa nemaju zobrazovat vsetky ale ma to brat ohlad na tie filtre!!!...filtre tam byt musia lebo to mame v popise projektu v ISe!!
+                //pokial je uz nejaky seminar vybraty a ty kliknes znova na ten predmet tak aby ten vybraty semkinar zostal vybraty
             }
         }
         
