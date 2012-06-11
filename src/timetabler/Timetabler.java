@@ -38,12 +38,6 @@ public class Timetabler extends QMainWindow {
     }
 
     public void initializeGUI(Timetabler tt) {
-
-//        ui.label_46.hide();
-//        ui.label_48.hide();
-//        ui.saturdayBox.hide();
-//        ui.sundayBox.hide();
-
         weekendGUI(false);
 
     }
@@ -92,8 +86,11 @@ public class Timetabler extends QMainWindow {
             course.optionsChanged.connect(this, "updateCourseOptions(Course)");
             course.removeLectureRequest.connect(this, "removeLecture(Course)");
             course.removeSeminarRequest.connect(this, "removeSeminar(Seminar)");
-
-            if (course.getLectures() != null) {
+            
+            outputContainer.add(new Course(course.getCode(), course.getName(), course.getId()));
+            outputContainer.get(outputContainer.size()-1).setLectures(course.getLectures());
+            
+            if (course.getLectures() != null) {                
                 for (Lecture lecture : course.getLectures()) {
                     Days day = lecture.getDay();
                     int lectureLength = lecture.getLength();
@@ -141,11 +138,14 @@ public class Timetabler extends QMainWindow {
                     lecture.setAlignment(Qt.AlignmentFlag.AlignCenter);
                     lecture.show();
 
-                    System.out.println(lecture.getCourse().getCode() + " " + lectureX + " " + lectureLength);
-
+//                    System.out.println(lecture.getCourse().getCode() + " " + lectureX + " " + lectureLength);
+                     
                 }
             }
-        }
+        }        
+//        System.out.println();
+//        System.out.println();
+//        System.out.println(outputContainer.toString());
     }
 
     public Ui_MainWindow getUi() {
