@@ -25,6 +25,7 @@ public class Timetabler extends QMainWindow {
 
         ui.actionOpen_time_table_from_IS.triggered.connect(this, "loadXmlFromIs()");
         ui.actionOpen_time_table_from_PC.triggered.connect(this, "loadXmlFromFile()");
+        ui.actionExport_to_HTML_XML.triggered.connect(this, "exportToXml()");
         ui.actionExit.triggered.connect(QApplication.instance(), "quit()");
 
         ui.listWidget.itemClicked.connect(this, "courseClicked(QListWidgetItem)");
@@ -196,5 +197,10 @@ public class Timetabler extends QMainWindow {
         inputContainer.addAll(courses);
         loadCourses();
         initializeGUI(this);
+    }
+    
+    public void exportToXml() {
+        Exporter exp = new Exporter(inputContainer);
+        exp.writeXML();
     }
 }
