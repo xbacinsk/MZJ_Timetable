@@ -85,6 +85,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
 
     public Ui_MainWindow() { super(); }
     
+    @Override
     public void setupUi(QMainWindow MainWindow)
     {
         MainWindow.setObjectName("MainWindow");

@@ -2,8 +2,10 @@ package timetabler.entities;
 
 import com.trolltech.qt.QVariant;
 import com.trolltech.qt.core.QSettings;
+import com.trolltech.qt.core.Qt;
 import com.trolltech.qt.gui.QDialog;
 import com.trolltech.qt.gui.QListWidgetItem;
+import com.trolltech.qt.gui.QMouseEvent;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -144,7 +146,7 @@ public class Course extends QListWidgetItem {
     public void removeSeminar(Seminar seminar){
         removeSeminarRequest.emit(seminar);
     }
-
+    
     @Override
     public String toString() {
         return "Course{" + "code=" + code + ", name=" + name + ", id=" + id + ", lecture= [" + lectures + "], seminar= [" + seminars + "] }";

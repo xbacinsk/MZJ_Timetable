@@ -45,6 +45,55 @@ public class Timetabler extends QMainWindow {
 
     public void courseClicked(QListWidgetItem item) {
         Course course = (Course) item;
+        
+        if (course.getSeminars() != null)
+        for (Seminar seminar : course.getSeminars()){
+            Days day = seminar.getDay();
+                int seminarLength = seminar.getLength();
+                /*
+                    * Tady by měla být funkce, která určí výšku lectureHeight
+                    * podle toho, jeslti se náhodou nepřekrývá s jiným
+                    * předmětem. 0 / 1 / 2 překryté 60 / 30 / 20 px
+                    *
+                    * Podle toho by mělo být i nastavené lectureY. 5 / 35 / 45
+                    * px
+                    *
+                    */
+                int seminarHeight = 60;
+                int seminarY = 5;
+                int seminarX = seminar.getTimeFrom().secsTo(new QTime(7, 0)) / -60;
+
+                switch (day) {
+                    case MON:
+                        seminar.setParent(ui.mondayBox);
+                        break;
+                    case TUE:
+                        seminar.setParent(ui.tuesdayBox);
+                        break;
+                    case WED:
+                        seminar.setParent(ui.wednesdayBox);
+                        break;
+                    case THU:
+                        seminar.setParent(ui.thursdayBox);
+                        break;
+                    case FRI:
+                        seminar.setParent(ui.fridayBox);
+                        break;
+                    case SAT:
+                        seminar.setParent(ui.saturdayBox);
+                        break;
+                    case SUN:
+                        seminar.setParent(ui.sundayBox);
+                        break;
+
+                }
+                seminar.setGeometry(seminarX, seminarY, seminarLength, seminarHeight);
+                seminar.setText(seminar.getCourse().getCode());
+                seminar.setStyleSheet("background-color: rgb(108, 220, 100);\n" + "border-color: rgb(0, 0, 0);");
+                seminar.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
+                seminar.setAlignment(Qt.AlignmentFlag.AlignCenter);
+                seminar.show();
+        }
         System.out.println("courseClicked: " + course);
     }
 
@@ -70,6 +119,11 @@ public class Timetabler extends QMainWindow {
                 course.getSeminars().remove(seminar);
             }
         }
+    }
+    
+    public void chooseSeminar(Seminar seminar){
+        seminar.requestRemoval.connect(seminar, "chooseSeminar()");
+        System.out.println("Vybran seminar: " + seminar.toString());
     }
 
     public void hideLecturesCheckBoxClicked(Integer n) {

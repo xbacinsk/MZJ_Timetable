@@ -31,6 +31,7 @@ public class Seminar extends QLabel {
     
     public final Signal0 requestSettings = new Signal0();
     public final Signal1<Seminar> requestRemoval = new Signal1<Seminar>();
+    public final Signal1<Seminar> requestChoose = new Signal1<Seminar>();
 
     public Seminar(Teacher teacher,Days day, QTime timeFrom, QTime timeTo, List<Room> rooms, int groupNum, Course course) {
         this.teacher = teacher;
@@ -81,6 +82,10 @@ public class Seminar extends QLabel {
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
+    
+    public int getLength(){
+        return timeFrom.secsTo(timeTo) / 60;
+    }
 
     public QTime getTimeFrom() {
         return timeFrom;
@@ -114,6 +119,9 @@ public class Seminar extends QLabel {
     protected void mousePressEvent(QMouseEvent me) {
         if(me.button() == Qt.MouseButton.RightButton){
             requestRemoval.emit(this);
+        }
+        if(me.button() == Qt.MouseButton.LeftButton){
+            requestChoose.emit(this);
         }
     }
 
