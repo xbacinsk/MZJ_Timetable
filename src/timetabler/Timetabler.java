@@ -18,7 +18,7 @@ public class Timetabler extends QMainWindow {
 
     private Ui_MainWindow ui = new Ui_MainWindow();
     private List<Course> inputContainer = new ArrayList<Course>();
-    private List<Course> outputContainer = new ArrayList<Course>();
+//    private List<Course> outputContainer = new ArrayList<Course>();
 
     public Timetabler() {
         ui.setupUi(this);
@@ -44,55 +44,11 @@ public class Timetabler extends QMainWindow {
     }
 
     public void courseClicked(QListWidgetItem item) {
-        Course course = (Course) item;
-        
+        Course course = (Course) item;        
         if (course.getSeminars() != null)
-        for (Seminar seminar : course.getSeminars()){
-            Days day = seminar.getDay();
-                int seminarLength = seminar.getLength();
-                /*
-                    * Tady by měla být funkce, která určí výšku lectureHeight
-                    * podle toho, jeslti se náhodou nepřekrývá s jiným
-                    * předmětem. 0 / 1 / 2 překryté 60 / 30 / 20 px
-                    *
-                    * Podle toho by mělo být i nastavené lectureY. 5 / 35 / 45
-                    * px
-                    *
-                    */
-                int seminarHeight = 60;
-                int seminarY = 5;
-                int seminarX = seminar.getTimeFrom().secsTo(new QTime(7, 0)) / -60;
-
-                switch (day) {
-                    case MON:
-                        seminar.setParent(ui.mondayBox);
-                        break;
-                    case TUE:
-                        seminar.setParent(ui.tuesdayBox);
-                        break;
-                    case WED:
-                        seminar.setParent(ui.wednesdayBox);
-                        break;
-                    case THU:
-                        seminar.setParent(ui.thursdayBox);
-                        break;
-                    case FRI:
-                        seminar.setParent(ui.fridayBox);
-                        break;
-                    case SAT:
-                        seminar.setParent(ui.saturdayBox);
-                        break;
-                    case SUN:
-                        seminar.setParent(ui.sundayBox);
-                        break;
-
-                }
-                seminar.setGeometry(seminarX, seminarY, seminarLength, seminarHeight);
-                seminar.setText(seminar.getCourse().getCode());
-                seminar.setStyleSheet("background-color: rgb(108, 220, 100);\n" + "border-color: rgb(0, 0, 0);");
-                seminar.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
-                seminar.setAlignment(Qt.AlignmentFlag.AlignCenter);
-                seminar.show();
+        for (Seminar seminar : course.getSeminars()){            
+            seminar.setVisible(true);
+                
         }
         System.out.println("courseClicked: " + course);
     }
@@ -114,15 +70,17 @@ public class Timetabler extends QMainWindow {
     }
 
     public void removeSeminar(Seminar seminar) {
-        for (Course course : outputContainer) {
-            if (course.getId() == seminar.getCourse().getId()){
-                course.getSeminars().remove(seminar);
-            }
-        }
+        seminar.setVisible(false);
     }
     
     public void chooseSeminar(Seminar seminar){
-        seminar.requestRemoval.connect(seminar, "chooseSeminar()");
+        seminar.requestChoose.connect(seminar, "chooseSeminar()");
+        Course pom = seminar.getCourse();
+//        for (Seminar seminar : pom.getSeminars()){            
+//            seminar.setVisible(true);
+//                
+//        }
+        seminar.setStyleSheet("background-color: rgba(255, 31, 2, 128);\n" + "border-color: rgb(0, 0, 0);");
         System.out.println("Vybran seminar: " + seminar.toString());
     }
 
@@ -141,16 +99,13 @@ public class Timetabler extends QMainWindow {
     }    
    
     public void loadCourses() {
-        for (Course course : inputContainer) {
-            ui.listWidget.addItem(course);
-            course.optionsChanged.connect(this, "updateCourseOptions(Course)");
-            course.removeLectureRequest.connect(this, "removeLecture(Course)");
-            course.removeSeminarRequest.connect(this, "removeSeminar(Seminar)");
-            
-            outputContainer.add(new Course(course.getCode(), course.getName(), course.getId()));
-            outputContainer.get(outputContainer.size()-1).setLectures(course.getLectures());
-            
-            if (course.getLectures() != null) {                
+        for (Course course : inputContainer) { 
+            if (course.getLectures() != null) { 
+                ui.listWidget.addItem(course);
+                course.optionsChanged.connect(this, "updateCourseOptions(Course)");
+                course.removeLectureRequest.connect(this, "removeLecture(Course)");
+                course.removeSeminarRequest.connect(this, "removeSeminar(Seminar)");
+                
                 for (Lecture lecture : course.getLectures()) {
                     Days day = lecture.getDay();
                     int lectureLength = lecture.getLength();
@@ -197,15 +152,57 @@ public class Timetabler extends QMainWindow {
                     lecture.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
                     lecture.setAlignment(Qt.AlignmentFlag.AlignCenter);
                     lecture.show();
-
-//                    System.out.println(lecture.getCourse().getCode() + " " + lectureX + " " + lectureLength);
-                     
                 }
             }
-        }        
-//        System.out.println();
-//        System.out.println();
-//        System.out.println(outputContainer.toString());
+            if (course.getSeminars() != null)
+            for (Seminar seminar : course.getSeminars()){
+                Days day = seminar.getDay();
+                    int seminarLength = seminar.getLength();
+                    /*
+                        * Tady by měla být funkce, která určí výšku lectureHeight
+                        * podle toho, jeslti se náhodou nepřekrývá s jiným
+                        * předmětem. 0 / 1 / 2 překryté 60 / 30 / 20 px
+                        *
+                        * Podle toho by mělo být i nastavené lectureY. 5 / 35 / 45
+                        * px
+                        *
+                        */
+                    int seminarHeight = 60;
+                    int seminarY = 5;
+                    int seminarX = seminar.getTimeFrom().secsTo(new QTime(7, 0)) / -60;
+
+                    switch (day) {
+                        case MON:
+                            seminar.setParent(ui.mondayBox);
+                            break;
+                        case TUE:
+                            seminar.setParent(ui.tuesdayBox);
+                            break;
+                        case WED:
+                            seminar.setParent(ui.wednesdayBox);
+                            break;
+                        case THU:
+                            seminar.setParent(ui.thursdayBox);
+                            break;
+                        case FRI:
+                            seminar.setParent(ui.fridayBox);
+                            break;
+                        case SAT:
+                            seminar.setParent(ui.saturdayBox);
+                            break;
+                        case SUN:
+                            seminar.setParent(ui.sundayBox);
+                            break;
+
+                    }
+                    seminar.setGeometry(seminarX, seminarY, seminarLength, seminarHeight);
+                    seminar.setText(seminar.getCourse().getCode());
+                    seminar.setStyleSheet("background-color: rgb(149, 236, 174);\n" + "border-color: rgb(0, 0, 0);");
+                    seminar.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
+                    seminar.setAlignment(Qt.AlignmentFlag.AlignCenter);
+                    seminar.setVisible(false);
+            }
+        }  
     }
 
     public Ui_MainWindow getUi() {
@@ -250,9 +247,6 @@ public class Timetabler extends QMainWindow {
          * sem prichadzaju data z parsera...kod je len na otestovanie treba ho
          * zmenit!!..ale to asi vidit :D
          */
-//        for(Course course : courses){
-//            System.out.println(course.toString());
-//        }
         inputContainer.addAll(courses);
         loadCourses();
         initializeGUI(this);
