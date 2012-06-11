@@ -46,13 +46,14 @@ public class Timetabler extends QMainWindow {
 
     public void courseClicked(QListWidgetItem item) {
         Course course = (Course) item;        
-        choosingMode = true;
-        if (course.getSeminars() != null)
-        for (Seminar seminar : course.getSeminars()){            
-            seminar.setStyleSheet("background-color: rgba(255, 31, 2, 128);\n" + "border-color: rgb(0, 0, 0);");
-            seminar.setVisible(true);                
+        if (course.getSeminars() != null){
+            for (Seminar seminar : course.getSeminars()){            
+                seminar.setStyleSheet("background-color: rgba(255, 31, 2, 128);\n" + "border-color: rgb(0, 0, 0);");
+                seminar.setVisible(true);                
+            }
+            System.out.println("courseClicked: " + course);
+            choosingMode = true;
         }
-        System.out.println("courseClicked: " + course);
     }
 
     public void courseDoubleClicked(QListWidgetItem item) {
@@ -77,13 +78,17 @@ public class Timetabler extends QMainWindow {
     }
     
     public void chooseSeminar(Seminar seminar){
-        seminar.requestChoose.connect(seminar, "chooseSeminar()");
-        
-        for (Seminar sem : seminar.getCourse().getSeminars()){            
-                        
+        System.out.println("Vybran seminar: " + seminar.toString());
+        if (choosingMode){
+            for (Seminar sem : seminar.getCourse().getSeminars()){
+                sem.setStyleSheet("background-color: rgb(149, 236, 174);\n");
+                sem.setVisible(false);
+            }
+            seminar.setVisible(true);
         }
         
         System.out.println("Vybran seminar: " + seminar.toString());
+        choosingMode = false;        
     }
 
     public void hideLecturesCheckBoxClicked(Integer n) {
@@ -102,12 +107,14 @@ public class Timetabler extends QMainWindow {
    
     public void loadCourses() {
         for (Course course : inputContainer) { 
+            ui.listWidget.addItem(course);
+            course.optionsChanged.connect(this, "updateCourseOptions(Course)");
+            course.removeLectureRequest.connect(this, "removeLecture(Course)");
+            course.removeSeminarRequest.connect(this, "removeSeminar(Seminar)");
+            
+            System.out.println(course.getName());
+            
             if (course.getLectures() != null) { 
-                ui.listWidget.addItem(course);
-                course.optionsChanged.connect(this, "updateCourseOptions(Course)");
-                course.removeLectureRequest.connect(this, "removeLecture(Course)");
-                course.removeSeminarRequest.connect(this, "removeSeminar(Seminar)");
-                
                 for (Lecture lecture : course.getLectures()) {
                     Days day = lecture.getDay();
                     int lectureLength = lecture.getLength();
@@ -156,53 +163,54 @@ public class Timetabler extends QMainWindow {
                     lecture.setVisible(true);
                 }
             }
-            if (course.getSeminars() != null)
-            for (Seminar seminar : course.getSeminars()){
-                Days day = seminar.getDay();
-                    int seminarLength = seminar.getLength();
-                    /*
-                        * Tady by měla být funkce, která určí výšku lectureHeight
-                        * podle toho, jeslti se náhodou nepřekrývá s jiným
-                        * předmětem. 0 / 1 / 2 překryté 60 / 30 / 20 px
-                        *
-                        * Podle toho by mělo být i nastavené lectureY. 5 / 35 / 45
-                        * px
-                        *
-                        */
-                    int seminarHeight = 60;
-                    int seminarY = 5;
-                    int seminarX = seminar.getTimeFrom().secsTo(new QTime(7, 0)) / -60;
+            if (course.getSeminars() != null){
+                for (Seminar seminar : course.getSeminars()){
+                    Days day = seminar.getDay();
+                        int seminarLength = seminar.getLength();
+                        /*
+                            * Tady by měla být funkce, která určí výšku lectureHeight
+                            * podle toho, jeslti se náhodou nepřekrývá s jiným
+                            * předmětem. 0 / 1 / 2 překryté 60 / 30 / 20 px
+                            *
+                            * Podle toho by mělo být i nastavené lectureY. 5 / 35 / 45
+                            * px
+                            *
+                            */
+                        int seminarHeight = 60;
+                        int seminarY = 5;
+                        int seminarX = seminar.getTimeFrom().secsTo(new QTime(7, 0)) / -60;
 
-                    switch (day) {
-                        case MON:
-                            seminar.setParent(ui.mondayBox);
-                            break;
-                        case TUE:
-                            seminar.setParent(ui.tuesdayBox);
-                            break;
-                        case WED:
-                            seminar.setParent(ui.wednesdayBox);
-                            break;
-                        case THU:
-                            seminar.setParent(ui.thursdayBox);
-                            break;
-                        case FRI:
-                            seminar.setParent(ui.fridayBox);
-                            break;
-                        case SAT:
-                            seminar.setParent(ui.saturdayBox);
-                            break;
-                        case SUN:
-                            seminar.setParent(ui.sundayBox);
-                            break;
+                        switch (day) {
+                            case MON:
+                                seminar.setParent(ui.mondayBox);
+                                break;
+                            case TUE:
+                                seminar.setParent(ui.tuesdayBox);
+                                break;
+                            case WED:
+                                seminar.setParent(ui.wednesdayBox);
+                                break;
+                            case THU:
+                                seminar.setParent(ui.thursdayBox);
+                                break;
+                            case FRI:
+                                seminar.setParent(ui.fridayBox);
+                                break;
+                            case SAT:
+                                seminar.setParent(ui.saturdayBox);
+                                break;
+                            case SUN:
+                                seminar.setParent(ui.sundayBox);
+                                break;
 
-                    }
-                    seminar.setGeometry(seminarX, seminarY, seminarLength, seminarHeight);
-                    seminar.setText(seminar.getCourse().getCode());
-                    seminar.setStyleSheet("background-color: rgb(149, 236, 174);\n" + "border-color: rgb(0, 0, 0);");
-                    seminar.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
-                    seminar.setAlignment(Qt.AlignmentFlag.AlignCenter);
-                    seminar.setVisible(false);
+                        }
+                        seminar.setGeometry(seminarX, seminarY, seminarLength, seminarHeight);
+                        seminar.setText(seminar.getCourse().getCode());
+                        seminar.setStyleSheet("background-color: rgb(149, 236, 174);\n" + "border-color: rgb(0, 0, 0);");
+                        seminar.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
+                        seminar.setAlignment(Qt.AlignmentFlag.AlignCenter);
+                        seminar.setVisible(false);
+                }
             }
         }  
     }
