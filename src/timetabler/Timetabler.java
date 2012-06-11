@@ -18,6 +18,7 @@ public class Timetabler extends QMainWindow {
 
     private Ui_MainWindow ui = new Ui_MainWindow();
     private List<Course> inputContainer = new ArrayList<Course>();
+    private boolean choosingMode = false;
 //    private List<Course> outputContainer = new ArrayList<Course>();
 
     public Timetabler() {
@@ -45,10 +46,11 @@ public class Timetabler extends QMainWindow {
 
     public void courseClicked(QListWidgetItem item) {
         Course course = (Course) item;        
+        choosingMode = true;
         if (course.getSeminars() != null)
         for (Seminar seminar : course.getSeminars()){            
-            seminar.setVisible(true);
-                
+            seminar.setStyleSheet("background-color: rgba(255, 31, 2, 128);\n" + "border-color: rgb(0, 0, 0);");
+            seminar.setVisible(true);                
         }
         System.out.println("courseClicked: " + course);
     }
@@ -70,17 +72,17 @@ public class Timetabler extends QMainWindow {
     }
 
     public void removeSeminar(Seminar seminar) {
+        if (!choosingMode)
         seminar.setVisible(false);
     }
     
     public void chooseSeminar(Seminar seminar){
         seminar.requestChoose.connect(seminar, "chooseSeminar()");
-        Course pom = seminar.getCourse();
-//        for (Seminar seminar : pom.getSeminars()){            
-//            seminar.setVisible(true);
-//                
-//        }
-        seminar.setStyleSheet("background-color: rgba(255, 31, 2, 128);\n" + "border-color: rgb(0, 0, 0);");
+        
+        for (Seminar sem : seminar.getCourse().getSeminars()){            
+                        
+        }
+        
         System.out.println("Vybran seminar: " + seminar.toString());
     }
 
@@ -151,7 +153,7 @@ public class Timetabler extends QMainWindow {
                     lecture.setStyleSheet("background-color: rgb(108, 220, 100);\n" + "border-color: rgb(0, 0, 0);");
                     lecture.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
                     lecture.setAlignment(Qt.AlignmentFlag.AlignCenter);
-                    lecture.show();
+                    lecture.setVisible(true);
                 }
             }
             if (course.getSeminars() != null)
