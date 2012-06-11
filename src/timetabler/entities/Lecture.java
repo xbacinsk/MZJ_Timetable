@@ -22,6 +22,7 @@ public class Lecture extends QLabel {
     private QTime timeTo;
     private List<Room> rooms;
     private Course course;
+    private int position;
     
     public final Signal0 requestSettings = new Signal0();
     public final Signal0 requestRemoval = new Signal0();
@@ -87,6 +88,13 @@ public class Lecture extends QLabel {
         this.timeTo = timeTo;
     }
 
+    public int getPosition(){
+        return this.position;
+    }
+    
+    public void setPosition(int position){
+        this.position = position;
+    }
     /**
      * Executes on mouse double-click
      *

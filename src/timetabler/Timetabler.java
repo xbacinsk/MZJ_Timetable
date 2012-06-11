@@ -29,10 +29,10 @@ public class Timetabler extends QMainWindow {
         ui.actionExport_to_HTML_XML.triggered.connect(this, "exportToXml()");
         ui.actionExit.triggered.connect(QApplication.instance(), "quit()");
 
-        ui.listWidget.currentItemChanged.connect(this, "courseClicked(QListWidgetItem, QListWidgetItem)");
+        ui.listWidget.itemClicked.connect(this, "courseClicked(QListWidgetItem)");
         ui.listWidget.itemDoubleClicked.connect(this, "courseDoubleClicked(QListWidgetItem)");
 
-        ui.checkBox.stateChanged.connect(this, "hideLecturesCheckBoxClicked(Integer)");
+        ui.checkBox.stateChanged.connect(this, "hideLecturesCheckBoxClicked(Integer)");        
     }
 
     public void weekendGUI(boolean b) {
@@ -44,24 +44,19 @@ public class Timetabler extends QMainWindow {
 
     }
 
-    public void courseClicked(QListWidgetItem item1, QListWidgetItem item2) {
-        Course current = (Course) item1;
-        Course previous = (Course) item2;
-        
-        if(choosingMode)
-            hideSeminars(previous);            
-        
-        if (current.getSeminars() != null) {
-            for (Seminar seminar : current.getSeminars()) {
+    public void courseClicked(QListWidgetItem item) {
+        Course course = (Course) item;        
+        if (course.getSeminars() != null){
+            for (Seminar seminar : course.getSeminars()){            
                 seminar.setStyleSheet("background-color: rgba(255, 31, 2, 128);\n" + "border-color: rgb(0, 0, 0);");
-                seminar.setVisible(true);
-                //tu sa nemaju zobrazovat vsetky ale ma to brat ohlad na tie filtre!!!...filtre tam byt musia lebo to mame v popise projektu v ISe!!
-                //pokial je uz nejaky seminar vybraty a ty kliknes znova na ten predmet tak aby ten vybraty semkinar zostal vybraty
+                seminar.setVisible(true);     
+                 //tu sa nemaju zobrazovat vsetky ale ma to brat ohlad na tie filtre!!!...filtre tam byt musia lebo to mame v popise projektu v ISe!!
+                 //pokial je uz nejaky seminar vybraty a ty kliknes znova na ten predmet tak aby ten vybraty semkinar zostal vybraty
+                 // redraw items in collision when showing up new item!
             }
+            System.out.println("courseClicked: " + course);
+            choosingMode = true;
         }
-        
-        System.out.println("courseClicked: " + current);
-        choosingMode = true;
     }
 
     public void courseDoubleClicked(QListWidgetItem item) {
@@ -81,27 +76,22 @@ public class Timetabler extends QMainWindow {
     }
 
     public void removeSeminar(Seminar seminar) {
-        if (!choosingMode) {
-            seminar.setVisible(false);
-        }
+        if (!choosingMode)
+        seminar.setVisible(false);
     }
-
-    private void hideSeminars(Course course) {
-        for (Seminar sem : course.getSeminars()) {
-            sem.setStyleSheet("background-color: rgb(149, 236, 174);\n");
-            sem.setVisible(false);
-        }
-    }
-
-    public void chooseSeminar(Seminar seminar) {
+    
+    public void chooseSeminar(Seminar seminar){
         System.out.println("Vybran seminar: " + seminar.toString());
-        if (choosingMode) {
-            hideSeminars(seminar.getCourse());
+        if (choosingMode){
+            for (Seminar sem : seminar.getCourse().getSeminars()){
+                sem.setStyleSheet("background-color: rgb(149, 236, 174);\n");
+                sem.setVisible(false);
+            }
             seminar.setVisible(true);
         }
-
+        
         System.out.println("Vybran seminar: " + seminar.toString());
-        choosingMode = false;
+        choosingMode = false;        
     }
 
     public void hideLecturesCheckBoxClicked(Integer n) {
@@ -113,22 +103,25 @@ public class Timetabler extends QMainWindow {
             } else {
                 settings.setValue(course.getCode() + "/lecture", true);
             }
-
+            
             updateCourseOptions(course);
         }
-    }
-
+    }    
+   
     public void loadCourses() {
-        for (Course course : inputContainer) {
+        Collisions cls = new Collisions();
+        List<Lecture> lec = new ArrayList<Lecture>();
+        List<Seminar> sem = new ArrayList<Seminar>();
+        
+        for (Course course : inputContainer) { 
             ui.listWidget.addItem(course);
             course.optionsChanged.connect(this, "updateCourseOptions(Course)");
             course.removeLectureRequest.connect(this, "removeLecture(Course)");
             course.removeSeminarRequest.connect(this, "removeSeminar(Seminar)");
-            course.chooseSeminarRequest.connect(this, "chooseSeminar(Seminar)");
-
+            
             System.out.println(course.getName());
-
-            if (course.getLectures() != null) {
+            
+            if (course.getLectures() != null) { 
                 for (Lecture lecture : course.getLectures()) {
                     Days day = lecture.getDay();
                     int lectureLength = lecture.getLength();
@@ -141,8 +134,51 @@ public class Timetabler extends QMainWindow {
                      * px
                      *
                      */
-                    int lectureHeight = 60;
-                    int lectureY = 5;
+                    int max=0;
+                    int lectureY=0;
+                    int lectureHeight=0;
+                    
+                    lec = cls.Lecturedetection(lecture, inputContainer);
+                    sem = cls.Seminardetection(lecture, inputContainer);
+                    
+                    if(lec.isEmpty() && sem.isEmpty()){
+                        lectureHeight = 60;
+                        lectureY = 5;
+                        lecture.setPosition(1);
+                    }
+                    else if(lec.isEmpty() && !sem.isEmpty()){
+                        for(Seminar s : sem){
+                            if(s.isVisible() && max < s.getPosition())
+                                max = s.getPosition();
+                        }
+                        max++;
+                        lectureY = cls.gui_y(max);
+                        lectureHeight = cls.gui_height(max);
+                        lecture.setPosition(max);
+                    }else if(!lec.isEmpty() && sem.isEmpty()){
+                        for(Lecture s : lec){
+                            if(max < s.getPosition())
+                                max = s.getPosition();
+                        }
+                        max++;
+                        lectureY = cls.gui_y(max);
+                        lectureHeight = cls.gui_height(max);
+                        lecture.setPosition(max);
+                    }else if(!lec.isEmpty() && !sem.isEmpty()){
+                        for(Lecture s : lec){
+                            if(max < s.getPosition())
+                                max = s.getPosition();
+                        }
+                        for(Seminar s : sem){
+                            if(s.isVisible() && max < s.getPosition())
+                                max = s.getPosition();
+                        }
+                        max++;
+                        lectureY = cls.gui_y(max);
+                        lectureHeight = cls.gui_height(max);
+                        lecture.setPosition(max);                       
+                    }
+                   
                     int lectureX = lecture.getTimeFrom().secsTo(new QTime(7, 0)) / -60;
 
                     switch (day) {
@@ -177,56 +213,97 @@ public class Timetabler extends QMainWindow {
                     lecture.setVisible(true);
                 }
             }
-            if (course.getSeminars() != null) {
-                for (Seminar seminar : course.getSeminars()) {
+            if (course.getSeminars() != null){
+                for (Seminar seminar : course.getSeminars()){
                     Days day = seminar.getDay();
-                    int seminarLength = seminar.getLength();
-                    /*
-                     * Tady by měla být funkce, která určí výšku lectureHeight
-                     * podle toho, jeslti se náhodou nepřekrývá s jiným
-                     * předmětem. 0 / 1 / 2 překryté 60 / 30 / 20 px
-                     *
-                     * Podle toho by mělo být i nastavené lectureY. 5 / 35 / 45
-                     * px
-                     *
-                     */
+                        int seminarLength = seminar.getLength();
+                        /*
+                            * Tady by měla být funkce, která určí výšku lectureHeight
+                            * podle toho, jeslti se náhodou nepřekrývá s jiným
+                            * předmětem. 0 / 1 / 2 překryté 60 / 30 / 20 px
+                            *
+                            * Podle toho by mělo být i nastavené lectureY. 5 / 35 / 45
+                            * px
+                            *
+                            */
                     int seminarHeight = 60;
                     int seminarY = 5;
-                    int seminarX = seminar.getTimeFrom().secsTo(new QTime(7, 0)) / -60;
-
-                    switch (day) {
-                        case MON:
-                            seminar.setParent(ui.mondayBox);
-                            break;
-                        case TUE:
-                            seminar.setParent(ui.tuesdayBox);
-                            break;
-                        case WED:
-                            seminar.setParent(ui.wednesdayBox);
-                            break;
-                        case THU:
-                            seminar.setParent(ui.thursdayBox);
-                            break;
-                        case FRI:
-                            seminar.setParent(ui.fridayBox);
-                            break;
-                        case SAT:
-                            seminar.setParent(ui.saturdayBox);
-                            break;
-                        case SUN:
-                            seminar.setParent(ui.sundayBox);
-                            break;
-
+                    int max=0;
+                    lec = cls.Lecturedetection(seminar, inputContainer);
+                    sem = cls.Seminardetection(seminar, inputContainer);
+                    
+                    if(lec.isEmpty() && sem.isEmpty()){
+                        seminarHeight = 60;
+                        seminarY = 5;
+                        seminar.setPosition(1);
                     }
-                    seminar.setGeometry(seminarX, seminarY, seminarLength, seminarHeight);
-                    seminar.setText(seminar.getCourse().getCode());
-                    seminar.setStyleSheet("background-color: rgb(149, 236, 174);\n" + "border-color: rgb(0, 0, 0);");
-                    seminar.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
-                    seminar.setAlignment(Qt.AlignmentFlag.AlignCenter);
-                    seminar.setVisible(false);
+                    else if(lec.isEmpty() && !sem.isEmpty()){
+                        for(Seminar s : sem){
+                            if(max < s.getPosition())
+                                max = s.getPosition();
+                        }
+                        max++;
+                        seminarHeight = cls.gui_height(max);
+                        seminarY = cls.gui_y(max);
+                        seminar.setPosition(max);
+                    }else if(!lec.isEmpty() && sem.isEmpty()){
+                        for(Lecture s : lec){
+                            if(max < s.getPosition())
+                                max = s.getPosition();
+                        }
+                        max++;
+                        seminarHeight = cls.gui_height(max);
+                        seminarY = cls.gui_y(max);
+                        seminar.setPosition(max);
+                    }else if(!lec.isEmpty() && !sem.isEmpty()){
+                        for(Lecture s : lec){
+                            if(max < s.getPosition())
+                                max = s.getPosition();
+                        }
+                        for(Seminar s : sem){
+                            if(max < s.getPosition())
+                                max = s.getPosition();
+                        }
+                        max++;
+                        seminarHeight = cls.gui_height(max);
+                        seminarY = cls.gui_y(max);
+                        seminar.setPosition(max);                    
+                    }
+                        int seminarX = seminar.getTimeFrom().secsTo(new QTime(7, 0)) / -60; 
+                        
+                        switch (day) {
+                            case MON:
+                                seminar.setParent(ui.mondayBox);
+                                break;
+                            case TUE:
+                                seminar.setParent(ui.tuesdayBox);
+                                break;
+                            case WED:
+                                seminar.setParent(ui.wednesdayBox);
+                                break;
+                            case THU:
+                                seminar.setParent(ui.thursdayBox);
+                                break;
+                            case FRI:
+                                seminar.setParent(ui.fridayBox);
+                                break;
+                            case SAT:
+                                seminar.setParent(ui.saturdayBox);
+                                break;
+                            case SUN:
+                                seminar.setParent(ui.sundayBox);
+                                break;
+
+                        }
+                        seminar.setGeometry(seminarX, seminarY, seminarLength, seminarHeight);
+                        seminar.setText(seminar.getCourse().getCode());
+                        seminar.setStyleSheet("background-color: rgb(149, 236, 174);\n" + "border-color: rgb(0, 0, 0);");
+                        seminar.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
+                        seminar.setAlignment(Qt.AlignmentFlag.AlignCenter);
+                        seminar.setVisible(false);
                 }
             }
-        }
+        }  
     }
 
     public Ui_MainWindow getUi() {
@@ -275,7 +352,7 @@ public class Timetabler extends QMainWindow {
         loadCourses();
         initializeGUI(this);
     }
-
+    
     public void exportToXml() {
         Exporter exp = new Exporter(inputContainer);
         exp.writeXML();
