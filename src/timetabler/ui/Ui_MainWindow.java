@@ -18,6 +18,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
     public QAction actionExport_to_HTML_XML;
     public QAction actionExit;
     public QAction actionAbout_Timetabler;
+    public QAction actionClearLoginData;
     public QWidget centralwidget;
     public QLabel label;
     public QListWidget listWidget;
@@ -105,6 +106,8 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         actionExport_to_HTML_XML.setObjectName("actionExport_to_HTML_XML");
         actionExit = new QAction(MainWindow);
         actionExit.setObjectName("actionExit");
+        actionClearLoginData = new QAction(MainWindow);
+        actionClearLoginData.setObjectName("actionClearLoginData");
         actionAbout_Timetabler = new QAction(MainWindow);
         actionAbout_Timetabler.setObjectName("actionAbout_Timetabler");
         centralwidget = new QWidget(MainWindow);
@@ -586,6 +589,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         menubar.addAction(menuHelp.menuAction());
         menuFile.addAction(actionOpen_time_table_from_PC);
         menuFile.addAction(actionOpen_time_table_from_IS);
+        menuFile.addAction(actionClearLoginData);
         menuFile.addSeparator();
         menuFile.addAction(actionExport_to_HTML_XML);
         menuFile.addSeparator();
@@ -603,6 +607,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         actionOpen_time_table_from_IS.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Open file from IS", null));
         actionExport_to_HTML_XML.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Export to HTML/XML", null));
         actionExit.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Exit", null));
+        actionClearLoginData.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Clear login data", null));
         actionAbout_Timetabler.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "About Timetabler", null));
         label.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "List of courses", null));
         listWidget.clear();
