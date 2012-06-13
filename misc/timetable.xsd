@@ -110,7 +110,6 @@
                         <xs:sequence>
                             <xs:element name="note" type="oneAttributeType" minOccurs="0" maxOccurs="unbounded"/>
                         </xs:sequence>
-                        <xs:attribute name="num" type="xs:positiveInteger" use="required"/>
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>

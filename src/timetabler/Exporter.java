@@ -3,9 +3,10 @@ package timetabler;
 import com.trolltech.qt.QVariant;
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.QDialog;
-import com.trolltech.qt.xml.*;
-import java.math.BigInteger;
-import java.util.ArrayList;
+import com.trolltech.qt.xml.QDomDocument;
+import com.trolltech.qt.xml.QDomElement;
+import com.trolltech.qt.xml.QDomProcessingInstruction;
+import com.trolltech.qt.xml.QDomText;
 import java.util.List;
 import timetabler.dialogs.ExportDialog;
 import timetabler.entities.*;
@@ -101,43 +102,44 @@ public class Exporter extends QObject {
             hourE.setAttribute("diff", diff);
 
             hourE.setAttribute("pdiff", pdiff);
-//            hourE.setAttribute("diff", diff);
 
             hourE.appendChild(doc.createTextNode(time.addSecs(3600 * i).toString("hh:mm")));
 
             hoursE.appendChild(hourE);
         }
+        
+        QDomElement notesE = doc.createElement("notes");
+        int numNotes = 0;
 
         // creates element "days"
         QDomElement daysE = doc.createElement("days");
         rootElement.appendChild(daysE);
-
+        rootElement.appendChild(notesE);
 
         for (int d = 0; d < 7; d++) {
             if (CourseInDay(Days.values()[d])) {
                 QDomElement dayE = doc.createElement("day");
 
                 dayE.setAttribute("id", "" + Days.values()[d]);
-                dayE.setAttribute("rows", 1);   // max num z kolizi - prepsat ked bude priznak
+                dayE.setAttribute("rows", maxPosition(d));   // max num z kolizi
 
-                for (int r = 1; r <= 1; r++) {   //pocet kolizi - radku
+                for (int r = 1; r <= maxPosition(d); r++) {   //pocet kolizi - radku
                     QDomElement rowE = doc.createElement("row");
                     rowE.setAttribute("num", r);
-
-
+                    
                     QTime endTime = minTime();
                     for (int i = 0; i < dif; i++) {
-
                         for (Course course : courses) {
+                            
                             if (course.getLectureVisibility() && (course.getLectures() != null)) {
-                                for (Lecture lecture : course.getLectures()) {                                    
+                                for (Lecture lecture : course.getLectures()) {
+                                    
                                     if (lecture.getTimeFrom().equals(time.addSecs(3600 * i))) {
-                                        //(cislokolize==r)
-                                        if ((lecture.getDay() == Days.values()[d])) {
-
+                                        if ((lecture.getPosition() == r) && (lecture.getDay() == Days.values()[d])) {
                                             if (!lecture.getTimeFrom().equals(endTime)) {
-                                                QDomElement breakCellE = doc.createElement("cell");
                                                 
+                                                QDomElement breakCellE = doc.createElement("cell");
+
                                                 int diff = (lecture.getTimeFrom().hour() * 60 + lecture.getTimeFrom().minute()) - (endTime.hour() * 60 + endTime.minute());
 
                                                 breakCellE.setAttribute("diff", dif * diff / 60);
@@ -212,81 +214,100 @@ public class Exporter extends QObject {
                             }
 
 
-                            /*
-                             * if(course.getSeminars() != null) for (Seminar
-                             * seminar : course.getSeminars()) {
-                             * //(cislokolize==r) if ((seminar.getDay() ==
-                             * Days.values()[d])) {
-                             *
-                             * QDomElement breakCellE =
-                             * doc.createElement("cell");
-                             * breakCellE.setAttribute("pdiff", 12);
-                             * breakCellE.setAttribute("diff", 10); QDomElement
-                             * breakE = doc.createElement("break");
-                             * breakCellE.appendChild(breakE);
-                             * rowE.appendChild(breakCellE);
-                             *
-                             *
-                             * QDomElement cellE = doc.createElement("cell");
-                             * cellE.setAttribute("pdiff", 12);
-                             * cellE.setAttribute("diff", 10);
-                             *
-                             *
-                             *
-                             * QDomElement courseE =
-                             * doc.createElement("course");
-                             *
-                             * if(QVariant.toBoolean(settings.value("export/color")))
-                             * { String color = "d9f5d5";
-                             * courseE.setAttribute("color", color); }
-                             *
-                             * // course id (for URL to course page in IS)
-                             * QDomElement courseidE =
-                             * doc.createElement("courseid"); QDomText courseidT
-                             * = doc.createTextNode("" + course.getId());
-                             * courseidE.appendChild(courseidT);
-                             * courseE.appendChild(courseidE);
-                             *
-                             * // course code QDomElement codeE =
-                             * doc.createElement("code"); String code =
-                             * course.getCode(); code = code + "/" +
-                             * seminar.getGroupNum();
-                             * codeE.appendChild(doc.createTextNode(code));
-                             * courseE.appendChild(codeE);
-                             *
-                             * // course name QDomElement nameE =
-                             * doc.createElement("name");
-                             * nameE.appendChild(doc.createTextNode(course.getName()));
-                             * courseE.appendChild(nameE);
-                             *
-                             * // lecture teacher QDomElement teacherE =
-                             * doc.createElement("teacher");
-                             * teacherE.appendChild(doc.createTextNode(seminar.getTeacher().getName()));
-                             *
-                             * // if user wants URL to Person page in IS if
-                             * (QVariant.toBoolean(settings.value("export/teacher")))
-                             * { teacherE.setAttribute("id", "" +
-                             * seminar.getTeacher().getTeacherId()); }
-                             * courseE.appendChild(teacherE);
-                             *
-                             * // list of rooms, where the course is taught
-                             * QDomElement roomsE = doc.createElement("rooms");
-                             * for (Room room : seminar.getRooms()) {
-                             * QDomElement roomE = doc.createElement("room");
-                             * roomE.appendChild(doc.createTextNode(room.getName()));
-                             *
-                             * // if user wants URL to Room page in IS if
-                             * (QVariant.toBoolean(settings.value("export/room")))
-                             * { roomE.setAttribute("id", "" +
-                             * room.getRoomId()); } roomsE.appendChild(roomE); }
-                             * courseE.appendChild(roomsE);
-                             * cellE.appendChild(courseE);
-                             *
-                             * rowE.appendChild(cellE); } }
-                             */
+                            if (course.getSeminars() != null) {
+                                for (Seminar seminar : course.getSeminars()) {
+                                    if(seminar.isVisible())
+                                    if (seminar.getTimeFrom().equals(time.addSecs(3600 * i))) {
 
+                                        if ((seminar.getPosition() == r) && (seminar.getDay() == Days.values()[d])) {
+
+                                                if (!seminar.getTimeFrom().equals(endTime)) {
+                                                    
+                                                    QDomElement breakCellE = doc.createElement("cell");
+
+                                                    int diff = (seminar.getTimeFrom().hour() * 60 + seminar.getTimeFrom().minute()) - (endTime.hour() * 60 + endTime.minute());
+
+                                                    breakCellE.setAttribute("diff", dif * diff / 60);
+                                                    breakCellE.setAttribute("pdiff", Math.round(dif * diff / 100));
+
+                                                    QDomElement breakE = doc.createElement("break");
+                                                    breakCellE.appendChild(breakE);
+                                                    rowE.appendChild(breakCellE);
+                                                }
+
+                                                QDomElement cellE = doc.createElement("cell");
+                                                int diff = (seminar.getTimeTo().hour() * 60 + seminar.getTimeTo().minute()) - (seminar.getTimeFrom().hour() * 60 + seminar.getTimeFrom().minute());
+
+                                                cellE.setAttribute("diff", dif * diff / 60);
+                                                cellE.setAttribute("pdiff", Math.round(dif * diff / 100));
+
+                                                QDomElement courseE = doc.createElement("course");
+                                                
+                                                if(seminar.toolTip() != null && !"".equals(seminar.toolTip())) {
+                                                    numNotes++;
+                                                    courseE.setAttribute("note", numNotes);
+                                                    QDomElement noteE = doc.createElement("note");
+                                                    noteE.setAttribute("id", numNotes);
+                                                    noteE.appendChild(doc.createTextNode(seminar.toolTip()));
+                                                    notesE.appendChild(noteE);
+                                                }
+
+                                                if (QVariant.toBoolean(settings.value("export/color"))) {
+                                                    String color = "d9f5d5";
+                                                    courseE.setAttribute("color", color);
+                                                }
+                                                
+
+                                                // course id (for URL to course page in IS)
+                                                QDomElement courseidE = doc.createElement("courseid");
+                                                QDomText courseidT = doc.createTextNode("" + course.getId());
+                                                courseidE.appendChild(courseidT);
+                                                courseE.appendChild(courseidE);
+
+                                                // course code
+                                                QDomElement codeE = doc.createElement("code");
+                                                String code = course.getCode() + "/" + seminar.getGroupNum();
+                                                codeE.appendChild(doc.createTextNode(code));
+                                                courseE.appendChild(codeE);
+
+                                                // course name
+                                                QDomElement nameE = doc.createElement("name");
+                                                nameE.appendChild(doc.createTextNode(course.getName()));
+                                                courseE.appendChild(nameE);
+
+                                                // lecture teacher
+                                                QDomElement teacherE = doc.createElement("teacher");
+                                                teacherE.appendChild(doc.createTextNode(seminar.getTeacher().getName()));
+
+                                                // if user wants URL to Person page in IS
+                                                if (QVariant.toBoolean(settings.value("export/teacher"))) {
+                                                    teacherE.setAttribute("id", "" + seminar.getTeacher().getTeacherId());
+                                                }
+                                                courseE.appendChild(teacherE);
+
+                                                // list of rooms, where the course is taught
+                                                QDomElement roomsE = doc.createElement("rooms");
+                                                for (Room room : seminar.getRooms()) {
+                                                    QDomElement roomE = doc.createElement("room");
+                                                    roomE.appendChild(doc.createTextNode(room.getName()));
+
+                                                    // if user wants URL to Room page in IS
+                                                    if (QVariant.toBoolean(settings.value("export/room"))) {
+                                                        roomE.setAttribute("id", "" + room.getRoomId());
+                                                    }
+                                                    roomsE.appendChild(roomE);
+                                                }
+                                                courseE.appendChild(roomsE);
+                                                cellE.appendChild(courseE);
+
+                                                rowE.appendChild(cellE);
+
+                                                endTime = seminar.getTimeTo();
+                                        }
+                                    }
+                                }
+                            }
                             dayE.appendChild(rowE);
-
                         }
                     }
 
@@ -302,8 +323,6 @@ public class Exporter extends QObject {
                         breakCellE.appendChild(breakE);
                         rowE.appendChild(breakCellE);
                     }
-
-
                 }
                 daysE.appendChild(dayE);
             }
@@ -405,5 +424,38 @@ public class Exporter extends QObject {
             }
         }
         return false;
+    }
+
+    private int maxPosition(int day) {
+        int max = 0;
+
+        for (Course course : courses) {
+
+            if (course.getLectureVisibility()) {
+                if (course.getLectures() != null) {
+                    for (Lecture lecture : course.getLectures()) {
+                        if (lecture.getDay() == Days.values()[day]) {
+                            int tmp = lecture.getPosition();
+                            if (tmp > max) {
+                                max = tmp;
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (course.getSeminars() != null) {
+                for (Seminar seminar : course.getSeminars()) {
+                    if(seminar.isVisible())
+                    if (seminar.getDay() == Days.values()[day]) {
+                        int tmp = seminar.getPosition();
+                        if (tmp > max) {
+                            max = tmp;
+                        }
+                    }
+                }
+            }
+        }
+        return max;
     }
 }

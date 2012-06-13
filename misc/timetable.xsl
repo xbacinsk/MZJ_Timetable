@@ -14,8 +14,10 @@
                     <TABLE WIDTH="100%" CELLSPACING="0" CELLPADDING="2" border="1" BGCOLOR="{hours/@bgcolor}">
                         <xsl:apply-templates select="hours"/>
                         <xsl:apply-templates select="days/day"/>
-                
                     </TABLE>
+                    <P>
+                    <xsl:apply-templates select="notes/note"/>
+                    </P>
                 </div>
             </body>
         </html>
@@ -61,7 +63,6 @@
                 <xsl:attribute name="WIDTH">
                     <xsl:value-of select="@pdiff"/>%
                 </xsl:attribute>
-                <div>
                     <FONT SIZE="-2">
                         <xsl:apply-templates select="course/rooms/room"/>
                     </FONT>
@@ -83,7 +84,13 @@
                         </xsl:if>
                         <xsl:value-of select="course/teacher"/>
                     </a>
-                </div>
+                <xsl:if test="course/@note">&#160;
+                    <FONT COLOR="red">
+                        <SUP>
+                            <xsl:value-of select="course/@note"/>
+                        </SUP>
+                    </FONT>
+                </xsl:if>
             </TD>
         </xsl:if>
     </xsl:template>
@@ -98,4 +105,9 @@
         </a>&#160;
         <xsl:value-of select="course/rooms/room"/>
     </xsl:template>
+    
+    <xsl:template match="notes/note">
+            <SUP><xsl:value-of select="@id"/></SUP><xsl:value-of select="."/><BR/>
+    </xsl:template>
+        
 </xsl:stylesheet>

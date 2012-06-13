@@ -60,6 +60,6 @@ public class Teacher {
 
     @Override
     public String toString() {
-        return "Teacher{" + "name=" + name + ", teacherId=" + teacherId + '}';
+        return name;
     }
 }
