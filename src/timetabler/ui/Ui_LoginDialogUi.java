@@ -90,7 +90,7 @@ public class Ui_LoginDialogUi implements com.trolltech.qt.QUiForm<QDialog>
 
     void retranslateUi(QDialog LoginDialogUi)
     {
-        LoginDialogUi.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("LoginDialogUi", "Dialog", null));
+        LoginDialogUi.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("LoginDialogUi", "IS Login", null));
         ucoLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("LoginDialogUi", "UCO:", null));
         passLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("LoginDialogUi", "Password:", null));
     } // retranslateUi
