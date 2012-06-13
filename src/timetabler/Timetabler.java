@@ -127,8 +127,10 @@ public class Timetabler extends QMainWindow {
         for (Course course : inputContainer) {
             if (n == Qt.CheckState.Checked.value()) {
                 settings.setValue(course.getCode() + "/lecture", false);
+                for (Lecture lecture : course.getLectures()) lecture.setVisible(false);
             } else {
                 settings.setValue(course.getCode() + "/lecture", true);
+                for (Lecture lecture : course.getLectures()) lecture.setVisible(true);
             }
 
             updateCourseOptions(course);
