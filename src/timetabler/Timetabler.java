@@ -49,6 +49,24 @@ public class Timetabler extends QMainWindow {
         QSettings settings = new QSettings();
         settings.remove("login/uco");
         settings.remove("login/pass");
+        
+        for (Course course : inputContainer){
+            for (Lecture lecture : course.getLectures()) {
+                lecture.setVisible(false);
+                lecture.clear();
+            }
+            for (Seminar seminar : course.getSeminars()) {
+                seminar.setVisible(false);
+                seminar.clear();
+            }
+        }
+        inputContainer.removeAll(inputContainer);
+        
+        ui.listWidget.clear();
+        ui.actionOpen_time_table_from_IS.setEnabled(true);
+        ui.actionOpen_time_table_from_PC.setEnabled(true);        
+        
+//        System.out.println("Vymazano.");        
     }
 
     public void courseClicked(QListWidgetItem item) {
@@ -61,7 +79,7 @@ public class Timetabler extends QMainWindow {
                 //pokial je uz nejaky seminar vybraty a ty kliknes znova na ten predmet tak aby ten vybraty semkinar zostal vybraty
                 // redraw items in collision when showing up new item!
             }
-            System.out.println("courseClicked: " + course);
+//            System.out.println("courseClicked: " + course);
             choosingMode = true;
         }
     }
@@ -97,8 +115,6 @@ public class Timetabler extends QMainWindow {
             }
             seminar.setVisible(true);
         }
-
-        System.out.println("Vybran seminar: " + seminar.toString());
         choosingMode = false;
     }
 
@@ -117,6 +133,9 @@ public class Timetabler extends QMainWindow {
     }
 
     public void loadCourses() {
+        ui.actionOpen_time_table_from_IS.setEnabled(false);
+        ui.actionOpen_time_table_from_PC.setEnabled(false);
+
         Collisions cls = new Collisions();
         List<Lecture> lec = new ArrayList<Lecture>();
         List<Seminar> sem = new ArrayList<Seminar>();
@@ -127,21 +146,21 @@ public class Timetabler extends QMainWindow {
             course.removeLectureRequest.connect(this, "removeLecture(Course)");
             course.removeSeminarRequest.connect(this, "removeSeminar(Seminar)");
 
-            System.out.println(course.getName());
+//            System.out.println(course.getName());
 
             if (course.getLectures() != null) {
                 for (Lecture lecture : course.getLectures()) {
                     Days day = lecture.getDay();
                     int lectureLength = lecture.getLength();
                     /*
-                     * Tady by měla být funkce, která určí výšku lectureHeight
-                     * podle toho, jeslti se náhodou nepřekrývá s jiným
-                     * předmětem. 0 / 1 / 2 překryté 60 / 30 / 20 px
-                     *
-                     * Podle toho by mělo být i nastavené lectureY. 5 / 35 / 45
-                     * px
-                     *
-                     */
+                    * Tady by měla být funkce, která určí výšku lectureHeight
+                    * podle toho, jeslti se náhodou nepřekrývá s jiným
+                    * předmětem. 0 / 1 / 2 překryté 60 / 30 / 20 px
+                    *
+                    * Podle toho by mělo být i nastavené lectureY. 5 / 35 / 45
+                    * px
+                    *
+                    */
                     int max = 0;
                     int lectureY = 0;
                     int lectureHeight = 0;
@@ -216,8 +235,20 @@ public class Timetabler extends QMainWindow {
                             break;
 
                     }
+                    
+                    switch (lecture.getPosition()) {
+                        case 1: 
+                            lecture.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+"p, li { white-space: pre-wrap; }\n"+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">"+ lecture.getCourse().getCode() +"</span></p>\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">" + lecture.getCourse().getTeachers().get(0) + "</span></p>\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:7pt; text-decoration: underline;\">" + lecture.getRooms() + "</span></p></body></html>", null));
+                            break;
+                        case 2: 
+                            lecture.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+"p, li { white-space: pre-wrap; }\n"+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">"+ lecture.getCourse().getCode() +"</span></p>\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">" + lecture.getCourse().getTeachers().get(0) + "</span></p></body></html>", null));
+                            break;
+                        case 3: 
+                            lecture.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+"p, li { white-space: pre-wrap; }\n"+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">"+ lecture.getCourse().getCode() +"</span></p></body></html>", null));
+                            break;
+                    }
+                    
                     lecture.setGeometry(lectureX, lectureY, lectureLength, lectureHeight);
-                    lecture.setText(lecture.getCourse().getCode());
                     lecture.setStyleSheet("background-color: rgb(108, 220, 100);\n" + "border-color: rgb(0, 0, 0);");
                     lecture.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
                     lecture.setAlignment(Qt.AlignmentFlag.AlignCenter);
@@ -229,14 +260,14 @@ public class Timetabler extends QMainWindow {
                     Days day = seminar.getDay();
                     int seminarLength = seminar.getLength();
                     /*
-                     * Tady by měla být funkce, která určí výšku lectureHeight
-                     * podle toho, jeslti se náhodou nepřekrývá s jiným
-                     * předmětem. 0 / 1 / 2 překryté 60 / 30 / 20 px
-                     *
-                     * Podle toho by mělo být i nastavené lectureY. 5 / 35 / 45
-                     * px
-                     *
-                     */
+                    * Tady by měla být funkce, která určí výšku lectureHeight
+                    * podle toho, jeslti se náhodou nepřekrývá s jiným
+                    * předmětem. 0 / 1 / 2 překryté 60 / 30 / 20 px
+                    *
+                    * Podle toho by mělo být i nastavené lectureY. 5 / 35 / 45
+                    * px
+                    *
+                    */
                     int seminarHeight = 60;
                     int seminarY = 5;
                     int max = 0;
@@ -310,7 +341,17 @@ public class Timetabler extends QMainWindow {
 
                     }
                     seminar.setGeometry(seminarX, seminarY, seminarLength, seminarHeight);
-                    seminar.setText(seminar.getCourse().getCode());
+                    switch (seminar.getPosition()) {
+                        case 1: 
+                            seminar.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+"p, li { white-space: pre-wrap; }\n"+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">"+ seminar.getCourse().getCode() +"</span></p>\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">" + seminar.getGroupNum() + "</span></p>\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">Tulajova</span></p>\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:7pt; text-decoration: underline;\">" + seminar.getRooms() + "</span></p></body></html>", null));
+                            break;
+                        case 2: 
+                            seminar.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+"p, li { white-space: pre-wrap; }\n"+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">"+ seminar.getCourse().getCode() +"</span></p>\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">" + seminar.getCourse().getTeachers().get(0) + "</span></p></body></html>", null));
+                            break;
+                        case 3: 
+                            seminar.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+"p, li { white-space: pre-wrap; }\n"+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">"+ seminar.getCourse().getCode() +"</span></p></body></html>", null));
+                            break;
+                    }
                     seminar.setStyleSheet("background-color: rgb(149, 236, 174);\n" + "border-color: rgb(0, 0, 0);");
                     seminar.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
                     seminar.setAlignment(Qt.AlignmentFlag.AlignCenter);
