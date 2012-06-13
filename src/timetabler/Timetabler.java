@@ -75,8 +75,9 @@ public class Timetabler extends QMainWindow {
         Course course = (Course) item;
         if (course.getSeminars() != null && choosingMode != true && !course.isSeminarChosen()) {
             for (Seminar seminar : course.getSeminars()) {
-                seminar.setStyleSheet("background-color: rgba(255, 31, 2, 128);\n" + "border-color: rgb(0, 0, 0);");
+                seminar.setStyleSheet("background-color: rgba(248, 136, 121, 216);\n" + "border-color: rgb(0, 0, 0);");
                 seminar.setVisible(true);
+                seminar.raise();
                 // tu sa nemaju zobrazovat vsetky ale ma to brat ohlad na tie filtre!!!...filtre tam byt musia lebo to mame v popise projektu v ISe!!
                 // pokial je uz nejaky seminar vybraty a ty kliknes znova na ten predmet tak aby ten vybraty semkinar zostal vybraty
                 // redraw items in collision when showing up new item!
@@ -92,7 +93,7 @@ public class Timetabler extends QMainWindow {
     }
 
     public void updateCourseOptions(Course course) {
-        System.out.println("updateCourseOptions: " + course);
+//        System.out.println("updateCourseOptions: " + course);
     }
 
     public void removeLecture(Course course) {
