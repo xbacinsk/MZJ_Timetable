@@ -28,7 +28,8 @@ public class Course extends QListWidgetItem {
 
     private String code;
     private String name;
-    private BigInteger id;
+    private BigInteger id;    
+    private boolean seminarChosen = false;
     private List<Lecture> lectures = new ArrayList<Lecture>();
     private List<Seminar> seminars = new ArrayList<Seminar>();
     public final Signal1<Course> optionsChanged = new Signal1<Course>();
@@ -127,6 +128,14 @@ public class Course extends QListWidgetItem {
         }
 
         return new ArrayList(teacherSet);
+    }
+
+    public boolean isSeminarChosen() {
+        return seminarChosen;
+    }
+
+    public void setSeminarChosen(boolean seminarChosen) {
+        this.seminarChosen = seminarChosen;
     }
 
     /**
