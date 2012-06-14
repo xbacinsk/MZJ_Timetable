@@ -73,18 +73,22 @@ public class Timetabler extends QMainWindow {
 
     public void courseClicked(QListWidgetItem item) {
         Course course = (Course) item;
+        QSettings settings = new QSettings();
+        
         if (course.getSeminars() != null && choosingMode != true && !course.isSeminarChosen()) {
             for (Seminar seminar : course.getSeminars()) {
-                seminar.setStyleSheet("background-color: rgba(248, 136, 121, 216);\n" + "border-color: rgb(0, 0, 0);");
-                seminar.setVisible(true);
-                seminar.raise();
-                // tu sa nemaju zobrazovat vsetky ale ma to brat ohlad na tie filtre!!!...filtre tam byt musia lebo to mame v popise projektu v ISe!!
-                // pokial je uz nejaky seminar vybraty a ty kliknes znova na ten predmet tak aby ten vybraty semkinar zostal vybraty
+                if (settings.value(course.getCode() + "/seminar", "").toString().equals("true")){
+                    seminar.setStyleSheet("background-color: rgba(248, 136, 121, 216);\n" + "border-color: rgb(0, 0, 0);");
+                    seminar.setVisible(true);
+                    seminar.raise();
                 // redraw items in collision when showing up new item!
+                }
             }
             course.setSeminarChosen(true);
             choosingMode = true;
         }
+        
+        settings.toString();
     }
 
     public void courseDoubleClicked(QListWidgetItem item) {
@@ -171,8 +175,8 @@ public class Timetabler extends QMainWindow {
         ui.actionOpen_time_table_from_PC.setEnabled(false);
 
         Collisions cls = new Collisions();
-        List<Lecture> lec = new ArrayList<Lecture>();
-        List<Seminar> sem = new ArrayList<Seminar>();
+        List<Lecture> lec;
+        List<Seminar> sem;
 
         for (Course course : inputContainer) {
             ui.listWidget.addItem(course);
@@ -436,8 +440,7 @@ public class Timetabler extends QMainWindow {
 
     public void xmlDataAvailable(List<Course> courses) {
         /**
-         * sem prichadzaju data z parsera...kod je len na otestovanie treba ho
-         * zmenit!!..ale to asi vidit :D
+         * sem prichadzaju data z parsera
          */
         inputContainer.addAll(courses);
         loadCourses();
