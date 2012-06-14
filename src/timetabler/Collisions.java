@@ -208,14 +208,17 @@ public class Collisions {
         return 2;
     }
     
-    public int gui_height(int i){
+    public int gui_height(int i,int b){
         int p=0;
         switch(i){
             case 1:
                 p=60;
                 break;
             case 2:
-                p=30;
+                if(b==3)
+                    p=20;
+                else
+                    p=30;
                 break;
             case 3:
                 p=20;
@@ -223,19 +226,22 @@ public class Collisions {
         }
         return p;
     }
-    public int gui_y(int i){
+    public int gui_y(int i,int b){
         int p=0;
         switch(i){
             case 1:
                 p=5;
                 break;
             case 2:
-                p=35;
+                if(b==3)
+                    p=25;
+                else
+                    p=35;
                 break;
             case 3:
                 p=45;
                 break;
-        }
+        }    
         return p;
     }
     
@@ -251,6 +257,6 @@ public class Collisions {
             if(ret)
                 break;
         }
-        return false;
+        return ret;
     }
 }
