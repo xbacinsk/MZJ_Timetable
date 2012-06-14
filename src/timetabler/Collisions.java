@@ -237,5 +237,20 @@ public class Collisions {
                 break;
         }
         return p;
-    }  
+    }
+    
+    public boolean weekend(Collection<Course> list){
+        boolean ret=false;
+        for(Course c : list){
+            for(Seminar s : c.getSeminars()){
+                if(s.getDay() == Days.SUN || s.getDay() == Days.SAT){
+                    ret = true;
+                    break;
+                }
+            }
+            if(ret)
+                break;
+        }
+        return false;
+    }
 }

@@ -83,8 +83,8 @@ public class Timetabler extends QMainWindow {
                 List<Seminar> sem = new ArrayList<Seminar>();
                 Collisions cls = new Collisions();
                 
-                    Days day = seminar.getDay();
-                    int seminarLength = seminar.getLength();                
+                Days day = seminar.getDay();
+                int seminarLength = seminar.getLength();                
                 
                 int seminarHeight = 60;
                 int seminarY = 5;
@@ -98,7 +98,7 @@ public class Timetabler extends QMainWindow {
                         seminar.setPosition(1);
                     } else if (lec.isEmpty() && !sem.isEmpty()) {
                         for (Seminar s : sem) {
-                            if (max < s.getPosition()) {
+                            if (s.isVisible() && max < s.getPosition()) {
                                 max = s.getPosition();
                             }
                         }
@@ -115,7 +115,7 @@ public class Timetabler extends QMainWindow {
                         seminar.setPosition(max);
                     } else if (!lec.isEmpty() && sem.isEmpty()) {
                         for (Lecture s : lec) {
-                            if (max < s.getPosition()) {
+                            if (s.isVisible() &&  max < s.getPosition()) {
                                 max = s.getPosition();
                             }
                         }
@@ -132,12 +132,12 @@ public class Timetabler extends QMainWindow {
                         seminar.setPosition(max);
                     } else if (!lec.isEmpty() && !sem.isEmpty()) {
                         for (Lecture s : lec) {
-                            if (max < s.getPosition()) {
+                            if (s.isVisible() &&  max < s.getPosition()) {
                                 max = s.getPosition();
                             }
                         }
                         for (Seminar s : sem) {
-                            if (max < s.getPosition()) {
+                            if (s.isVisible() &&  max < s.getPosition()) {
                                 max = s.getPosition();
                             }
                         }
@@ -241,14 +241,149 @@ public class Timetabler extends QMainWindow {
 
     public void hideLecturesCheckBoxClicked(Integer n) {
         QSettings settings = new QSettings();
-
+        
+        Collisions cls = new Collisions();
+        List<Lecture> lec = new ArrayList<Lecture>();
+        List<Seminar> sem = new ArrayList<Seminar>();
+        
         for (Course course : inputContainer) {
             if (n == Qt.CheckState.Checked.value()) {
                 settings.setValue(course.getCode() + "/lecture", false);
-                for (Lecture lecture : course.getLectures()) lecture.setVisible(false);
+                for (Lecture lecture : course.getLectures()){
+                    
+                    lecture.setVisible(false);
+                    lecture.setPosition(0);
+                    
+                    lec = cls.Lecturedetection(lecture, inputContainer);
+                    sem = cls.Seminardetection(lecture, inputContainer);
+                    int max = 0;
+                    int i=0;
+                    
+                    if(!sem.isEmpty()){
+                        for(Seminar s : sem){
+                            if(s.isVisible())
+                                max++;
+                        }
+                    }
+                    if(!lec.isEmpty()){
+                        for(Lecture s : lec){
+                            if(s.isVisible())
+                                max++;
+                        }
+                    }
+                    
+                    if (!sem.isEmpty()) {
+                        for (Seminar s : sem) {
+                            if(s.isVisible()){
+                                i++;
+                                s.setPosition(i);
+                                QRect test = s.geometry();
+                                test.setHeight(cls.gui_height(max));
+                                test.setY(cls.gui_y(s.getPosition()));
+                                s.setGeometry(test);
+                            }
+                        }
+                    } 
+                    if (!lec.isEmpty()) {
+                        for (Lecture s : lec) {                                                           
+                            if(s.isVisible()){
+                                i++;
+                                s.setPosition(i);
+                                QRect test = s.geometry();
+                                test.setHeight(cls.gui_height(max));
+                                test.setY(cls.gui_y(s.getPosition()));
+                                s.setGeometry(test);
+                            }
+                        }
+                    }
+                }
             } else {
                 settings.setValue(course.getCode() + "/lecture", true);
-                for (Lecture lecture : course.getLectures()) lecture.setVisible(true);
+                for (Lecture lecture : course.getLectures()){
+                    
+                    lec = cls.Lecturedetection(lecture, inputContainer);
+                    sem = cls.Seminardetection(lecture, inputContainer);
+                    int lectureLength = lecture.getLength();
+                    int lectureHeight = 60;
+                    int lectureY = 5;
+                    int max=0;
+
+                    if (lec.isEmpty() && sem.isEmpty()) {
+                        lectureHeight = 60;
+                        lectureY = 5;
+                        lecture.setPosition(1);
+                    } else if (lec.isEmpty() && !sem.isEmpty()) {
+                        for (Seminar s : sem) {
+                            if (max < s.getPosition()) {
+                                max = s.getPosition();
+                            }
+                        }
+                        max++;
+                        for (Seminar s : sem) {
+                            QRect test = s.geometry();
+                            test.setHeight(cls.gui_height(max));
+                            //System.out.println(s.getPosition());
+                            test.setY(cls.gui_y(s.getPosition()));
+                            s.setGeometry(test);
+                        }
+                        lectureY = cls.gui_y(max);
+                        lectureHeight = cls.gui_height(max);
+                        lecture.setPosition(max);
+                    } else if (!lec.isEmpty() && sem.isEmpty()) {
+                        for (Lecture s : lec) {
+                            if (max < s.getPosition()) {
+                                max = s.getPosition();
+                            }
+                        }
+                        max++;
+                        for (Lecture s : lec) {
+                            QRect test = s.geometry();
+                            test.setHeight(cls.gui_height(max));
+                            //System.out.println(s.getPosition());
+                            test.setY(cls.gui_y(s.getPosition()));
+                            s.setGeometry(test);
+                        }
+                        lectureY = cls.gui_y(max);
+                        lectureHeight = cls.gui_height(max);
+                        lecture.setPosition(max);
+                    } else if (!lec.isEmpty() && !sem.isEmpty()) {
+                        for (Lecture s : lec) {
+                            if (max < s.getPosition()) {
+                                max = s.getPosition();
+                            }
+                        }
+                        for (Seminar s : sem) {
+                            if (max < s.getPosition()) {
+                                max = s.getPosition();
+                            }
+                        }
+                        max++;
+                        for (Lecture s : lec) {
+                            QRect test = s.geometry();
+                            test.setHeight(cls.gui_height(max));
+                            //System.out.println(s.getPosition());
+                            test.setY(cls.gui_y(s.getPosition()));
+                            s.setGeometry(test);
+                        }
+                        for (Seminar s : sem) {
+                            QRect test = s.geometry();
+                            test.setHeight(cls.gui_height(max));
+                            //System.out.println(s.getPosition());
+                            test.setY(cls.gui_y(s.getPosition()));
+                            s.setGeometry(test);
+                        }
+                        lectureY = cls.gui_y(max);
+                        lectureHeight = cls.gui_height(max);
+                        lecture.setPosition(max);
+                    }
+                    int lectureX = lecture.getTimeFrom().secsTo(new QTime(7, 0)) / -60;
+                    
+                    QRect rect = new QRect(lectureX,lectureY,lectureLength,lectureHeight);
+                    lecture.setGeometry(rect);
+                    rect.dispose();
+                    
+                    lecture.setVisible(true);
+                }
             }
 
             updateCourseOptions(course);
@@ -286,7 +421,8 @@ public class Timetabler extends QMainWindow {
     public void loadCourses() {
         ui.actionOpen_time_table_from_IS.setEnabled(false);
         ui.actionOpen_time_table_from_PC.setEnabled(false);
-
+        
+        
         Collisions cls = new Collisions();
         List<Lecture> lec = new ArrayList<Lecture>();
         List<Seminar> sem = new ArrayList<Seminar>();
@@ -299,7 +435,7 @@ public class Timetabler extends QMainWindow {
 
 //            System.out.println(course.getName());
 
-            if (course.getLectures() != null) {
+        if (course.getLectures() != null) {
                 for (Lecture lecture : course.getLectures()) {
                     Days day = lecture.getDay();
                     int lectureLength = lecture.getLength();
@@ -425,20 +561,8 @@ public class Timetabler extends QMainWindow {
                 }
             }
             if (course.getSeminars() != null) {
-                for (Seminar seminar : course.getSeminars()) {
-                    
+                for (Seminar seminar : course.getSeminars()) {                    
                     seminar.requestChoose.connect(this, "chooseSeminar(Seminar)");
-                    
-
-                    /*
-                    * Tady by měla být funkce, která určí výšku lectureHeight
-                    * podle toho, jeslti se náhodou nepřekrývá s jiným
-                    * předmětem. 0 / 1 / 2 překryté 60 / 30 / 20 px
-                    *
-                    * Podle toho by mělo být i nastavené lectureY. 5 / 35 / 45
-                    * px
-                    *
-                    */
                 }
             }
         }
