@@ -73,14 +73,131 @@ public class Timetabler extends QMainWindow {
 
     public void courseClicked(QListWidgetItem item) {
         Course course = (Course) item;
-        if (course.getSeminars() != null && choosingMode != true && !course.isSeminarChosen()) {
+        if (course.getSeminars() != null && !course.getSeminars().isEmpty() && choosingMode != true && !course.isSeminarChosen()) {
             for (Seminar seminar : course.getSeminars()) {
-                seminar.setStyleSheet("background-color: rgba(248, 136, 121, 216);\n" + "border-color: rgb(0, 0, 0);");
-                seminar.setVisible(true);
-                seminar.raise();
                 // tu sa nemaju zobrazovat vsetky ale ma to brat ohlad na tie filtre!!!...filtre tam byt musia lebo to mame v popise projektu v ISe!!
                 // pokial je uz nejaky seminar vybraty a ty kliknes znova na ten predmet tak aby ten vybraty semkinar zostal vybraty
                 // redraw items in collision when showing up new item!
+                
+                List<Lecture> lec = new ArrayList<Lecture>();
+                List<Seminar> sem = new ArrayList<Seminar>();
+                Collisions cls = new Collisions();
+                
+                    Days day = seminar.getDay();
+                    int seminarLength = seminar.getLength();                
+                
+                int seminarHeight = 60;
+                int seminarY = 5;
+                int max = 0;
+                    lec = cls.Lecturedetection(seminar, inputContainer);
+                    sem = cls.Seminardetection(seminar, inputContainer);
+
+                    if (lec.isEmpty() && sem.isEmpty()) {
+                        seminarHeight = 60;
+                        seminarY = 5;
+                        seminar.setPosition(1);
+                    } else if (lec.isEmpty() && !sem.isEmpty()) {
+                        for (Seminar s : sem) {
+                            if (max < s.getPosition()) {
+                                max = s.getPosition();
+                            }
+                        }
+                        max++;
+                        for (Seminar s : sem) {
+                            QRect test = s.geometry();
+                            test.setHeight(cls.gui_height(max));
+                            //System.out.println(s.getPosition());
+                            test.setY(cls.gui_y(s.getPosition()));
+                            s.setGeometry(test);
+                        }
+                        seminarHeight = cls.gui_height(max);
+                        seminarY = cls.gui_y(max);
+                        seminar.setPosition(max);
+                    } else if (!lec.isEmpty() && sem.isEmpty()) {
+                        for (Lecture s : lec) {
+                            if (max < s.getPosition()) {
+                                max = s.getPosition();
+                            }
+                        }
+                        max++;
+                        for (Lecture s : lec) {
+                            QRect test = s.geometry();
+                            test.setHeight(cls.gui_height(max));
+                            //System.out.println(s.getPosition());
+                            test.setY(cls.gui_y(s.getPosition()));
+                            s.setGeometry(test);
+                        }
+                        seminarHeight = cls.gui_height(max);
+                        seminarY = cls.gui_y(max);
+                        seminar.setPosition(max);
+                    } else if (!lec.isEmpty() && !sem.isEmpty()) {
+                        for (Lecture s : lec) {
+                            if (max < s.getPosition()) {
+                                max = s.getPosition();
+                            }
+                        }
+                        for (Seminar s : sem) {
+                            if (max < s.getPosition()) {
+                                max = s.getPosition();
+                            }
+                        }
+                        max++;
+                        for (Lecture s : lec) {
+                            QRect test = s.geometry();
+                            test.setHeight(cls.gui_height(max));
+                            //System.out.println(s.getPosition());
+                            test.setY(cls.gui_y(s.getPosition()));
+                            s.setGeometry(test);
+                        }
+                        for (Seminar s : sem) {
+                            QRect test = s.geometry();
+                            test.setHeight(cls.gui_height(max));
+                            //System.out.println(s.getPosition());
+                            test.setY(cls.gui_y(s.getPosition()));
+                            s.setGeometry(test);
+                        }
+                        seminarHeight = cls.gui_height(max);
+                        seminarY = cls.gui_y(max);
+                        seminar.setPosition(max);
+                    }
+                    
+                    int seminarX = seminar.getTimeFrom().secsTo(new QTime(7, 0)) / -60;
+
+                    switch (day) {
+                        case MON:
+                            seminar.setParent(ui.mondayBox);
+                            break;
+                        case TUE:
+                            seminar.setParent(ui.tuesdayBox);
+                            break;
+                        case WED:
+                            seminar.setParent(ui.wednesdayBox);
+                            break;
+                        case THU:
+                            seminar.setParent(ui.thursdayBox);
+                            break;
+                        case FRI:
+                            seminar.setParent(ui.fridayBox);
+                            break;
+                        case SAT:
+                            seminar.setParent(ui.saturdayBox);
+                            break;
+                        case SUN:
+                            seminar.setParent(ui.sundayBox);
+                            break;
+
+                    }
+                    
+                    setSeminarText(seminar);
+                    seminar.setGeometry(seminarX, seminarY, seminarLength, seminarHeight);
+                    seminar.setStyleSheet("background-color: rgba(248, 136, 121, 216);\n" + "border-color: rgb(0, 0, 0);");
+                    //seminar.setStyleSheet("background-color: rgb(149, 236, 174);\n" + "border-color: rgb(0, 0, 0);");
+                    seminar.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
+                    seminar.setAlignment(Qt.AlignmentFlag.AlignCenter);
+                    seminar.setVisible(true);
+                    seminar.raise();
+                    
+                
             }
             course.setSeminarChosen(true);
             choosingMode = true;
@@ -208,7 +325,7 @@ public class Timetabler extends QMainWindow {
                         lecture.setPosition(1);
                     } else if (lec.isEmpty() && !sem.isEmpty()) {
                         for (Seminar s : sem) {
-                            if (s.isVisible() && max < s.getPosition()) {
+                            if (max < s.getPosition()) {
                                 max = s.getPosition();
                             }
                         }
@@ -233,7 +350,7 @@ public class Timetabler extends QMainWindow {
                             }
                         }
                         for (Seminar s : sem) {
-                            if (s.isVisible() && max < s.getPosition()) {
+                            if (max < s.getPosition()) {
                                 max = s.getPosition();
                             }
                         }
@@ -284,8 +401,7 @@ public class Timetabler extends QMainWindow {
                     
                     seminar.requestChoose.connect(this, "chooseSeminar(Seminar)");
                     
-                    Days day = seminar.getDay();
-                    int seminarLength = seminar.getLength();
+
                     /*
                     * Tady by měla být funkce, která určí výšku lectureHeight
                     * podle toho, jeslti se náhodou nepřekrývá s jiným
@@ -295,85 +411,6 @@ public class Timetabler extends QMainWindow {
                     * px
                     *
                     */
-                    int seminarHeight = 60;
-                    int seminarY = 5;
-                    int max = 0;
-                    lec = cls.Lecturedetection(seminar, inputContainer);
-                    sem = cls.Seminardetection(seminar, inputContainer);
-
-                    if (lec.isEmpty() && sem.isEmpty()) {
-                        seminarHeight = 60;
-                        seminarY = 5;
-                        seminar.setPosition(1);
-                    } else if (lec.isEmpty() && !sem.isEmpty()) {
-                        for (Seminar s : sem) {
-                            if (max < s.getPosition()) {
-                                max = s.getPosition();
-                            }
-                        }
-                        max++;
-                        seminarHeight = cls.gui_height(max);
-                        seminarY = cls.gui_y(max);
-                        seminar.setPosition(max);
-                    } else if (!lec.isEmpty() && sem.isEmpty()) {
-                        for (Lecture s : lec) {
-                            if (max < s.getPosition()) {
-                                max = s.getPosition();
-                            }
-                        }
-                        max++;
-                        seminarHeight = cls.gui_height(max);
-                        seminarY = cls.gui_y(max);
-                        seminar.setPosition(max);
-                    } else if (!lec.isEmpty() && !sem.isEmpty()) {
-                        for (Lecture s : lec) {
-                            if (max < s.getPosition()) {
-                                max = s.getPosition();
-                            }
-                        }
-                        for (Seminar s : sem) {
-                            if (max < s.getPosition()) {
-                                max = s.getPosition();
-                            }
-                        }
-                        max++;
-                        seminarHeight = cls.gui_height(max);
-                        seminarY = cls.gui_y(max);
-                        seminar.setPosition(max);
-                    }
-                    int seminarX = seminar.getTimeFrom().secsTo(new QTime(7, 0)) / -60;
-
-                    switch (day) {
-                        case MON:
-                            seminar.setParent(ui.mondayBox);
-                            break;
-                        case TUE:
-                            seminar.setParent(ui.tuesdayBox);
-                            break;
-                        case WED:
-                            seminar.setParent(ui.wednesdayBox);
-                            break;
-                        case THU:
-                            seminar.setParent(ui.thursdayBox);
-                            break;
-                        case FRI:
-                            seminar.setParent(ui.fridayBox);
-                            break;
-                        case SAT:
-                            seminar.setParent(ui.saturdayBox);
-                            break;
-                        case SUN:
-                            seminar.setParent(ui.sundayBox);
-                            break;
-
-                    }
-                    
-                    setSeminarText(seminar);
-                    seminar.setGeometry(seminarX, seminarY, seminarLength, seminarHeight);
-                    seminar.setStyleSheet("background-color: rgb(149, 236, 174);\n" + "border-color: rgb(0, 0, 0);");
-                    seminar.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
-                    seminar.setAlignment(Qt.AlignmentFlag.AlignCenter);
-                    seminar.setVisible(false);
                 }
             }
         }

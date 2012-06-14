@@ -126,7 +126,7 @@ public class Collisions {
         Lecture later;
         if(t1.getDay() != t2.getDay())
             return false;
-        Lecture tmp = new Lecture(null,Days.FRI,t2.getTimeFrom(),t2.getTimeTo(),null,null);
+        Lecture tmp = new Lecture(null,t2.getDay(),t2.getTimeFrom(),t2.getTimeTo(),null,null);
         int res = earlierTerm(t1,tmp);
         if(res == 0)
             return true;
