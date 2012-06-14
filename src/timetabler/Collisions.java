@@ -126,7 +126,7 @@ public class Collisions {
         Lecture later;
         if(t1.getDay() != t2.getDay())
             return false;
-        Lecture tmp = new Lecture(null,Days.FRI,t2.getTimeFrom(),t2.getTimeTo(),null,null);
+        Lecture tmp = new Lecture(null,t2.getDay(),t2.getTimeFrom(),t2.getTimeTo(),null,null);
         int res = earlierTerm(t1,tmp);
         if(res == 0)
             return true;
@@ -237,5 +237,20 @@ public class Collisions {
                 break;
         }
         return p;
-    }  
+    }
+    
+    public boolean weekend(Collection<Course> list){
+        boolean ret=false;
+        for(Course c : list){
+            for(Seminar s : c.getSeminars()){
+                if(s.getDay() == Days.SUN || s.getDay() == Days.SAT){
+                    ret = true;
+                    break;
+                }
+            }
+            if(ret)
+                break;
+        }
+        return false;
+    }
 }
