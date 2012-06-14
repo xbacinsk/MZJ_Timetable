@@ -73,6 +73,7 @@ public class Timetabler extends QMainWindow {
 
     public void courseClicked(QListWidgetItem item) {
         Course course = (Course) item;
+
         if (course.getSeminars() != null && !course.getSeminars().isEmpty() && choosingMode != true && !course.isSeminarChosen()) {
             for (Seminar seminar : course.getSeminars()) {
                 // tu sa nemaju zobrazovat vsetky ale ma to brat ohlad na tie filtre!!!...filtre tam byt musia lebo to mame v popise projektu v ISe!!
@@ -196,12 +197,12 @@ public class Timetabler extends QMainWindow {
                     seminar.setAlignment(Qt.AlignmentFlag.AlignCenter);
                     seminar.setVisible(true);
                     seminar.raise();
-                    
-                
+                                    
             }
             course.setSeminarChosen(true);
             choosingMode = true;
         }
+        
     }
 
     public void courseDoubleClicked(QListWidgetItem item) {
@@ -424,8 +425,8 @@ public class Timetabler extends QMainWindow {
         
         
         Collisions cls = new Collisions();
-        List<Lecture> lec = new ArrayList<Lecture>();
-        List<Seminar> sem = new ArrayList<Seminar>();
+        List<Lecture> lec;
+        List<Seminar> sem;
 
         for (Course course : inputContainer) {
             ui.listWidget.addItem(course);
@@ -625,8 +626,7 @@ public class Timetabler extends QMainWindow {
 
     public void xmlDataAvailable(List<Course> courses) {
         /**
-         * sem prichadzaju data z parsera...kod je len na otestovanie treba ho
-         * zmenit!!..ale to asi vidit :D
+         * sem prichadzaju data z parsera
          */
         inputContainer.addAll(courses);
         loadCourses();
