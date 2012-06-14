@@ -29,4 +29,4 @@ for $day in $doc//den
       
       return $commentText), "#")
   
-  return string-join(($dayName,$timeFrom,$timeTo,$rooms,$courseCode,$courseName,$courseId,$teachers,$comments),";")
+  return string-join(($dayName,$timeFrom,$timeTo,$rooms,$courseCode,$courseName,$courseId,$teachers,$comments),"@")

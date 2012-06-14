@@ -82,7 +82,7 @@ public class Parser extends QObject {
         while (!item.isNull()) {
             //for each item
 
-            String[] fields = item.toAtomicValue().toString().split(";");
+            String[] fields = item.toAtomicValue().toString().split("@");
             if(fields.length != 9 && fields.length != 8){
                 throw new InvalidXmlDataException("Invalid XML data\n" + "Make sure you are using XML file created by IS with options \"včetně všech seminářů zobrazovaných předmětů\" and \"vypisovat i učitele\"");
             }
