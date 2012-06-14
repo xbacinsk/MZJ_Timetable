@@ -607,7 +607,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         actionOpen_time_table_from_IS.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Open file from IS", null));
         actionExport_to_HTML_XML.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Export to HTML/XML", null));
         actionExit.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Exit", null));
-        actionClearLoginData.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Clear login data", null));
+        actionClearLoginData.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Clear data", null));
         actionAbout_Timetabler.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "About Timetabler", null));
         label.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "List of courses", null));
         listWidget.clear();
