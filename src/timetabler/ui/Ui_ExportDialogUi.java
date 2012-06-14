@@ -94,7 +94,7 @@ public class Ui_ExportDialogUi implements com.trolltech.qt.QUiForm<QDialog>{
     {
         LoginDialogUi.setWindowTitle(com.trolltech.qt.core.QCoreApplication.translate("ExportDialogUi", "Dialog", null));
         nameLabel.setText(com.trolltech.qt.core.QCoreApplication.translate("ExportDialogUi", "XML file name:", null));
-        colorBox.setText("Colorably distinguish lectures and seminars");
+        colorBox.setText("Colorize lectures and seminars");
         roomBox.setText("Link to IS room page");
         teacherBox.setText("Link to teacher's IS page");
     }
