@@ -330,6 +330,13 @@ public class Timetabler extends QMainWindow {
                             }
                         }
                         max++;
+                        for (Seminar s : sem) {
+                            QRect test = s.geometry();
+                            test.setHeight(cls.gui_height(max));
+                            //System.out.println(s.getPosition());
+                            test.setY(cls.gui_y(s.getPosition()));
+                            s.setGeometry(test);
+                        }
                         lectureY = cls.gui_y(max);
                         lectureHeight = cls.gui_height(max);
                         lecture.setPosition(max);
@@ -340,6 +347,13 @@ public class Timetabler extends QMainWindow {
                             }
                         }
                         max++;
+                        for (Lecture s : lec) {
+                            QRect test = s.geometry();
+                            test.setHeight(cls.gui_height(max));
+                            //System.out.println(s.getPosition());
+                            test.setY(cls.gui_y(s.getPosition()));
+                            s.setGeometry(test);
+                        }
                         lectureY = cls.gui_y(max);
                         lectureHeight = cls.gui_height(max);
                         lecture.setPosition(max);
@@ -355,6 +369,20 @@ public class Timetabler extends QMainWindow {
                             }
                         }
                         max++;
+                        for (Lecture s : lec) {
+                            QRect test = s.geometry();
+                            test.setHeight(cls.gui_height(max));
+                            //System.out.println(s.getPosition());
+                            test.setY(cls.gui_y(s.getPosition()));
+                            s.setGeometry(test);
+                        }
+                        for (Seminar s : sem) {
+                            QRect test = s.geometry();
+                            test.setHeight(cls.gui_height(max));
+                            //System.out.println(s.getPosition());
+                            test.setY(cls.gui_y(s.getPosition()));
+                            s.setGeometry(test);
+                        }
                         lectureY = cls.gui_y(max);
                         lectureHeight = cls.gui_height(max);
                         lecture.setPosition(max);
