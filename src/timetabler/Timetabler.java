@@ -90,11 +90,11 @@ public class Timetabler extends QMainWindow {
     public boolean notFiltered(Seminar seminar){
         QSettings settings = new QSettings();
         settings.beginGroup(seminar.getCourse().getCode()+"/days");
-            if (QVariant.toBoolean(settings.value(seminar.getDay().getText()))) return false;
+            if (!QVariant.toBoolean(settings.value(seminar.getDay().getText()))) return false;
         settings.endGroup();
         
         settings.beginGroup(seminar.getCourse().getCode()+"/teachers");
-            if (QVariant.toBoolean(settings.value(seminar.getTeacher().toString()))) return false;
+            if (!QVariant.toBoolean(settings.value(seminar.getTeacher().toString()))) return false;
         settings.endGroup();
         
 //        settings.beginGroup(seminar.getCourse().getCode()+"/time");
@@ -102,7 +102,7 @@ public class Timetabler extends QMainWindow {
 //        settings.endGroup();
         
         settings.beginGroup(seminar.getCourse().getCode()+"/teachers");
-            if (QVariant.toBoolean(settings.value(seminar.getTeacher().toString()))) return false;
+            if (!QVariant.toBoolean(settings.value(seminar.getTeacher().toString()))) return false;
         settings.endGroup();
         
         return true;
@@ -114,12 +114,14 @@ public class Timetabler extends QMainWindow {
      */
     public boolean notFiltered(Lecture lecture){
         QSettings settings = new QSettings();
-        if (QVariant.toBoolean(settings.value(lecture.getCourse().getCode()+"/lecture"))) return false;
+        System.out.println(settings.allKeys());
+        if (!QVariant.toBoolean(settings.value(lecture.getCourse().getCode()+"/lecture"))) return false;
         settings.beginGroup(lecture.getCourse().getCode()+"/days");
-            if (QVariant.toBoolean(settings.value(lecture.getDay().getText()))) return false;
+            if (!QVariant.toBoolean(settings.value(lecture.getDay().getText()))) return false;
         settings.endGroup();
         settings.beginGroup(lecture.getCourse().getCode()+"/teachers");
-            if (QVariant.toBoolean(settings.value(lecture.getTeacher().toString()))) return false;
+            System.out.println(QVariant.toBoolean(settings.value(lecture.getTeacher().toString())));
+            if (!QVariant.toBoolean(settings.value(lecture.getTeacher().toString()))) return false;
         settings.endGroup();
         
         return true;
@@ -134,10 +136,9 @@ public class Timetabler extends QMainWindow {
      */     
     public void courseClicked(QListWidgetItem item) {
         Course course = (Course) item;
-
+        
         if (course.getSeminars() != null && !course.getSeminars().isEmpty() && choosingMode != true && !course.isSeminarChosen()) {
             for (Seminar seminar : course.getSeminars()) {
-//                if (notFiltered(seminar)){
                     List<Lecture> lec;
                     List<Seminar> sem;
                     Collisions cls = new Collisions();
@@ -275,8 +276,300 @@ public class Timetabler extends QMainWindow {
     public void courseDoubleClicked(QListWidgetItem item) {
         Course course = (Course) item;
         course.showSettings();
-//        if (notFiltered(course.getLectures().get(0)))
-            for (Lecture lecture : course.getLectures()) lecture.setVisible(false);
+        Collisions cls = new Collisions();
+        List<Lecture> lec;
+        List<Seminar> sem;
+        
+        for(Lecture lecture : course.getLectures()){
+            if(!notFiltered(lecture)){
+                if(lecture.isVisible() == true){
+                    
+                    lecture.setVisible(false);
+                    lecture.setPosition(0);
+                    
+                    lec = cls.Lecturedetection(lecture, inputContainer);
+                    sem = cls.Seminardetection(lecture, inputContainer);
+                    int max = 0;
+                    int i=0;
+                    
+                    if(!sem.isEmpty()){
+                        for(Seminar s : sem){
+                            if(s.isVisible())
+                                max++;
+                        }
+                    }
+                    if(!lec.isEmpty()){
+                        for(Lecture s : lec){
+                            if(s.isVisible())
+                                max++;
+                        }
+                    }                   
+                    if (!sem.isEmpty()) {
+                        for (Seminar s : sem) {
+                            if(s.isVisible()){
+                                i++;
+                                s.setPosition(i);
+                                QRect test = s.geometry();
+                                test.setHeight(cls.gui_height(max,max));
+                                test.setY(cls.gui_y(s.getPosition(),max));
+                                setSeminarText(s,max);
+                                s.setGeometry(test);
+                            }
+                        }
+                    } 
+                    if (!lec.isEmpty()) {
+                        for (Lecture s : lec) {                                                           
+                            if(s.isVisible()){
+                                i++;
+                                s.setPosition(i);
+                                QRect test = s.geometry();
+                                test.setHeight(cls.gui_height(max,max));
+                                test.setY(cls.gui_y(s.getPosition(),max));
+                                setLectureText(s,max);
+                                s.setGeometry(test);
+                            }
+                        }
+                    }
+                }
+            }
+            else{
+                if(lecture.isVisible() == false){
+                    
+                    lec = cls.Lecturedetection(lecture, inputContainer);
+                    sem = cls.Seminardetection(lecture, inputContainer);
+                    int lectureLength = lecture.getLength();
+                    int lectureHeight = 60;
+                    int lectureY = 5;
+                    int max=0;
+
+                    if (lec.isEmpty() && sem.isEmpty()) {
+                        lectureHeight = 60;
+                        lectureY = 5;
+                        lecture.setPosition(1);
+                    } else if (lec.isEmpty() && !sem.isEmpty()) {
+                        for (Seminar s : sem) {
+                            if (max < s.getPosition()) {
+                                max = s.getPosition();
+                            }
+                        }
+                        max++;
+                        for (Seminar s : sem) {
+                            QRect test = s.geometry();
+                            test.setHeight(cls.gui_height(max,max));
+                            //System.out.println(s.getPosition());
+                            test.setY(cls.gui_y(s.getPosition(),max));
+                            setSeminarText(s,max);
+                            s.setGeometry(test);
+                        }
+                        lectureY = cls.gui_y(max,max);
+                        lectureHeight = cls.gui_height(max,max);
+                        lecture.setPosition(max);
+                    } else if (!lec.isEmpty() && sem.isEmpty()) {
+                        for (Lecture s : lec) {
+                            if (max < s.getPosition()) {
+                                max = s.getPosition();
+                            }
+                        }
+                        max++;
+                        for (Lecture s : lec) {
+                            QRect test = s.geometry();
+                            test.setHeight(cls.gui_height(max,max));
+                            //System.out.println(s.getPosition());
+                            test.setY(cls.gui_y(s.getPosition(),max));
+                            setLectureText(s,max);
+                            s.setGeometry(test);
+                        }
+                        lectureY = cls.gui_y(max,max);
+                        lectureHeight = cls.gui_height(max,max);
+                        lecture.setPosition(max);
+                    } else if (!lec.isEmpty() && !sem.isEmpty()) {
+                        for (Lecture s : lec) {
+                            if (max < s.getPosition()) {
+                                max = s.getPosition();
+                            }
+                        }
+                        for (Seminar s : sem) {
+                            if (max < s.getPosition()) {
+                                max = s.getPosition();
+                            }
+                        }
+                        max++;
+                        for (Lecture s : lec) {
+                            QRect test = s.geometry();
+                            test.setHeight(cls.gui_height(max,max));
+                            //System.out.println(s.getPosition());
+                            test.setY(cls.gui_y(s.getPosition(),max));
+                            setLectureText(s,max);
+                            s.setGeometry(test);
+                        }
+                        for (Seminar s : sem) {
+                            QRect test = s.geometry();
+                            test.setHeight(cls.gui_height(max,max));
+                            //System.out.println(s.getPosition());
+                            test.setY(cls.gui_y(s.getPosition(),max));
+                            setSeminarText(s,max);
+                            s.setGeometry(test);
+                        }
+                        lectureY = cls.gui_y(max,max);
+                        lectureHeight = cls.gui_height(max,max);
+                        lecture.setPosition(max);
+                    }
+                    int lectureX = lecture.getTimeFrom().secsTo(new QTime(7, 0)) / -60;
+                    
+                    QRect rect = new QRect(lectureX,lectureY,lectureLength,lectureHeight);
+                    setLectureText(lecture,max);
+                    lecture.setGeometry(rect);
+                    rect.dispose();
+                    
+                    lecture.setVisible(true);
+                }
+            }
+        }
+        for(Seminar seminar : course.getSeminars())
+        {
+            if(!notFiltered(seminar)){
+                if(seminar.isVisible() == true){
+                                seminar.setVisible(false);
+                                seminar.getCourse().setSeminarChosen(false);
+                                seminar.setPosition(0);
+
+                                lec = cls.Lecturedetection(seminar, inputContainer);
+                                sem = cls.Seminardetection(seminar, inputContainer);
+                                int max = 0;
+                                int i=0;
+
+                                if(!sem.isEmpty()){
+                                    for(Seminar s : sem){
+                                        if(s.isVisible())
+                                            max++;
+                                    }
+                                }
+                                if(!lec.isEmpty()){
+                                    for(Lecture s : lec){
+                                        if(s.isVisible())
+                                            max++;
+                                    }
+                                }
+
+                                if (!sem.isEmpty()) {
+                                    for (Seminar s : sem) {
+                                        if(s.isVisible()){
+                                            i++;
+                                            s.setPosition(i);
+                                            QRect test = s.geometry();
+                                            test.setHeight(cls.gui_height(max,max));
+                                            test.setY(cls.gui_y(s.getPosition(),max));
+                                            setSeminarText(s,max);
+                                            s.setGeometry(test);
+                                        }
+                                    }
+                                } 
+                                if (!lec.isEmpty()) {
+                                    for (Lecture s : lec) {                                                           
+                                        if(s.isVisible()){
+                                            i++;
+                                            s.setPosition(i);
+                                            QRect test = s.geometry();
+                                            test.setHeight(cls.gui_height(max,max));
+                                            test.setY(cls.gui_y(s.getPosition(),max));
+                                            setLectureText(s,max);
+                                            s.setGeometry(test);
+                                        }
+                                    }
+                                }
+                            lecturesRedraw();
+                }
+            }else{
+                if(seminar.isVisible() == false){
+                                int seminarHeight=60;
+                                int seminarY=5;
+                                int seminarLength = seminar.getLength();
+                                int seminarX = seminar.getTimeFrom().secsTo(new QTime(7, 0)) / -60;
+                                int max=0;
+
+                                        lec = cls.Lecturedetection(seminar, inputContainer);
+                                        sem = cls.Seminardetection(seminar, inputContainer);
+
+                                        if (lec.isEmpty() && sem.isEmpty()) {
+                                            seminarHeight = 60;
+                                            seminarY = 5;
+                                            seminar.setPosition(1);
+                                        } else if (lec.isEmpty() && !sem.isEmpty()) {
+                                            for (Seminar s : sem) {
+                                                if (max < s.getPosition()) {
+                                                    max = s.getPosition();
+                                                }
+                                            }
+                                            max++;
+                                            for (Seminar s : sem) {
+                                                QRect test = s.geometry();
+                                                test.setHeight(cls.gui_height(max,max));
+                                                //System.out.println(s.getPosition());
+                                                test.setY(cls.gui_y(s.getPosition(),max));
+                                                setSeminarText(s,max);
+                                                s.setGeometry(test);
+                                            }
+                                            seminarY = cls.gui_y(max,max);
+                                            seminarHeight = cls.gui_height(max,max);
+                                            seminar.setPosition(max);
+                                        } else if (!lec.isEmpty() && sem.isEmpty()) {
+                                            for (Lecture s : lec) {
+                                                if (max < s.getPosition()) {
+                                                    max = s.getPosition();
+                                                }
+                                            }
+                                            max++;
+                                            for (Lecture s : lec) {
+                                                QRect test = s.geometry();
+                                                test.setHeight(cls.gui_height(max,max));
+                                                //System.out.println(s.getPosition());
+                                                test.setY(cls.gui_y(s.getPosition(),max));
+                                                setLectureText(s,max);
+                                                s.setGeometry(test);
+                                            }
+                                            seminarY = cls.gui_y(max,max);
+                                            seminarHeight = cls.gui_height(max,max);
+                                            seminar.setPosition(max);
+                                        } else if (!lec.isEmpty() && !sem.isEmpty()) {
+                                            for (Lecture s : lec) {
+                                                if (max < s.getPosition()) {
+                                                    max = s.getPosition();
+                                                }
+                                            }
+                                            for (Seminar s : sem) {
+                                                if (max < s.getPosition()) {
+                                                    max = s.getPosition();
+                                                }
+                                            }
+                                            max++;
+                                            for (Lecture s : lec) {
+                                                QRect test = s.geometry();
+                                                test.setHeight(cls.gui_height(max,max));
+                                                //System.out.println(s.getPosition());
+                                                test.setY(cls.gui_y(s.getPosition(),max));
+                                                setLectureText(s,max);
+                                                s.setGeometry(test);
+                                            }
+                                            for (Seminar s : sem) {
+                                                QRect test = s.geometry();
+                                                test.setHeight(cls.gui_height(max,max));
+                                                //System.out.println(s.getPosition());
+                                                test.setY(cls.gui_y(s.getPosition(),max));
+                                                setSeminarText(s,max);
+                                                s.setGeometry(test);
+                                            }
+                                            seminarY = cls.gui_y(max,max);
+                                            seminarHeight = cls.gui_height(max,max);
+                                            seminar.setPosition(max);
+                                        }
+                                setSeminarText(seminar,max);
+                                seminar.setGeometry(seminarX, seminarY, seminarLength, seminarHeight);
+                                seminar.setVisible(true);
+                                lecturesRedraw();
+                }
+            }
+        }
+        
     }
 
     public void updateCourseOptions(Course course) {
