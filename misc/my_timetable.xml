@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="timetable.xsl"?>
+<timetable xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="" xsi:noNamespaceSchemaLocation="timetable.xsd">
+ <hours bgcolor="f5f5f5">
+  <hour diff="12" pdiff="7">08:00</hour>
+  <hour diff="12" pdiff="7">09:00</hour>
+  <hour diff="12" pdiff="7">10:00</hour>
+  <hour diff="12" pdiff="7">11:00</hour>
+  <hour diff="12" pdiff="7">12:00</hour>
+  <hour diff="12" pdiff="7">13:00</hour>
+  <hour diff="12" pdiff="7">14:00</hour>
+  <hour diff="12" pdiff="7">15:00</hour>
+  <hour diff="12" pdiff="7">16:00</hour>
+  <hour diff="12" pdiff="7">17:00</hour>
+  <hour diff="12" pdiff="7">18:00</hour>
+  <hour diff="10" pdiff="6">19:00</hour>
+ </hours>
+ <days>
+  <day rows="1" id="MON">
+   <row num="1">
+    <cell diff="60" pdiff="36">
+     <break/>
+    </cell>
+    <cell diff="10" pdiff="6">
+     <course color="d9f5d5">
+      <courseid>632905</courseid>
+      <code>PB138/6</code>
+      <name>Moderní značkovací jazyky</name>
+      <teacher id="60380">A. Rambousek</teacher>
+      <rooms>
+       <room id="4384">B130</room>
+      </rooms>
+     </course>
+    </cell>
+    <cell diff="72" pdiff="43">
+     <break/>
+    </cell>
+   </row>
+  </day>
+  <day rows="2" id="TUE">
+   <row num="1">
+    <cell diff="20" pdiff="12">
+     <course color="e9d5e5">
+      <courseid>636898</courseid>
+      <code>SOC109</code>
+      <name>Demografie</name>
+      <teacher id="1605">Burjanek</teacher>
+      <rooms>
+       <room id="8368">P31</room>
+      </rooms>
+     </course>
+    </cell>
+    <cell diff="4" pdiff="2">
+     <break/>
+    </cell>
+    <cell diff="20" pdiff="12">
+     <course color="e9d5e5">
+      <courseid>636893</courseid>
+      <code>SOC103</code>
+      <name>Obecná sociologická teorie</name>
+      <teacher id="5918">Szaló</teacher>
+      <rooms>
+       <room id="8368">P31</room>
+      </rooms>
+     </course>
+    </cell>
+    <cell diff="4" pdiff="2">
+     <break/>
+    </cell>
+    <cell diff="22" pdiff="13">
+     <course color="e9d5e5">
+      <courseid>632905</courseid>
+      <code>PB138</code>
+      <name>Moderní značkovací jazyky</name>
+      <teacher id="94">Pitner</teacher>
+      <rooms>
+       <room id="534">D1</room>
+      </rooms>
+     </course>
+    </cell>
+    <cell diff="72" pdiff="43">
+     <break/>
+    </cell>
+   </row>
+   <row num="2">
+    <cell diff="48" pdiff="28">
+     <break/>
+    </cell>
+    <cell diff="18" pdiff="10">
+     <course color="e9d5e5">
+      <courseid>636896</courseid>
+      <code>SOC106</code>
+      <name>Metodologie sociálních věd</name>
+      <teacher id="108207">Kreidl</teacher>
+      <rooms>
+       <room id="8368">P31</room>
+      </rooms>
+     </course>
+    </cell>
+    <cell diff="76" pdiff="45">
+     <break/>
+    </cell>
+   </row>
+  </day>
+  <day rows="3" id="WED">
+   <row num="1">
+    <cell diff="48" pdiff="28">
+     <break/>
+    </cell>
+    <cell diff="22" pdiff="13">
+     <course color="d9f5d5">
+      <courseid>633006</courseid>
+      <code>VB036/14</code>
+      <name>English II</name>
+      <teacher id="2448">I. Tulajová</teacher>
+      <rooms>
+       <room id="891">C511</room>
+      </rooms>
+     </course>
+    </cell>
+    <cell diff="50" pdiff="30">
+     <break/>
+    </cell>
+    <cell diff="22" pdiff="13">
+     <course color="e9d5e5">
+      <courseid>632936</courseid>
+      <code>PV113</code>
+      <name>Produkce audiovizuálního díla</name>
+      <teacher id="2378">Sojka</teacher>
+      <rooms>
+       <room id="2362">D3</room>
+      </rooms>
+     </course>
+    </cell>
+   </row>
+   <row num="2">
+    <cell diff="72" pdiff="43">
+     <break/>
+    </cell>
+    <cell diff="22" pdiff="13">
+     <course color="e9d5e5">
+      <courseid>632950</courseid>
+      <code>PV174</code>
+      <name>Laboratoř EM aplikací</name>
+      <teacher id="2378">Sojka</teacher>
+      <rooms>
+       <room id="528">C522</room>
+      </rooms>
+     </course>
+    </cell>
+    <cell diff="14" pdiff="8">
+     <break/>
+    </cell>
+    <cell diff="10" pdiff="6">
+     <course color="e9d5e5">
+      <courseid>632936</courseid>
+      <code>PV113</code>
+      <name>Produkce audiovizuálního díla</name>
+      <teacher id="2378">Sojka</teacher>
+      <rooms>
+       <room id="705">A104</room>
+      </rooms>
+     </course>
+    </cell>
+    <cell diff="24" pdiff="14">
+     <break/>
+    </cell>
+   </row>
+   <row num="3">
+    <cell diff="96" pdiff="57">
+     <break/>
+    </cell>
+    <cell diff="22" pdiff="13">
+     <course color="e9d5e5">
+      <courseid>632986</courseid>
+      <code>SIN02</code>
+      <name>Sociální aspekty informatiky</name>
+      <teacher id="1404">Kopeček</teacher>
+      <rooms>
+       <room id="892">C525</room>
+      </rooms>
+     </course>
+    </cell>
+    <cell diff="24" pdiff="14">
+     <break/>
+    </cell>
+   </row>
+  </day>
+ </days>
+ <notes/>
+</timetable>

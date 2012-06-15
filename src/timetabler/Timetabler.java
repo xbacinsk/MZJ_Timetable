@@ -67,6 +67,7 @@ public class Timetabler extends QMainWindow {
         ui.actionOpen_time_table_from_PC.setEnabled(true); 
         
         choosingMode = false;
+        weekendGUI(false);
         
 //        System.out.println("Vymazano.");        
     }
@@ -80,8 +81,8 @@ public class Timetabler extends QMainWindow {
                 // pokial je uz nejaky seminar vybraty a ty kliknes znova na ten predmet tak aby ten vybraty semkinar zostal vybraty
                 // redraw items in collision when showing up new item!
                 
-                List<Lecture> lec = new ArrayList<Lecture>();
-                List<Seminar> sem = new ArrayList<Seminar>();
+                List<Lecture> lec;
+                List<Seminar> sem;
                 Collisions cls = new Collisions();
                 
                 Days day = seminar.getDay();
@@ -224,8 +225,8 @@ public class Timetabler extends QMainWindow {
     public void removeSeminar(Seminar seminar) {
         if (!choosingMode) {
             Collisions cls = new Collisions();
-            List<Lecture> lec = new ArrayList<Lecture>();
-            List<Seminar> sem = new ArrayList<Seminar>();
+            List<Lecture> lec;
+            List<Seminar> sem;
             
             seminar.setVisible(false);
             seminar.getCourse().setSeminarChosen(false);
@@ -283,8 +284,8 @@ public class Timetabler extends QMainWindow {
         if (choosingMode) {
             
             Collisions cls = new Collisions();
-            List<Lecture> lec = new ArrayList<Lecture>();
-            List<Seminar> sem = new ArrayList<Seminar>();
+            List<Lecture> lec;
+            List<Seminar> sem;
             
             for (Seminar se : seminar.getCourse().getSeminars()) {
                 se.setStyleSheet("background-color: rgb(149, 236, 174);\n");
@@ -425,8 +426,8 @@ public class Timetabler extends QMainWindow {
         QSettings settings = new QSettings();
         
         Collisions cls = new Collisions();
-        List<Lecture> lec = new ArrayList<Lecture>();
-        List<Seminar> sem = new ArrayList<Seminar>();
+        List<Lecture> lec;
+        List<Seminar> sem;
         
         for (Course course : inputContainer) {
             if (n == Qt.CheckState.Checked.value()) {
@@ -603,11 +604,12 @@ public class Timetabler extends QMainWindow {
         ui.actionOpen_time_table_from_IS.setEnabled(false);
         ui.actionOpen_time_table_from_PC.setEnabled(false);
         
-        
         Collisions cls = new Collisions();
+        if (cls.weekend(inputContainer)) weekendGUI(true);
+        
         List<Lecture> lec;
         List<Seminar> sem;
-
+       
         for (Course course : inputContainer) {
             ui.listWidget.addItem(course);
             course.optionsChanged.connect(this, "updateCourseOptions(Course)");
