@@ -2,10 +2,8 @@ package timetabler.entities;
 
 import com.trolltech.qt.QVariant;
 import com.trolltech.qt.core.QSettings;
-import com.trolltech.qt.core.Qt;
 import com.trolltech.qt.gui.QDialog;
 import com.trolltech.qt.gui.QListWidgetItem;
-import com.trolltech.qt.gui.QMouseEvent;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,8 +14,9 @@ import timetabler.dialogs.CourseDialog;
 /**
  * Holds all the information about course.
  *
- * Holds the course code, name, id, lecture and seminar. One object represents
- * whole course with all its information which are needed for its rendering.
+ * Holds the course code, name, id, lecture, seminar and seminarChosen. One object represents
+ * whole course as extension of QListWidgetItem with all information which are needed for its 
+ * rendering in the List courses.
  *
  * @author Michal Kimle
  * @version 2012-06-04

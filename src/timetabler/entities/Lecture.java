@@ -7,9 +7,10 @@ import com.trolltech.qt.gui.QMouseEvent;
 import java.util.List;
 
 /**
- * Holds information about lecture.
- *
- * All information are stored in its Term object.
+ * 
+ * Holds information about lecture, such as its teacher, day, time from and time to, list of rooms 
+ * and pointer to parent course. One object represents lecture as a extension of QLabel with all 
+ * information which are needed for its rendering.
  *
  * @author Michal Kimle
  * @version 2012-06-04
@@ -44,6 +45,9 @@ public class Lecture extends QLabel {
         this.course = course;
     }
     
+    /**
+     * @return length of the lecture in minutes
+     */
     public int getLength(){
         return timeFrom.secsTo(timeTo) / 60;
     }

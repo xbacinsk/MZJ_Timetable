@@ -245,6 +245,13 @@ public class Collisions {
         return p;
     }
     
+    /**
+     * Return boolean value if there are any saturday or sunday seminars 
+     * in the given collection.
+     * 
+     * @param list
+     * @return 
+     */
     public boolean weekend(Collection<Course> list){
         boolean ret=false;
         for(Course c : list){

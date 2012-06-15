@@ -7,11 +7,10 @@ import com.trolltech.qt.gui.QMouseEvent;
 import java.util.List;
 
 /**
- * Holds information about seminar.
- *
- * Holds list of Term objects which represents all the information about seminar
- * and one separate Term object which represents currently chosen term in
- * timetable.
+ * 
+ * Holds information about seminar, such as its teacher, day, time from and time to, list of rooms 
+ * and pointer to parent course. One object represents seminar as a extension of QLabel with all 
+ * information which are needed for its rendering.
  *
  * @author Michal Kimle
  * @version 2012-05-04
@@ -84,6 +83,9 @@ public class Seminar extends QLabel {
         this.teacher = teacher;
     }
     
+    /**
+     * @return length of the seminar in minutes
+     */
     public int getLength(){
         return timeFrom.secsTo(timeTo) / 60;
     }

@@ -166,9 +166,6 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         sizePolicy4.setVerticalStretch((byte)0);
         sizePolicy4.setHeightForWidth(fridayBox.sizePolicy().hasHeightForWidth());
         fridayBox.setSizePolicy(sizePolicy4);
-//        label_26 = new QLabel(fridayBox);
-//        label_26.setObjectName("label_26");
-//        label_26.setGeometry(new QRect(5, 5, 60, 60));
         label_2 = new QLabel(centralwidget);
         label_2.setObjectName("label_2");
         label_2.setGeometry(new QRect(266, 12, 40, 16));
@@ -328,65 +325,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         sizePolicy21.setVerticalStretch((byte)0);
         sizePolicy21.setHeightForWidth(mondayBox.sizePolicy().hasHeightForWidth());
         mondayBox.setSizePolicy(sizePolicy21);
-//        label_22 = new QLabel(mondayBox);
-//        label_22.setObjectName("label_22");
-//        label_22.setGeometry(new QRect(5, 5, 60, 60));
-//        label_27 = new QLabel(mondayBox);
-//        label_27.setObjectName("label_27");
-//        label_27.setGeometry(new QRect(65, 5, 60, 60));
-//        label_28 = new QLabel(mondayBox);
-//        label_28.setObjectName("label_28");
-//        label_28.setGeometry(new QRect(125, 5, 60, 60));
-//        label_29 = new QLabel(mondayBox);
-//        label_29.setObjectName("label_29");
-//        label_29.setGeometry(new QRect(185, 5, 60, 60));
-//        label_30 = new QLabel(mondayBox);
-//        label_30.setObjectName("label_30");
-//        label_30.setGeometry(new QRect(245, 5, 60, 60));
-//        label_31 = new QLabel(mondayBox);
-//        label_31.setObjectName("label_31");
-//        label_31.setGeometry(new QRect(305, 5, 55, 60));
-//        label_32 = new QLabel(mondayBox);
-//        label_32.setObjectName("label_32");
-//        label_32.setGeometry(new QRect(365, 5, 60, 60));
-//        label_32.setStyleSheet("background-color: rgb(149, 236, 174);\n"+"border-color: rgb(0, 0, 0);");
-//        label_32.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.NoFrame);
-//        label_32.setTextFormat(com.trolltech.qt.core.Qt.TextFormat.PlainText);
-//        label_32.setScaledContents(false);
-//        label_32.setWordWrap(false);
-//        label_32.setMargin(0);
-//        label_32.setIndent(-1);
-//        label_33 = new QLabel(mondayBox);
-//        label_33.setObjectName("label_33");
-//        label_33.setGeometry(new QRect(425, 5, 60, 60));
-//        label_33.setStyleSheet("background-color: rgb(108, 220, 100);\n"+"border-color: rgb(0, 0, 0);");
-//        label_33.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.NoFrame);
-//        label_33.setTextFormat(com.trolltech.qt.core.Qt.TextFormat.PlainText);
-//        label_33.setScaledContents(false);
-//        label_33.setWordWrap(false);
-//        label_33.setMargin(0);
-//        label_33.setIndent(-1);
-//        label_34 = new QLabel(mondayBox);
-//        label_34.setObjectName("label_34");
-//        label_34.setGeometry(new QRect(485, 5, 60, 60));
-//        label_35 = new QLabel(mondayBox);
-//        label_35.setObjectName("label_35");
-//        label_35.setGeometry(new QRect(545, 5, 60, 60));
-//        label_36 = new QLabel(mondayBox);
-//        label_36.setObjectName("label_36");
-//        label_36.setGeometry(new QRect(605, 5, 60, 60));
-//        label_37 = new QLabel(mondayBox);
-//        label_37.setObjectName("label_37");
-//        label_37.setGeometry(new QRect(665, 5, 60, 60));
-//        label_38 = new QLabel(mondayBox);
-//        label_38.setObjectName("label_38");
-//        label_38.setGeometry(new QRect(725, 5, 60, 60));
-//        label_39 = new QLabel(mondayBox);
-//        label_39.setObjectName("label_39");
-//        label_39.setGeometry(new QRect(785, 5, 60, 60));
-//        termButton = new QPushButton(mondayBox);
-//        termButton.setObjectName("termButton");
-//        termButton.setGeometry(new QRect(305, 5, 60, 60));
+        
         QPalette palette= new QPalette();
         palette.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.Button, new QColor(255, 31, 2));
         palette.setColor(QPalette.ColorGroup.Active, QPalette.ColorRole.Base, new QColor(255, 31, 2));
@@ -397,15 +336,7 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Button, new QColor(255, 31, 2));
         palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Base, new QColor(255, 31, 2));
         palette.setColor(QPalette.ColorGroup.Disabled, QPalette.ColorRole.Window, new QColor(255, 31, 2));
-//        termButton.setPalette(palette);
-//        termButton.setAcceptDrops(false);
-//        termButton.setAutoFillBackground(false);
-//        termButton.setStyleSheet("background-color: rgba(255, 31, 2, 128);");
-//        termButton.setCheckable(false);
-//        termButton.setChecked(false);
-//        termButton.setAutoDefault(false);
-//        termButton.setDefault(false);
-//        termButton.setFlat(false);
+
         label_18 = new QLabel(centralwidget);
         label_18.setObjectName("label_18");
         label_18.setGeometry(new QRect(235, 125, 30, 20));
@@ -429,45 +360,6 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         sizePolicy23.setVerticalStretch((byte)0);
         sizePolicy23.setHeightForWidth(tuesdayBox.sizePolicy().hasHeightForWidth());
         tuesdayBox.setSizePolicy(sizePolicy23);
-//        label_23 = new QLabel(tuesdayBox);
-//        label_23.setObjectName("label_23");
-//        label_23.setGeometry(new QRect(5, 5, 60, 60));
-//        label_40 = new QLabel(tuesdayBox);
-//        label_40.setObjectName("label_40");
-//        label_40.setGeometry(new QRect(605, 5, 60, 30));
-//        label_40.setStyleSheet("background-color: rgb(149, 236, 174);\n"+"border-color: rgb(0, 0, 0);");
-//        label_40.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
-//        label_40.setLineWidth(1);
-//        label_40.setMidLineWidth(0);
-//        label_41 = new QLabel(tuesdayBox);
-//        label_41.setObjectName("label_41");
-//        label_41.setGeometry(new QRect(485, 5, 120, 30));
-//        label_41.setStyleSheet("background-color: rgb(149, 236, 174);\n"+"border-color: rgb(0, 0, 0);");
-//        label_41.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
-//        label_41.setLineWidth(1);
-//        label_41.setMidLineWidth(0);
-//        label_42 = new QLabel(tuesdayBox);
-//        label_42.setObjectName("label_42");
-//        label_42.setGeometry(new QRect(545, 35, 120, 30));
-//        label_42.setStyleSheet("background-color: rgb(149, 236, 174);\n"+"border-color: rgb(0, 0, 0);");
-//        label_42.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
-//        label_42.setLineWidth(1);
-//        label_42.setMidLineWidth(0);
-//        label_43 = new QLabel(tuesdayBox);
-//        label_43.setObjectName("label_43");
-//        label_43.setGeometry(new QRect(725, 45, 120, 20));
-//        label_43.setStyleSheet("background-color: rgb(149, 236, 174);\n"+"border-color: rgb(0, 0, 0);");
-//        label_43.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
-//        label_44 = new QLabel(tuesdayBox);
-//        label_44.setObjectName("label_44");
-//        label_44.setGeometry(new QRect(725, 25, 60, 20));
-//        label_44.setStyleSheet("background-color: rgb(149, 236, 174);\n"+"border-color: rgb(0, 0, 0);");
-//        label_44.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
-//        label_45 = new QLabel(tuesdayBox);
-//        label_45.setObjectName("label_45");
-//        label_45.setGeometry(new QRect(665, 5, 120, 20));
-//        label_45.setStyleSheet("background-color: rgb(149, 236, 174);\n"+"border-color: rgb(0, 0, 0);");
-//        label_45.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
         label_19 = new QLabel(centralwidget);
         label_19.setObjectName("label_19");
         label_19.setGeometry(new QRect(235, 195, 30, 20));
@@ -491,9 +383,6 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         sizePolicy25.setVerticalStretch((byte)0);
         sizePolicy25.setHeightForWidth(wednesdayBox.sizePolicy().hasHeightForWidth());
         wednesdayBox.setSizePolicy(sizePolicy25);
-//        label_24 = new QLabel(wednesdayBox);
-//        label_24.setObjectName("label_24");
-//        label_24.setGeometry(new QRect(5, 5, 60, 60));
         label_20 = new QLabel(centralwidget);
         label_20.setObjectName("label_20");
         label_20.setGeometry(new QRect(235, 265, 30, 20));
@@ -517,9 +406,6 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         sizePolicy27.setVerticalStretch((byte)0);
         sizePolicy27.setHeightForWidth(thursdayBox.sizePolicy().hasHeightForWidth());
         thursdayBox.setSizePolicy(sizePolicy27);
-//        label_25 = new QLabel(thursdayBox);
-//        label_25.setObjectName("label_25");
-//        label_25.setGeometry(new QRect(5, 5, 60, 60));
         label_46 = new QLabel(centralwidget);
         label_46.setObjectName("label_46");
         label_46.setGeometry(new QRect(235, 405, 30, 20));
@@ -543,9 +429,6 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         sizePolicy29.setVerticalStretch((byte)0);
         sizePolicy29.setHeightForWidth(saturdayBox.sizePolicy().hasHeightForWidth());
         saturdayBox.setSizePolicy(sizePolicy29);
-//        label_47 = new QLabel(saturdayBox);
-//        label_47.setObjectName("label_47");
-//        label_47.setGeometry(new QRect(5, 5, 60, 60));
         label_48 = new QLabel(centralwidget);
         label_48.setObjectName("label_48");
         label_48.setGeometry(new QRect(235, 475, 30, 20));
@@ -569,9 +452,6 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         sizePolicy31.setVerticalStretch((byte)0);
         sizePolicy31.setHeightForWidth(sundayBox.sizePolicy().hasHeightForWidth());
         sundayBox.setSizePolicy(sizePolicy31);
-//        label_49 = new QLabel(sundayBox);
-//        label_49.setObjectName("label_49");
-//        label_49.setGeometry(new QRect(5, 5, 60, 60));
         MainWindow.setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar.setObjectName("menubar");
@@ -611,25 +491,9 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         actionAbout_Timetabler.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "About Timetabler", null));
         label.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "List of courses", null));
         listWidget.clear();
-
-//        QListWidgetItem __item = new QListWidgetItem(listWidget);
-//        __item.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "VB001 Specialist English", null));
-//
-//        QListWidgetItem __item1 = new QListWidgetItem(listWidget);
-//        __item1.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "MB102 Matematika II", null));
-//
-//        QListWidgetItem __item2 = new QListWidgetItem(listWidget);
-//        __item2.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "PV113 Produkce audiovizu\u00e1ln\u00edho d\u00edla", null));
-//
-//        QListWidgetItem __item3 = new QListWidgetItem(listWidget);
-//        __item3.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "PB168 Kdesi cosi", null));
-//
-//        QListWidgetItem __item4 = new QListWidgetItem(listWidget);
-//        __item4.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "IB001 Tamto a tohle", null));
         checkBox.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Show seminars only", null));
         label_21.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "FRI", null));
         fridayBox.setTitle("");
-//        label_26.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
         label_2.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "7:00", null));
         label_16.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "21:00", null));
         label_3.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "8:00", null));
@@ -647,84 +511,21 @@ public class Ui_MainWindow implements com.trolltech.qt.QUiForm<QMainWindow>
         label_15.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "20:00", null));
         label_17.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "MON", null));
         mondayBox.setTitle("");
-//        label_22.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
-//        label_27.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
-//        label_28.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
-//        label_29.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
-//        label_30.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
-//        label_31.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
-//        label_32.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", 
-//        "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+//"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+//"p, li { white-space: pre-wrap; }\n"+//"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+//"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">VB001</span></p>\n"+
-//"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">01</span></p>\n"+
-//"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">Tulajova</span></p>\n"+
-//"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:7pt; text-decoration: underline;\">B527</span></p></body></html>", null));
-//        label_33.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+
-//"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+
-//"p, li { white-space: pre-wrap; }\n"+
-//"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+
-//"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">SOC103</span></p>\n"+
-//"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">Tulajova</span></p>\n"+
-//"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:7pt; text-decoration: underline;\">D3</span></p></body></html>", null));
-//        label_34.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
-//        label_35.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
-//        label_36.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
-//        label_37.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
-//        label_38.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
-//        label_39.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
-//        termButton.setText("");
         label_18.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TUE", null));
         tuesdayBox.setTitle("");
-//        label_23.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
-//        label_40.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+
-//"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+"p, li { white-space: pre-wrap; }\n"+
-//"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+
-//"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">SOC103</span></p>\n"+
-//"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">Tulajova</span></p></body></html>", null));
-//        label_41.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+
-//"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+
-//"p, li { white-space: pre-wrap; }\n"+
-//"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+
-//"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">SOC103</span></p>\n"+
-//"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">Tulajova</span></p></body></html>", null));
-//        label_42.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+
-//"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+
-//"p, li { white-space: pre-wrap; }\n"+
-//"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+
-//"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">SOC103</span></p>\n"+
-//"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">Tulajova</span></p></body></html>", null));
-//        label_43.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+
-//"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+
-//"p, li { white-space: pre-wrap; }\n"+
-//"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+
-//"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">SOC103</span></p></body></html>", null));
-//        label_44.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+
-//"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+
-//"p, li { white-space: pre-wrap; }\n"+
-//"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+
-//"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">SOC103</span></p></body></html>", null));
-//        label_45.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+
-//"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+
-//"p, li { white-space: pre-wrap; }\n"+
-//"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+
-//"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">SOC103</span></p></body></html>", null));
         label_19.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "WED", null));
         wednesdayBox.setTitle("");
-//        label_24.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
         label_20.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "THU", null));
         thursdayBox.setTitle("");
-//        label_25.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
         label_46.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "SAT", null));
         saturdayBox.setTitle("");
-//        label_47.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
         label_48.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "SUN", null));
         sundayBox.setTitle("");
-//        label_49.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "TextLabel", null));
         menuFile.setTitle(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "File", null));
         menuHelp.setTitle(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "Help", null));
     } // retranslateUi  
     
     
-    // 432 571
     public void weekendGUI(Timetabler tt, boolean b) {
         if (b) {
             tt.setMinimumHeight(571);

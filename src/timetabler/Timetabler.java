@@ -20,7 +20,6 @@ public class Timetabler extends QMainWindow {
     private Ui_MainWindow ui = new Ui_MainWindow();
     private List<Course> inputContainer = new ArrayList<Course>();
     private boolean choosingMode = false;
-//    private List<Course> outputContainer = new ArrayList<Course>();
 
     public Timetabler() {
         ui.setupUi(this);
@@ -36,16 +35,28 @@ public class Timetabler extends QMainWindow {
 
         ui.checkBox.stateChanged.connect(this, "hideLecturesCheckBoxClicked(Integer)");
     }
-
+    
+    /**
+     * Makes Saturday and Sunday boxes invisible or visible 
+     * 
+     * @param b
+     */
     public void weekendGUI(boolean b) {
         ui.weekendGUI(this, b);
     }
-
+    
     public void initializeGUI(Timetabler tt) {
         weekendGUI(false);
-
     }
-
+    
+    /**
+     * Clears data in QSettings such as UCO and Password, so login dialog is 
+     * shown again new data can be filled in.
+     * 
+     * Also removes all data from input container and deletes all shown object 
+     * - Courses from list and Seminar and Lecture labels. 
+     * 
+     */
     public void clearLoginData() {
         QSettings settings = new QSettings();
         settings.remove("login/uco");
@@ -73,8 +84,8 @@ public class Timetabler extends QMainWindow {
 //        System.out.println("Vymazano.");        
     }
     
-    /*
-     * returns false if user wants to hide lectures/seminars with specified parameters
+    /**
+     * @return false if user wants to hide seminar with specified parameters
      */
     public boolean notFiltered(Seminar seminar){
         QSettings settings = new QSettings();
@@ -97,6 +108,10 @@ public class Timetabler extends QMainWindow {
         return true;
     }
     
+    /**
+     * @param lecture
+     * @return false if user wants to hide lecture with specified parameters
+     */
     public boolean notFiltered(Lecture lecture){
         QSettings settings = new QSettings();
         if (QVariant.toBoolean(settings.value(lecture.getCourse().getCode()+"/lecture"))) return false;
@@ -109,7 +124,14 @@ public class Timetabler extends QMainWindow {
         
         return true;
     }
-
+    
+    /**
+     * Shows all seminars for the currently chosen course. Sets choosing mode 
+     * to activated, to prevent from any other actions but choosing the most 
+     * suitable seminar.
+     * 
+     * @param item (course) chosen in List of courses
+     */     
     public void courseClicked(QListWidgetItem item) {
         Course course = (Course) item;
 
@@ -228,7 +250,6 @@ public class Timetabler extends QMainWindow {
                         setSeminarText(seminar);
                         seminar.setGeometry(seminarX, seminarY, seminarLength, seminarHeight);
                         seminar.setStyleSheet("background-color: rgba(248, 136, 121, 216);\n" + "border-color: rgb(0, 0, 0);");
-                        //seminar.setStyleSheet("background-color: rgb(149, 236, 174);\n" + "border-color: rgb(0, 0, 0);");
                         seminar.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
                         seminar.setAlignment(Qt.AlignmentFlag.AlignCenter);
                         seminar.setVisible(true);
@@ -241,7 +262,13 @@ public class Timetabler extends QMainWindow {
         }
         
     }
-
+    
+    /**
+     * Shows dialog where user can filter days, teachers and time which he wants
+     * to se or which he not wants.
+     * 
+     * @param item 
+     */
     public void courseDoubleClicked(QListWidgetItem item) {
         Course course = (Course) item;
         course.showSettings();
@@ -252,14 +279,24 @@ public class Timetabler extends QMainWindow {
     public void updateCourseOptions(Course course) {
 //        System.out.println("updateCourseOptions: " + course);
     }
-
+    
+    /**
+     * Removes and hides lecture and its label.
+     * 
+     * @param course 
+     */
     public void removeLecture(Course course) {
         QSettings settings = new QSettings();
         settings.setValue(course.getCode() + "/lecture", false);
 
         updateCourseOptions(course);
     }
-
+    
+    /**
+     * Removes and hides seminar and its label.
+     * 
+     * @param seminar 
+     */
     public void removeSeminar(Seminar seminar) {
         if (!choosingMode) {
             Collisions cls = new Collisions();
@@ -315,7 +352,13 @@ public class Timetabler extends QMainWindow {
         lecturesRedraw();
         }
     }
-
+    
+    /**
+     * Action triggered by clicking on one of seminar options during choosing 
+     * mode. Hides all the others.
+     * 
+     * @param seminar 
+     */
     public void chooseSeminar(Seminar seminar) {
         if (choosingMode) {
             
@@ -457,7 +500,12 @@ public class Timetabler extends QMainWindow {
             choosingMode = false;
         }
     }
-
+    
+    /**
+     * Hides or shows lectures.
+     * 
+     * @param n 
+     */
     public void hideLecturesCheckBoxClicked(Integer n) {
         QSettings settings = new QSettings();
         
@@ -608,6 +656,11 @@ public class Timetabler extends QMainWindow {
         }
     }
     
+    /**
+     * Sets text of a lecture label according to its position and size.
+     * 
+     * @param lecture 
+     */
     public void setLectureText(Lecture lecture){
         switch (lecture.getPosition()) {
             case 1: 
@@ -622,6 +675,11 @@ public class Timetabler extends QMainWindow {
         }
     }
     
+    /**
+     * Sets text of a seminar label according to its position and size.
+     * 
+     * @param seminar 
+     */
     public void setSeminarText(Seminar seminar){
         switch (seminar.getPosition()) {
             case 1: 
@@ -635,7 +693,11 @@ public class Timetabler extends QMainWindow {
                 break;
         }
     }
-
+    
+    /**
+     * Loads courses loaded from XML from inputContainer. In default showing all
+     * lectures. And fills List of courses.
+     */
     public void loadCourses() {
         ui.actionOpen_time_table_from_IS.setEnabled(false);
         ui.actionOpen_time_table_from_PC.setEnabled(false);

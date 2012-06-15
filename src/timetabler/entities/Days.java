@@ -1,11 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package timetabler.entities;
 
 /**
- *
+ * Used to represent a day of week as a parameter in Lecture and Seminar objects.
+ * 
  * @author Enthas
  */
 public enum Days {
