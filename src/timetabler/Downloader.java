@@ -3,8 +3,8 @@ package timetabler;
 import com.trolltech.qt.QVariant;
 import com.trolltech.qt.core.*;
 import com.trolltech.qt.gui.QDialog;
-import com.trolltech.qt.network.*;
 import com.trolltech.qt.network.QNetworkReply.NetworkError;
+import com.trolltech.qt.network.*;
 import timetabler.dialogs.LoginDialog;
 import timetabler.exceptions.MissingLoginException;
 

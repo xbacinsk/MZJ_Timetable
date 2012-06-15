@@ -28,8 +28,6 @@ public class LoginDialog extends QDialog {
      * SLOT
      *
      * Called when OK button is pressed
-     *
-     * @todo checking login before storing in global settings
      */
     @Override
     public void accept() {

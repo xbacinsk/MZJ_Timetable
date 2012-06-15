@@ -52,8 +52,6 @@ public class Parser extends QObject {
      * Parses xml and creates Course objects
      *
      * @throws InvalidQueryException
-     *
-     * @todo parsing results and creating Course objects from parsed data
      */
     private void parseXml() throws InvalidQueryException, InvalidXmlDataException {
         List<Course> courses = new ArrayList<Course>();
@@ -197,6 +195,13 @@ public class Parser extends QObject {
         dataAvailable.emit(courses);
     }
 
+    /**
+     * Returns Course with given id from given list
+     * 
+     * @param courses list of courses to search in
+     * @param courseId course id to search for
+     * @return course with given id
+     */
     Course getCourse(List<Course> courses, BigInteger courseId) {
         for (Course course : courses) {
             if (course.getId().equals(courseId)) {

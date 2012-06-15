@@ -857,6 +857,10 @@ public class Timetabler extends QMainWindow {
         this.ui = ui;
     }
     
+    
+    /**
+     * Clears all settings except login information
+     */
     private void clearSettings(){
         QSettings settings = new QSettings();
 
@@ -870,7 +874,10 @@ public class Timetabler extends QMainWindow {
             settings.clear();
         }
     }
-
+    
+    /**
+     * Loads xml with timetable from IS
+     */
     public void loadXmlFromIs() {
         clearSettings();
 
@@ -887,6 +894,9 @@ public class Timetabler extends QMainWindow {
         }
     }
 
+    /**
+     * Loads xml with timetable from file
+     */
     public void loadXmlFromFile() {
         clearSettings();
         
@@ -904,15 +914,22 @@ public class Timetabler extends QMainWindow {
         p.readXml(ba);
     }
 
+    /**
+     * SLOT
+     * 
+     * It is called when data from parser is ready
+     * 
+     * @param courses 
+     */
     public void xmlDataAvailable(List<Course> courses) {
-        /**
-         * sem prichadzaju data z parsera
-         */
         inputContainer.addAll(courses);
         loadCourses();
         initializeGUI(this);
     }
 
+    /**
+     * Exports created timetable to xml
+     */
     public void exportToXml() {
         Exporter exp = new Exporter(inputContainer);
         exp.writeXML();

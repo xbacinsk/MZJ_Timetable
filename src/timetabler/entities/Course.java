@@ -21,7 +21,6 @@ import timetabler.dialogs.CourseDialog;
  * @author Michal Kimle
  * @version 2012-06-04
  *
- * @todo functions for rendering
  */
 public class Course extends QListWidgetItem {
 
@@ -93,6 +92,11 @@ public class Course extends QListWidgetItem {
         settings.setValue(code + "/lecture", isVisible);
     }
     
+    /**
+     * Returns visibility of lecture
+     * 
+     * @return true if lecture should be visible, false otherwise
+     */
     public boolean getLectureVisibility(){
         QSettings settings = new QSettings();
         return QVariant.toBoolean(settings.value(code + "/lecture", true));
@@ -102,8 +106,6 @@ public class Course extends QListWidgetItem {
      * Returns list of all teachers within current course
      *
      * @return list of all teachers within course
-     *
-     * @todo fix teachers duplicity
      */
     public List<Teacher> getTeachers() {
         Set<Teacher> teacherSet = new HashSet<Teacher>();
@@ -140,7 +142,7 @@ public class Course extends QListWidgetItem {
     /**
      * SLOT
      *
-     * opens course dialog
+     * Opens course dialog
      */
     public void showSettings() {
         CourseDialog dialog = new CourseDialog(this);

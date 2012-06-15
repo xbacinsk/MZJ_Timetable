@@ -31,7 +31,6 @@ public class Exporter extends QObject {
     /**
      * Writes a XML file
      *
-     * @param courses list of courses (from parsed XML)
      */
     public void writeXML() {
         if (!settings.contains("export/name") || !fail) {

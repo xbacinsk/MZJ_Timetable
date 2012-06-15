@@ -7,7 +7,8 @@ package timetabler.ui;
  **
  ** WARNING! All changes made in this file will be lost when recompiling ui file!
  ********************************************************************************/
-import com.trolltech.qt.core.*;
+import com.trolltech.qt.core.QRect;
+import com.trolltech.qt.core.QSize;
 import com.trolltech.qt.gui.*;
 import timetabler.Timetabler;
 

@@ -8,7 +8,7 @@ import timetabler.ui.Ui_ExportDialogUi;
 
 /**
  *
- * @author Lenka
+ * @author Lenka Bacinska
  */
 public class ExportDialog extends QDialog {
 

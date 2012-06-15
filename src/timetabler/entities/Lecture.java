@@ -110,7 +110,7 @@ public class Lecture extends QLabel {
     protected void mouseDoubleClickEvent(QMouseEvent me) {
         requestSettings.emit();
     }
-    
+
     @Override
     protected void mousePressEvent(QMouseEvent me) {
         if(me.button() == Qt.MouseButton.RightButton){

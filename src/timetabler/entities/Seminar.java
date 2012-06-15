@@ -125,6 +125,13 @@ public class Seminar extends QLabel {
         requestSettings.emit();
     }
     
+    /**
+     * Executes on mouse click
+     *
+     * emits request for remove or chose
+     *
+     * @param me mouse event generated within click
+     */
     @Override
     protected void mousePressEvent(QMouseEvent me) {
         if(me.button() == Qt.MouseButton.RightButton){
