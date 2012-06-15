@@ -32,7 +32,7 @@ public class Collisions {
         for(Course c : list){   
             if(c.getLectures() != null){
                 for(Lecture l : c.getLectures()){
-                    if(comparator(tmp, l)){
+                    if(l.isVisible() && comparator(tmp, l)){
                         output.add(l);
                     }
                 }
@@ -47,7 +47,7 @@ public class Collisions {
         for(Course c : list){   
             if(c.getLectures() != null){
                 for(Lecture l : c.getLectures()){
-                    if(comparator(l, tmp)){
+                    if(l.isVisible() && comparator(l, tmp)){
                         output.add(l);
                     }
                 }
@@ -63,7 +63,7 @@ public class Collisions {
         for(Course c : list){
             if(c.getSeminars() != null){
                 for(Seminar s : c.getSeminars()){
-                    if(comparator(tmp, s)){
+                    if(s.isVisible() && comparator(tmp, s)){
                         output.add(s);
                     }
                 }
@@ -78,7 +78,7 @@ public class Collisions {
         for(Course c : list){
             if(c.getSeminars() != null){
                 for(Seminar s : c.getSeminars()){
-                    if(comparator(tmp, s)){
+                    if(s.isVisible() && comparator(tmp, s)){
                         output.add(s);
                     }
                 }

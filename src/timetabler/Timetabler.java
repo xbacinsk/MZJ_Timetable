@@ -165,8 +165,8 @@ public class Timetabler extends QMainWindow {
                             for (Seminar s : sem) {
                                 QRect test = s.geometry();
                                 test.setHeight(cls.gui_height(max,max));
-                                //System.out.println(s.getPosition());
                                 test.setY(cls.gui_y(s.getPosition(),max));
+                                setSeminarText(s,max);
                                 s.setGeometry(test);
                             }
                             seminarHeight = cls.gui_height(max,max);
@@ -184,6 +184,7 @@ public class Timetabler extends QMainWindow {
                                 test.setHeight(cls.gui_height(max,max));
                                 //System.out.println(s.getPosition());
                                 test.setY(cls.gui_y(s.getPosition(),max));
+                                setLectureText(s,max);
                                 s.setGeometry(test);
                             }
                             seminarHeight = cls.gui_height(max,max);
@@ -206,6 +207,7 @@ public class Timetabler extends QMainWindow {
                                 test.setHeight(cls.gui_height(max,max));
                                 //System.out.println(s.getPosition());
                                 test.setY(cls.gui_y(s.getPosition(),max));
+                                setLectureText(s,max);
                                 s.setGeometry(test);
                             }
                             for (Seminar s : sem) {
@@ -213,6 +215,7 @@ public class Timetabler extends QMainWindow {
                                 test.setHeight(cls.gui_height(max,max));
                                 //System.out.println(s.getPosition());
                                 test.setY(cls.gui_y(s.getPosition(),max));
+                                setSeminarText(s,max);
                                 s.setGeometry(test);
                             }
                             seminarHeight = cls.gui_height(max,max);
@@ -247,7 +250,7 @@ public class Timetabler extends QMainWindow {
 
                         }
 
-                        setSeminarText(seminar);
+                        setSeminarText(seminar,max);
                         seminar.setGeometry(seminarX, seminarY, seminarLength, seminarHeight);
                         seminar.setStyleSheet("background-color: rgba(248, 136, 121, 216);\n" + "border-color: rgb(0, 0, 0);");
                         seminar.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
@@ -333,6 +336,7 @@ public class Timetabler extends QMainWindow {
                         QRect test = s.geometry();
                         test.setHeight(cls.gui_height(max,max));
                         test.setY(cls.gui_y(s.getPosition(),max));
+                        setSeminarText(s,max);
                         s.setGeometry(test);
                     }
                 }
@@ -345,6 +349,7 @@ public class Timetabler extends QMainWindow {
                         QRect test = s.geometry();
                         test.setHeight(cls.gui_height(max,max));
                         test.setY(cls.gui_y(s.getPosition(),max));
+                        setLectureText(s,max);
                         s.setGeometry(test);
                     }
                 }
@@ -398,6 +403,7 @@ public class Timetabler extends QMainWindow {
                                 QRect test = s.geometry();
                                 test.setHeight(cls.gui_height(max,max));
                                 test.setY(cls.gui_y(s.getPosition(),max));
+                                setSeminarText(s,max);
                                 s.setGeometry(test);
                             }
                         }
@@ -410,6 +416,7 @@ public class Timetabler extends QMainWindow {
                                 QRect test = s.geometry();
                                 test.setHeight(cls.gui_height(max,max));
                                 test.setY(cls.gui_y(s.getPosition(),max));
+                                setLectureText(s,max);
                                 s.setGeometry(test);
                             }
                         }
@@ -442,6 +449,7 @@ public class Timetabler extends QMainWindow {
                             test.setHeight(cls.gui_height(max,max));
                             //System.out.println(s.getPosition());
                             test.setY(cls.gui_y(s.getPosition(),max));
+                            setSeminarText(s,max);
                             s.setGeometry(test);
                         }
                         seminarY = cls.gui_y(max,max);
@@ -459,6 +467,7 @@ public class Timetabler extends QMainWindow {
                             test.setHeight(cls.gui_height(max,max));
                             //System.out.println(s.getPosition());
                             test.setY(cls.gui_y(s.getPosition(),max));
+                            setLectureText(s,max);
                             s.setGeometry(test);
                         }
                         seminarY = cls.gui_y(max,max);
@@ -481,6 +490,7 @@ public class Timetabler extends QMainWindow {
                             test.setHeight(cls.gui_height(max,max));
                             //System.out.println(s.getPosition());
                             test.setY(cls.gui_y(s.getPosition(),max));
+                            setLectureText(s,max);
                             s.setGeometry(test);
                         }
                         for (Seminar s : sem) {
@@ -488,12 +498,14 @@ public class Timetabler extends QMainWindow {
                             test.setHeight(cls.gui_height(max,max));
                             //System.out.println(s.getPosition());
                             test.setY(cls.gui_y(s.getPosition(),max));
+                            setSeminarText(s,max);
                             s.setGeometry(test);
                         }
                         seminarY = cls.gui_y(max,max);
                         seminarHeight = cls.gui_height(max,max);
                         seminar.setPosition(max);
                     }
+            setSeminarText(seminar,max);
             seminar.setGeometry(seminarX, seminarY, seminarLength, seminarHeight);
             seminar.setVisible(true);
             lecturesRedraw();
@@ -546,6 +558,7 @@ public class Timetabler extends QMainWindow {
                                 QRect test = s.geometry();
                                 test.setHeight(cls.gui_height(max,max));
                                 test.setY(cls.gui_y(s.getPosition(),max));
+                                setSeminarText(s,max);
                                 s.setGeometry(test);
                             }
                         }
@@ -558,6 +571,7 @@ public class Timetabler extends QMainWindow {
                                 QRect test = s.geometry();
                                 test.setHeight(cls.gui_height(max,max));
                                 test.setY(cls.gui_y(s.getPosition(),max));
+                                setLectureText(s,max);
                                 s.setGeometry(test);
                             }
                         }
@@ -590,6 +604,7 @@ public class Timetabler extends QMainWindow {
                             test.setHeight(cls.gui_height(max,max));
                             //System.out.println(s.getPosition());
                             test.setY(cls.gui_y(s.getPosition(),max));
+                            setSeminarText(s,max);
                             s.setGeometry(test);
                         }
                         lectureY = cls.gui_y(max,max);
@@ -607,6 +622,7 @@ public class Timetabler extends QMainWindow {
                             test.setHeight(cls.gui_height(max,max));
                             //System.out.println(s.getPosition());
                             test.setY(cls.gui_y(s.getPosition(),max));
+                            setLectureText(s,max);
                             s.setGeometry(test);
                         }
                         lectureY = cls.gui_y(max,max);
@@ -629,6 +645,7 @@ public class Timetabler extends QMainWindow {
                             test.setHeight(cls.gui_height(max,max));
                             //System.out.println(s.getPosition());
                             test.setY(cls.gui_y(s.getPosition(),max));
+                            setLectureText(s,max);
                             s.setGeometry(test);
                         }
                         for (Seminar s : sem) {
@@ -636,6 +653,7 @@ public class Timetabler extends QMainWindow {
                             test.setHeight(cls.gui_height(max,max));
                             //System.out.println(s.getPosition());
                             test.setY(cls.gui_y(s.getPosition(),max));
+                            setSeminarText(s,max);
                             s.setGeometry(test);
                         }
                         lectureY = cls.gui_y(max,max);
@@ -645,6 +663,7 @@ public class Timetabler extends QMainWindow {
                     int lectureX = lecture.getTimeFrom().secsTo(new QTime(7, 0)) / -60;
                     
                     QRect rect = new QRect(lectureX,lectureY,lectureLength,lectureHeight);
+                    setLectureText(lecture,max);
                     lecture.setGeometry(rect);
                     rect.dispose();
                     
@@ -661,8 +680,10 @@ public class Timetabler extends QMainWindow {
      * 
      * @param lecture 
      */
-    public void setLectureText(Lecture lecture){
-        switch (lecture.getPosition()) {
+    public void setLectureText(Lecture lecture,int b){
+        if(b==0)
+            b++;
+        switch (b) {
             case 1: 
                 lecture.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+"p, li { white-space: pre-wrap; }\n"+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">"+ lecture.getCourse().getCode() +"</span></p>\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">" + lecture.getTeacher() + "</span></p>\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:7pt; text-decoration: underline;\">" + lecture.getRooms() + "</span></p></body></html>", null));
                 break;
@@ -680,8 +701,10 @@ public class Timetabler extends QMainWindow {
      * 
      * @param seminar 
      */
-    public void setSeminarText(Seminar seminar){
-        switch (seminar.getPosition()) {
+    public void setSeminarText(Seminar seminar,int b){
+        if(b==0)
+            b++;
+        switch (b) {
             case 1: 
                 seminar.setText(com.trolltech.qt.core.QCoreApplication.translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"+"p, li { white-space: pre-wrap; }\n"+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">"+ seminar.getCourse().getCode() +"</span></p>\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt; font-weight:600;\">" + seminar.getGroupNum() + "</span></p>\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:8pt;\">" + seminar.getTeacher() + "</span></p>\n"+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:7pt; text-decoration: underline;\">" + seminar.getRooms() + "</span></p></body></html>", null));
                 break;
@@ -752,6 +775,7 @@ public class Timetabler extends QMainWindow {
                             test.setHeight(cls.gui_height(max,max));
                             //System.out.println(s.getPosition());
                             test.setY(cls.gui_y(s.getPosition(),max));
+                            setSeminarText(s,max);
                             s.setGeometry(test);
                         }
                         lectureY = cls.gui_y(max,max);
@@ -769,6 +793,7 @@ public class Timetabler extends QMainWindow {
                             test.setHeight(cls.gui_height(max,max));
                             //System.out.println(s.getPosition());
                             test.setY(cls.gui_y(s.getPosition(),max));
+                            setLectureText(s,max);
                             s.setGeometry(test);
                         }
                         lectureY = cls.gui_y(max,max);
@@ -791,6 +816,7 @@ public class Timetabler extends QMainWindow {
                             test.setHeight(cls.gui_height(max,max));
                             //System.out.println(s.getPosition());
                             test.setY(cls.gui_y(s.getPosition(),max));
+                            setLectureText(s,max);
                             s.setGeometry(test);
                         }
                         for (Seminar s : sem) {
@@ -798,6 +824,7 @@ public class Timetabler extends QMainWindow {
                             test.setHeight(cls.gui_height(max,max));
                             //System.out.println(s.getPosition());
                             test.setY(cls.gui_y(s.getPosition(),max));
+                            setSeminarText(s,max);
                             s.setGeometry(test);
                         }
                         lectureY = cls.gui_y(max,max);
@@ -832,7 +859,7 @@ public class Timetabler extends QMainWindow {
 
                     }
                     
-                    setLectureText(lecture);
+                    setLectureText(lecture,max);
                     
                     lecture.setGeometry(lectureX, lectureY, lectureLength, lectureHeight);
                     lecture.setStyleSheet("background-color: rgb(108, 220, 100);\n" + "border-color: rgb(0, 0, 0);");
