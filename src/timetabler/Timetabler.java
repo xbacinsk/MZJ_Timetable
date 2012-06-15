@@ -97,9 +97,11 @@ public class Timetabler extends QMainWindow {
             if (!QVariant.toBoolean(settings.value(seminar.getTeacher().toString()))) return false;
         settings.endGroup();
         
-//        settings.beginGroup(seminar.getCourse().getCode()+"/time");
-//            if (QTime.fromString(QVariant.toString(settings.value("/from" + seminar.getTimeFrom().toString())))) return false;
-//        settings.endGroup();
+        settings.beginGroup(seminar.getCourse().getCode()+"/time");
+            QTime from = QTime.fromString(QVariant.toString(settings.value("/from")));
+            QTime to = QTime.fromString(QVariant.toString(settings.value("/to")));
+            if (!timecomparator(from, to, seminar.getTimeFrom(), seminar.getTimeTo())) return false;
+        settings.endGroup();
         
         settings.beginGroup(seminar.getCourse().getCode()+"/teachers");
             if (!QVariant.toBoolean(settings.value(seminar.getTeacher().toString()))) return false;
@@ -108,20 +110,42 @@ public class Timetabler extends QMainWindow {
         return true;
     }
     
+    private boolean timecomparator(QTime from,QTime to, QTime start, QTime end){
+        boolean beg = false; boolean beg2 = false;
+        if(from.hour() == start.hour()){
+            if(from.minute() <= from.minute())
+                beg = true;            
+        }else if(from.hour() <= start.hour()){
+            beg = true;
+        }
+        if(to.hour() == end.hour()){
+            if(to.minute() >= end.minute())
+                beg2 = true;
+        }else if(to.hour() >= end.hour())
+            beg2 = true;
+        if(beg && beg2)
+            return true;
+        else
+            return false;
+    }
+    
     /**
      * @param lecture
      * @return false if user wants to hide lecture with specified parameters
      */
     public boolean notFiltered(Lecture lecture){
         QSettings settings = new QSettings();
-        System.out.println(settings.allKeys());
         if (!QVariant.toBoolean(settings.value(lecture.getCourse().getCode()+"/lecture"))) return false;
         settings.beginGroup(lecture.getCourse().getCode()+"/days");
             if (!QVariant.toBoolean(settings.value(lecture.getDay().getText()))) return false;
         settings.endGroup();
         settings.beginGroup(lecture.getCourse().getCode()+"/teachers");
-            System.out.println(QVariant.toBoolean(settings.value(lecture.getTeacher().toString())));
             if (!QVariant.toBoolean(settings.value(lecture.getTeacher().toString()))) return false;
+        settings.endGroup();
+        settings.beginGroup(lecture.getCourse().getCode()+"/time");
+            QTime from = QTime.fromString(QVariant.toString(settings.value("/from")));
+            QTime to = QTime.fromString(QVariant.toString(settings.value("/to")));
+            if (!timecomparator(from, to, lecture.getTimeFrom(), lecture.getTimeTo())) return false;
         settings.endGroup();
         
         return true;
