@@ -89,6 +89,11 @@ public class Timetabler extends QMainWindow {
      */
     public boolean notFiltered(Seminar seminar){
         QSettings settings = new QSettings();
+
+        settings.beginGroup(seminar.getCourse().getCode());
+            if (settings.childKeys().isEmpty()) return true;
+        settings.endGroup();
+        
         settings.beginGroup(seminar.getCourse().getCode()+"/days");
             if (!QVariant.toBoolean(settings.value(seminar.getDay().getText()))) return false;
         settings.endGroup();
@@ -101,10 +106,6 @@ public class Timetabler extends QMainWindow {
             QTime from = QTime.fromString(QVariant.toString(settings.value("/from")));
             QTime to = QTime.fromString(QVariant.toString(settings.value("/to")));
             if (!timecomparator(from, to, seminar.getTimeFrom(), seminar.getTimeTo())) return false;
-        settings.endGroup();
-        
-        settings.beginGroup(seminar.getCourse().getCode()+"/teachers");
-            if (!QVariant.toBoolean(settings.value(seminar.getTeacher().toString()))) return false;
         settings.endGroup();
         
         return true;
@@ -135,6 +136,11 @@ public class Timetabler extends QMainWindow {
      */
     public boolean notFiltered(Lecture lecture){
         QSettings settings = new QSettings();
+        
+        settings.beginGroup(lecture.getCourse().getCode());
+            if (settings.childKeys().isEmpty()) return true;
+        settings.endGroup();
+        
         if (!QVariant.toBoolean(settings.value(lecture.getCourse().getCode()+"/lecture"))) return false;
         settings.beginGroup(lecture.getCourse().getCode()+"/days");
             if (!QVariant.toBoolean(settings.value(lecture.getDay().getText()))) return false;
@@ -163,6 +169,10 @@ public class Timetabler extends QMainWindow {
         
         if (course.getSeminars() != null && !course.getSeminars().isEmpty() && choosingMode != true && !course.isSeminarChosen()) {
             for (Seminar seminar : course.getSeminars()) {
+                    if(!notFiltered(seminar)){
+                        seminar.setStyleSheet("background-color: rgba(248, 136, 121, 216);\n" + "border-color: rgb(0, 0, 0);");
+                        continue;
+                    }
                     List<Lecture> lec;
                     List<Seminar> sem;
                     Collisions cls = new Collisions();
@@ -284,7 +294,7 @@ public class Timetabler extends QMainWindow {
                         seminar.raise();
 
 //                }
-                course.setSeminarChosen(true);
+                //course.setSeminarChosen(true);
                 choosingMode = true;
             }    
         }
@@ -293,13 +303,15 @@ public class Timetabler extends QMainWindow {
     
     /**
      * Shows dialog where user can filter days, teachers and time which he wants
-     * to se or which he not wants.
+     * to see or which he not wants.
      * 
      * @param item 
      */
     public void courseDoubleClicked(QListWidgetItem item) {
         Course course = (Course) item;
         course.showSettings();
+        if(course.isSeminarChosen())
+            return;
         Collisions cls = new Collisions();
         List<Lecture> lec;
         List<Seminar> sem;
@@ -454,7 +466,7 @@ public class Timetabler extends QMainWindow {
             if(!notFiltered(seminar)){
                 if(seminar.isVisible() == true){
                                 seminar.setVisible(false);
-                                seminar.getCourse().setSeminarChosen(false);
+                                //seminar.getCourse().setSeminarChosen(false);
                                 seminar.setPosition(0);
 
                                 lec = cls.Lecturedetection(seminar, inputContainer);
@@ -1280,7 +1292,9 @@ public class Timetabler extends QMainWindow {
     }
     
     public void lecturesRedraw(){
-        hideLecturesCheckBoxClicked(2);
-        hideLecturesCheckBoxClicked(0);
+        if(Qt.CheckState.Checked.toString() != "Checked"){
+            hideLecturesCheckBoxClicked(2);
+            hideLecturesCheckBoxClicked(0);
+        }
     }
 }
