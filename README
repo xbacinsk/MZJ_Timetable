@@ -1,11 +1,11 @@
-Úèelom projektu je pomáha študentom Masarykovej univerzity pri vytváraní rozvrhu pred registráciou do seminárnych skupín.
+ÃšÄelom projektu je pomÃ¡haÅ¥ Å¡tudentom Masarykovej univerzity pri vytvÃ¡ranÃ­ rozvrhu pred registrÃ¡ciou do seminÃ¡rnych skupÃ­n.
 
-Po autentizácii sa uívate¾ovi naèíta a zobrazí rozvrh, ktorı poskytuje IS, s jeho zapísanımi predmetmi a prednáškami, ktoré sú pevne dané (tie si bude môc pod¾a potreby zobrazova a skrıva). Ïalej sa vytvorí zoznam predmetov, v ktorom si študent bude môc vybra konkrétny predmet, s ktorım chce pracova.
+Po autentizÃ¡cii sa uÅ¾Ã­vateÄ¾ovi naÄÃ­ta a zobrazÃ­ rozvrh, ktorÃ½ poskytuje IS, s jeho zapÃ­sanÃ½mi predmetmi a prednÃ¡Å¡kami, ktorÃ© sÃº pevne danÃ© (tie si bude mÃ´cÅ¥ podÄ¾a potreby zobrazovaÅ¥ a skrÃ½vaÅ¥). Äalej sa vytvorÃ­ zoznam predmetov, v ktorom si Å¡tudent bude mÃ´cÅ¥ vybraÅ¥ konkrÃ©tny predmet, s ktorÃ½m chce pracovaÅ¥.
 
-Hlavnou funkcionalitou je presúvanie seminárnych skupín a ich zobrazovanie v grafickej a dynamicky sa zobrazujúcej reprezentácii rozvrhu.
+Hlavnou funkcionalitou je zobrazovanie seminÃ¡rnych skupÃ­n v grafickej a dynamicky sa zobrazujÃºcej reprezentÃ¡cii rozvrhu.
 
-U kadého predmetu si uívate zvolí, èi chce zobrazova prednášku (implicitne zapnuté). Po chytení a presúvaní objektu (predmetu) ponad rozvrh sa ukáu monosti, kde môe seminárnu skupinu umiestni. Po umiestnení sa zmení farba políèka v zozname a nebude moné zobrazi druhú seminárnu skupinu tohto predmetu. Ak si chce uívate¾ vybra inú skupinu, staèí presunú u zobrazenú v rozvrhu.
+U kaÅ¾dÃ©ho predmetu si mÃ´Å¾e uÅ¾Ã­vateÄ¾ zvoliÅ¥, Äi chce zobrazovaÅ¥ prednÃ¡Å¡ku (implicitne zapnutÃ©). Po kliknutÃ­ na nÃ¡zov predmetu v zozname sa v rozvrhu zobrazia vÅ¡etky moÅ¾nÃ© umiestnenia seminÃ¡rnych skupÃ­n, z ktorÃ½ch si uÅ¾Ã­vateÄ¾ jednu zvolÃ­. TÃº mÃ´Å¾e kedykoÄ¾vek zruÅ¡iÅ¥ pravÃ½m tlaÄÃ­tkom myÅ¡i a znovu si vybraÅ¥. DvojitÃ½m kliknutÃ­m na predmet sa zobrazÃ­ okno s moÅ¾nosÅ¥ami, kde uÅ¾Ã­vateÄ¾ mÃ´Å¾e Å¡pecifikovaÅ¥, ktorÃ© skupiny mu vyhovujÃº (Äasovo, podÄ¾a vyuÄujÃºcich).
 
-Študent si takto môe jednoducho a preh¾adne vytvori rozvrh pod¾a svojich predstáv a bude jasne vidie, ktoré seminárne skupiny sa mu budú prekrıva a ktoré nie.
+Å tudent si takto mÃ´Å¾e jednoducho a prehÄ¾adne vytvoriÅ¥ rozvrh podÄ¾a svojich predstÃ¡v a bude jasne vidieÅ¥, ktorÃ© seminÃ¡rne skupiny sa mu budÃº prekrÃ½vaÅ¥ a ktorÃ© nie.
 
-Nakoniec si môe svoj predbenı rozvrh exportova do XML/XHTML, prièom si môe vybra farebné rozlíšenie prednášok a seminárnych skupín.
+Nakoniec si mÃ´Å¾e svoj predbeÅ¾nÃ½ rozvrh exportovaÅ¥ do XML/XHTML, priÄom si mÃ´Å¾e vybraÅ¥ farebnÃ© rozlÃ­Å¡enie prednÃ¡Å¡ok a seminÃ¡rnych skupÃ­n, prÃ­padne Äi chce odkazy na miestnosti a vyuÄujÃºcich.
