@@ -91,7 +91,7 @@ public class Timetabler extends QMainWindow {
         QSettings settings = new QSettings();
 
         settings.beginGroup(seminar.getCourse().getCode());
-            if (settings.childKeys().isEmpty()) return true;
+            if (settings.childKeys().size() <= 1) return true;
         settings.endGroup();
         
         settings.beginGroup(seminar.getCourse().getCode()+"/days");
@@ -138,7 +138,7 @@ public class Timetabler extends QMainWindow {
         QSettings settings = new QSettings();
         
         settings.beginGroup(lecture.getCourse().getCode());
-            if (settings.childKeys().isEmpty()) return true;
+            if (settings.childKeys().size() <= 1) return true;
         settings.endGroup();
         
         if (!QVariant.toBoolean(settings.value(lecture.getCourse().getCode()+"/lecture"))) return false;
