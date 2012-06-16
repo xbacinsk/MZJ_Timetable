@@ -111,13 +111,13 @@ public class Course extends QListWidgetItem {
         Set<Teacher> teacherSet = new HashSet<Teacher>();
 
         //getting teacher from lecture
-        if (lectures != null) {
-            for (Lecture lecture : lectures) {
-                if (lecture != null && lecture.getTeacher() != null) {
-                    teacherSet.add(lecture.getTeacher());
-                }
-            }
-        }
+//        if (lectures != null) {
+//            for (Lecture lecture : lectures) {
+//                if (lecture != null && lecture.getTeacher() != null) {
+//                    teacherSet.add(lecture.getTeacher());
+//                }
+//            }
+//        }
 
         //getting teachers from seminars
         if (seminars != null) {
