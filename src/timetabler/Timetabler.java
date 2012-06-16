@@ -90,9 +90,8 @@ public class Timetabler extends QMainWindow {
     public boolean notFiltered(Seminar seminar){
         QSettings settings = new QSettings();
 
-        settings.beginGroup(seminar.getCourse().getCode());
-            if (settings.childKeys().size() <= 1) return true;
-        settings.endGroup();
+        if (!settings.contains(seminar.getCourse().getCode()+"/days/Monday")) 
+            return true;
         
         settings.beginGroup(seminar.getCourse().getCode()+"/days");
             if (!QVariant.toBoolean(settings.value(seminar.getDay().getText()))) return false;
@@ -137,9 +136,8 @@ public class Timetabler extends QMainWindow {
     public boolean notFiltered(Lecture lecture){
         QSettings settings = new QSettings();
         
-        settings.beginGroup(lecture.getCourse().getCode());
-            if (settings.childKeys().size() <= 1) return true;
-        settings.endGroup();
+        if (!settings.contains(lecture.getCourse().getCode()+"/days/Monday")) 
+            return true;
         
         if (!QVariant.toBoolean(settings.value(lecture.getCourse().getCode()+"/lecture"))) return false;
         settings.beginGroup(lecture.getCourse().getCode()+"/days");
