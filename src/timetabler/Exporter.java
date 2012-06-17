@@ -151,7 +151,7 @@ public class Exporter extends QObject {
 
                                             // cell color - if user wants colorize lectures/seminars
                                             if (QVariant.toBoolean(settings.value("export/color"))) {
-                                                courseE.setAttribute("color", "e9d5e5");
+                                                courseE.setAttribute("color", "6cdc64");
                                             }
 
                                             // course id (for URL to course page in IS)
@@ -235,8 +235,7 @@ public class Exporter extends QObject {
 
                                             // if user wants to colorize lectures/seminars
                                             if (QVariant.toBoolean(settings.value("export/color"))) {
-                                                String color = "d9f5d5";
-                                                courseE.setAttribute("color", color);
+                                                courseE.setAttribute("color", "95ecae");
                                             }
 
                                             // course id (for URL to course page in IS)
