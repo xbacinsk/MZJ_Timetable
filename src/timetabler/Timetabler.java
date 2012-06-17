@@ -20,6 +20,7 @@ public class Timetabler extends QMainWindow {
     private Ui_MainWindow ui = new Ui_MainWindow();
     private List<Course> inputContainer = new ArrayList<Course>();
     private boolean choosingMode = false;
+    private String choosingCode="";
 
     public Timetabler() {
         ui.setupUi(this);
@@ -79,6 +80,7 @@ public class Timetabler extends QMainWindow {
         ui.actionOpen_time_table_from_PC.setEnabled(true); 
         
         choosingMode = false;
+        choosingCode = "";
         weekendGUI(false);
         
 //        System.out.println("Vymazano.");        
@@ -90,7 +92,7 @@ public class Timetabler extends QMainWindow {
     public boolean notFiltered(Seminar seminar){
         QSettings settings = new QSettings();
 
-        if (!settings.contains(seminar.getCourse().getCode()+"/days/Monday")) 
+        if (!settings.contains(seminar.getCourse().getCode()+"/time/from")) 
             return true;
         
         settings.beginGroup(seminar.getCourse().getCode()+"/days");
@@ -136,10 +138,11 @@ public class Timetabler extends QMainWindow {
     public boolean notFiltered(Lecture lecture){
         QSettings settings = new QSettings();
         
-        if (!settings.contains(lecture.getCourse().getCode()+"/days/Monday")) 
+        if (!settings.contains(lecture.getCourse().getCode()+"/time/from")) 
             return true;
         
-        if (!QVariant.toBoolean(settings.value(lecture.getCourse().getCode()+"/lecture"))) return false;
+        if (!QVariant.toBoolean(settings.value(lecture.getCourse().getCode()+"/lecture"))) 
+            return false;
         settings.beginGroup(lecture.getCourse().getCode()+"/days");
             if (!QVariant.toBoolean(settings.value(lecture.getDay().getText()))) return false;
         settings.endGroup();
@@ -290,10 +293,8 @@ public class Timetabler extends QMainWindow {
                         seminar.setAlignment(Qt.AlignmentFlag.AlignCenter);
                         seminar.setVisible(true);
                         seminar.raise();
-
-//                }
-                //course.setSeminarChosen(true);
                 choosingMode = true;
+                choosingCode = seminar.getCourse().getCode();
             }    
         }
         
@@ -308,7 +309,7 @@ public class Timetabler extends QMainWindow {
     public void courseDoubleClicked(QListWidgetItem item) {
         Course course = (Course) item;
         course.showSettings();
-        if(course.isSeminarChosen())
+        if(course.isSeminarChosen() || !choosingCode.equals(course.getCode()))
             return;
         Collisions cls = new Collisions();
         List<Lecture> lec;
@@ -365,10 +366,7 @@ public class Timetabler extends QMainWindow {
                         }
                     }
                 }
-            }
-            else{
-                if(lecture.isVisible() == false){
-                    
+            else{   
                     lec = cls.Lecturedetection(lecture, inputContainer);
                     sem = cls.Seminardetection(lecture, inputContainer);
                     int lectureLength = lecture.getLength();
@@ -464,7 +462,6 @@ public class Timetabler extends QMainWindow {
             if(!notFiltered(seminar)){
                 if(seminar.isVisible() == true){
                                 seminar.setVisible(false);
-                                //seminar.getCourse().setSeminarChosen(false);
                                 seminar.setPosition(0);
 
                                 lec = cls.Lecturedetection(seminar, inputContainer);
@@ -597,7 +594,32 @@ public class Timetabler extends QMainWindow {
                                             seminar.setPosition(max);
                                         }
                                 setSeminarText(seminar,max);
-                                seminar.setGeometry(seminarX, seminarY, seminarLength, seminarHeight);
+                                seminar.setGeometry(seminarX, seminarY, seminarLength, seminarHeight);                             
+                                switch (seminar.getDay()) {
+                                    case MON:
+                                        seminar.setParent(ui.mondayBox);
+                                        break;
+                                    case TUE:
+                                        seminar.setParent(ui.tuesdayBox);
+                                        break;
+                                    case WED:
+                                        seminar.setParent(ui.wednesdayBox);
+                                        break;
+                                    case THU:
+                                        seminar.setParent(ui.thursdayBox);
+                                        break;
+                                    case FRI:
+                                        seminar.setParent(ui.fridayBox);
+                                        break;
+                                    case SAT:
+                                        seminar.setParent(ui.saturdayBox);
+                                        break;
+                                    case SUN:
+                                        seminar.setParent(ui.sundayBox);
+                                        break;
+                                }  
+                                seminar.setFrameShape(com.trolltech.qt.gui.QFrame.Shape.Box);
+                                seminar.setAlignment(Qt.AlignmentFlag.AlignCenter);                            
                                 seminar.setVisible(true);
                                 lecturesRedraw();
                 }
@@ -837,6 +859,7 @@ public class Timetabler extends QMainWindow {
             seminar.setVisible(true);
             lecturesRedraw();
             choosingMode = false;
+            choosingCode = "";
         }
     }
     
