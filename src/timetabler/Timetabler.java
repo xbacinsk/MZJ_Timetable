@@ -138,7 +138,7 @@ public class Timetabler extends QMainWindow {
     public boolean notFiltered(Lecture lecture){
         QSettings settings = new QSettings();
         
-        if (!settings.contains(lecture.getCourse().getCode()+"/time/from")) 
+        if (!settings.contains(lecture.getCourse().getCode()+"/lecture")) 
             return true;
         
         if (!QVariant.toBoolean(settings.value(lecture.getCourse().getCode()+"/lecture"))) 
@@ -309,7 +309,9 @@ public class Timetabler extends QMainWindow {
     public void courseDoubleClicked(QListWidgetItem item) {
         Course course = (Course) item;
         course.showSettings();
-        if(course.isSeminarChosen() || !choosingCode.equals(course.getCode()))
+        if(course.isSeminarChosen())
+            return;
+        if(course.getSeminars() != null && !course.getSeminars().isEmpty() && !choosingCode.equals(course.getCode()))
             return;
         Collisions cls = new Collisions();
         List<Lecture> lec;
