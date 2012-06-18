@@ -138,21 +138,21 @@ public class Timetabler extends QMainWindow {
     public boolean notFiltered(Lecture lecture){
         QSettings settings = new QSettings();
         
-        if (!settings.contains(lecture.getCourse().getCode()+"/lecture")) 
+        //if (!settings.contains(lecture.getCourse().getCode()+"/lecture"))
+        if (!settings.contains(lecture.getCourse().getCode()+"/time/from"))
             return true;
         
         if (!QVariant.toBoolean(settings.value(lecture.getCourse().getCode()+"/lecture"))) 
             return false;
         settings.beginGroup(lecture.getCourse().getCode()+"/days");
-            if (!QVariant.toBoolean(settings.value(lecture.getDay().getText()))) return false;
-        settings.endGroup();
-        settings.beginGroup(lecture.getCourse().getCode()+"/teachers");
-            if (!QVariant.toBoolean(settings.value(lecture.getTeacher().toString()))) return false;
+            if (!QVariant.toBoolean(settings.value(lecture.getDay().getText()))) 
+                return false;
         settings.endGroup();
         settings.beginGroup(lecture.getCourse().getCode()+"/time");
             QTime from = QTime.fromString(QVariant.toString(settings.value("/from")));
             QTime to = QTime.fromString(QVariant.toString(settings.value("/to")));
-            if (!timecomparator(from, to, lecture.getTimeFrom(), lecture.getTimeTo())) return false;
+            if (!timecomparator(from, to, lecture.getTimeFrom(), lecture.getTimeTo())) 
+                return false;
         settings.endGroup();
         
         return true;
@@ -308,10 +308,12 @@ public class Timetabler extends QMainWindow {
      */
     public void courseDoubleClicked(QListWidgetItem item) {
         Course course = (Course) item;
-        course.showSettings();
-        if(course.isSeminarChosen())
+        if(course.getSeminars() != null && !course.getSeminars().isEmpty() && !choosingCode.equals(course.getCode())){
+            course.showSettings(true);
             return;
-        if(course.getSeminars() != null && !course.getSeminars().isEmpty() && !choosingCode.equals(course.getCode()))
+        }
+        course.showSettings(false);
+        if(course.isSeminarChosen())
             return;
         Collisions cls = new Collisions();
         List<Lecture> lec;
@@ -366,9 +368,11 @@ public class Timetabler extends QMainWindow {
                                 s.setGeometry(test);
                             }
                         }
+                      }
                     }
                 }
             else{   
+                if(lecture.isVisible() == false){
                     lec = cls.Lecturedetection(lecture, inputContainer);
                     sem = cls.Seminardetection(lecture, inputContainer);
                     int lectureLength = lecture.getLength();

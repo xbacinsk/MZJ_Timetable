@@ -144,8 +144,8 @@ public class Course extends QListWidgetItem {
      *
      * Opens course dialog
      */
-    public void showSettings() {
-        CourseDialog dialog = new CourseDialog(this);
+    public void showSettings(boolean b) {
+        CourseDialog dialog = new CourseDialog(this,b);
         if(dialog.exec() == QDialog.DialogCode.Accepted.value())
             optionsChanged.emit(this);
     }

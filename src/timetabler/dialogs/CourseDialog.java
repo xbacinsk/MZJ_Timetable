@@ -27,10 +27,11 @@ public class CourseDialog extends QDialog{
   private Ui_CourseDialogUi ui = new Ui_CourseDialogUi();
   private Course course;
   
-  public CourseDialog(Course course){
+  public CourseDialog(Course course,boolean b){
     this.course = course;
     ui.setupUi(this);
     loadSettings();
+    ui.lectureVisibilityCheckBox.setDisabled(b);
   }
   
   /**
